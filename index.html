@@ -1,344 +1,540 @@
-<!DOCTYPE html>
+
+ <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ayush Verma | Web Designer Portfolio</title>
+    <title>Ayush Verma | Professional Web Designer</title>
+    <style>
+        /* ===== GLOBAL RESET & VARIABLES ===== */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: #f8fafc;
+            color: #1e293b;
+            line-height: 1.6;
+            padding: 0 16px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 24px 0;
+        }
+
+        /* ===== HEADER STYLING ===== */
+        header {
+            background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+            color: #ffffff;
+            padding: 40px 24px;
+            border-radius: 16px;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(30, 58, 138, 0.2);
+            margin-bottom: 24px;
+        }
+
+        header h1 {
+            font-size: 2.2rem;
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+        }
+
+        header p {
+            font-size: 1.05rem;
+            opacity: 0.95;
+            max-width: 650px;
+            margin: 4px auto;
+        }
+
+        /* ===== NAVIGATION BAR ===== */
+        nav {
+            background-color: #ffffff;
+            padding: 14px 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+            text-align: center;
+            position: sticky;
+            top: 10px;
+            z-index: 100;
+        }
+
+        nav a {
+            color: #3b82f6;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            margin: 0 10px;
+            display: inline-block;
+            transition: color 0.2s ease;
+        }
+
+        nav a:hover {
+            color: #1e3a8a;
+            text-decoration: underline;
+        }
+
+        /* ===== SECTIONS & CARDS ===== */
+        section {
+            background-color: #ffffff;
+            padding: 32px 24px;
+            border-radius: 16px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+            margin-bottom: 32px;
+            border: 1px solid #e2e8f0;
+        }
+
+        h2 {
+            font-size: 1.6rem;
+            color: #0f172a;
+            margin-bottom: 16px;
+            border-left: 5px solid #3b82f6;
+            padding-left: 12px;
+        }
+
+        h3 {
+            font-size: 1.3rem;
+            color: #1e3a8a;
+            margin: 20px 0 10px 0;
+        }
+
+        h4 {
+            font-size: 1.1rem;
+            color: #334155;
+            margin: 16px 0 8px 0;
+        }
+
+        p, ul, ol {
+            color: #475569;
+            font-size: 1rem;
+            margin-bottom: 14px;
+        }
+
+        ul, ol {
+            padding-left: 24px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        /* ===== IMAGES ===== */
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 12px;
+            margin: 16px 0;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+            display: block;
+        }
+
+        /* ===== TABLES ===== */
+        .table-responsive {
+            overflow-x: auto;
+            margin: 16px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #ffffff;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 12px 16px;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+            font-size: 0.95rem;
+        }
+
+        th {
+            background-color: #f1f5f9;
+            color: #1e293b;
+            font-weight: 600;
+        }
+
+        tr:hover {
+            background-color: #f8fafc;
+        }
+
+        /* ===== BUTTONS ===== */
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s ease;
+            text-align: center;
+            margin-top: 8px;
+        }
+
+        .btn-whatsapp {
+            background-color: #22c55e;
+            color: #ffffff;
+            box-shadow: 0 4px 12px rgba(34, 197, 94, 0.3);
+        }
+
+        .btn-whatsapp:hover {
+            background-color: #16a34a;
+            transform: translateY(-2px);
+        }
+
+        .btn-primary {
+            background-color: #3b82f6;
+            color: #ffffff;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+        }
+
+        .btn-primary:hover {
+            background-color: #2563eb;
+            transform: translateY(-2px);
+        }
+
+        /* ===== FORMS ===== */
+        form {
+            background-color: #f8fafc;
+            padding: 24px;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+            margin-top: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 600;
+            color: #334155;
+            font-size: 0.9rem;
+        }
+
+        input[type="text"], input[type="tel"], textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            font-size: 0.95rem;
+            background-color: #ffffff;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        input[type="text"]:focus, input[type="tel"]:focus, textarea:focus {
+            border-color: #3b82f6;
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            text-align: center;
+            padding: 24px;
+            color: #64748b;
+            font-size: 0.9rem;
+            border-top: 1px solid #e2e8f0;
+            margin-top: 40px;
+        }
+
+        /* ===== PROJECT DEMO BADGE ===== */
+        .demo-tag {
+            display: inline-block;
+            background-color: #dbeafe;
+            color: #1e40af;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 10px;
+        }
+    </style>
 </head>
 <body>
 
-    <!-- ================= HEADER SECTION ================= -->
-    <header>
-        <h1>Ayush Verma</h1>
-        <p><strong>Certified Web Designer | Kanpur, Uttar Pradesh</strong></p>
-        <p>Creating fast, lightweight, visually appealing web pages for businesses and institutes.</p>
-        <hr>
-    </header>
+    <div class="container">
+        <!-- ================= HEADER SECTION ================= -->
+        <header>
+            <h1>Ayush Verma</h1>
+            <p><strong>Certified Web Designer | Kanpur, Uttar Pradesh</strong></p>
+            <p>Crafting fast, clean, and high-impact web pages for businesses and coaching institutes.</p>
+        </header>
 
-    <!-- ================= NAVIGATION BAR ================= -->
-    <nav>
-        <p>
-            <a href="#about">About Me</a> | 
-            <a href="#services">Services</a> | 
-            <a href="#certification"><strong>Certification</strong></a> | 
-            <a href="#projects">Projects</a> | 
-            <a href="#coaching-demo">Demo 1: Coaching</a> | 
-            <a href="#stationery-demo">Demo 2: Stationery Store</a> | 
-            <a href="#contact">Contact Me</a>
-        </p>
-        <hr>
-    </nav>
+        <!-- ================= NAVIGATION BAR ================= -->
+        <nav>
+            <a href="#about">About</a>
+            <a href="#services">Services</a>
+            <a href="#certification">Certification</a>
+            <a href="#projects">Projects</a>
+            <a href="#coaching-demo">Coaching Demo</a>
+            <a href="#stationery-demo">Stationery Demo</a>
+            <a href="#contact">Contact</a>
+        </nav>
 
-    <!-- ================= MAIN CONTENT ================= -->
-    <main>
-        <!-- About Section -->
-        <section id="about">
-            <h2>About Me</h2>
-            <p>
-                Hello! I am <strong>Ayush Verma</strong>, a passionate web developer based in Kanpur. I specialize in building 
-                clean, structured, and responsive websites that help local businesses, coaching institutes, and stores grow online.
-            </p>
-        </section>
-        <hr>
+        <!-- ================= MAIN CONTENT ================= -->
+        <main>
+            <!-- About Section -->
+            <section id="about">
+                <h2>About Me</h2>
+                <p>
+                    Hello! I am <strong>Ayush Verma</strong>, a passionate web designer based in Kanpur. I specialize in building 
+                    clean, lightweight, and modern websites designed to help local business owners, educational centers, and retail stores attract more customers online.
+                </p>
+            </section>
 
-        <!-- Services Section -->
-        <section id="services">
-            <h2>Services Offered</h2>
-            <p>Custom web solutions tailored for local growth:</p>
-            <ul>
-                <li>Modern single-page business websites and portfolios</li>
-                <li>Educational landing pages with batch schedules and fee tables</li>
-                <li>Digital storefronts and product catalog showcases for retail shops</li>
-                <li>One-tap WhatsApp & Call buttons for instant lead generation</li>
-            </ul>
-        </section>
-        <hr>
+            <!-- Services Section -->
+            <section id="services">
+                <h2>Services Offered</h2>
+                <p>Tailored web solutions focused on speed, simplicity, and conversions:</p>
+                <ul>
+                    <li><strong>Single-Page Business Websites:</strong> Fast-loading, responsive web pages optimized for mobile devices.</li>
+                    <li><strong>Educational & Coaching Portals:</strong> Clear timetable schedules, batch announcements, and fee structures.</li>
+                    <li><strong>Digital Storefront Catalogs:</strong> Price lists and product highlights for local retail and stationery stores.</li>
+                    <li><strong>Direct Inquiry Integration:</strong> Instant WhatsApp and Call buttons for direct customer conversions.</li>
+                </ul>
+            </section>
 
-        <!-- ================= CERTIFICATION SECTION (NO EXTERNAL IMAGE REQUIRED) ================= -->
-        <section id="certification">
-            <h2>Professional Certification</h2>
-            
-            <div align="center">
-                <div style="max-width: 520px; border: 4px solid #7c3aed; padding: 24px; border-radius: 12px; background-color: #ffffff; box-shadow: 0 4px 12px rgba(0,0,0,0.1); text-align: center; font-family: sans-serif; position: relative;">
-                    
-                    <!-- Platform Brand -->
-                    <div style="text-align: right; margin-bottom: 10px;">
-                        <span style="background-color: #7c3aed; color: #ffffff; padding: 4px 14px; border-radius: 15px; font-weight: bold; font-size: 14px; letter-spacing: 1px;">mimo</span>
+            <!-- ================= CERTIFICATION SECTION ================= -->
+            <section id="certification">
+                <h2>Professional Certification</h2>
+                
+                <div style="display: flex; justify-content: center; margin-top: 20px;">
+                    <div style="max-width: 500px; width: 100%; border: 3px solid #7c3aed; padding: 28px 24px; border-radius: 16px; background-color: #ffffff; box-shadow: 0 10px 25px rgba(124, 58, 237, 0.1); text-align: center;">
+                        
+                        <div style="text-align: right; margin-bottom: 8px;">
+                            <span style="background-color: #7c3aed; color: #ffffff; padding: 4px 14px; border-radius: 20px; font-weight: bold; font-size: 13px; letter-spacing: 0.5px;">mimo</span>
+                        </div>
+
+                        <div style="font-size: 42px; margin: 10px 0;">🛡️</div>
+
+                        <h3 style="color: #6d28d9; letter-spacing: 1.5px; margin: 0; font-size: 15px; text-transform: uppercase;">Certificate of Completion</h3>
+                        <p style="color: #64748b; font-size: 13px; margin: 8px 0 0 0;">has been awarded to</p>
+
+                        <h2 style="font-size: 26px; color: #0f172a; margin: 10px 0; border-bottom: 2px solid #f1f5f9; padding-bottom: 12px; border-left: none;">Ayush Verma</h2>
+
+                        <p style="color: #64748b; font-size: 13px; margin: 6px 0;">for successful completion of</p>
+                        <h3 style="font-size: 24px; color: #7c3aed; margin: 4px 0 16px 0; letter-spacing: 1px;">HTML</h3>
+
+                        <p style="color: #475569; font-size: 13px; line-height: 1.5; margin-bottom: 24px;">
+                            <em>"This curriculum provides an understanding of the core concepts of websites and the HTML knowledge required to create web pages."</em>
+                        </p>
+
+                        <div style="display: flex; justify-content: space-between; border-top: 1px dashed #cbd5e1; padding-top: 16px; font-size: 12px;">
+                            <div style="text-align: left;">
+                                <strong style="color: #1e293b;">Johannes Berger</strong><br>
+                                <span style="color: #94a3b8;">CEO, Mimo</span>
+                            </div>
+                            <div style="text-align: right;">
+                                <strong style="color: #1e293b;">16 / September / 2026</strong><br>
+                                <span style="color: #16a34a; font-weight: bold;">✔ Verified Completion</span>
+                            </div>
+                        </div>
+
                     </div>
-
-                    <!-- Badge Icon -->
-                    <div style="font-size: 42px; margin: 10px 0;">🛡️</div>
-
-                    <h3 style="color: #6d28d9; letter-spacing: 2px; margin: 0; font-size: 16px; text-transform: uppercase;">Certificate of Completion</h3>
-                    <p style="color: #555555; font-size: 13px; margin: 8px 0 0 0;">has been awarded to</p>
-
-                    <!-- Student Name -->
-                    <h2 style="font-size: 26px; color: #111827; margin: 10px 0; border-bottom: 2px solid #e5e7eb; padding-bottom: 10px;">Ayush Verma</h2>
-
-                    <p style="color: #555555; font-size: 13px; margin: 6px 0;">for successful completion of</p>
-                    <h3 style="font-size: 24px; color: #7c3aed; margin: 4px 0 16px 0; letter-spacing: 1px;">HTML</h3>
-
-                    <p style="color: #4b5563; font-size: 13px; line-height: 1.5; padding: 0 15px; margin-bottom: 25px;">
-                        <em>"This curriculum provides an understanding of the core concepts of websites and the HTML knowledge required to create web pages."</em>
-                    </p>
-
-                    <table width="100%" border="0" style="border-top: 1px dashed #cbd5e1; padding-top: 15px;">
-                        <tr>
-                            <td align="left" style="font-size: 12px; color: #374151;">
-                                <strong>Johannes Berger</strong><br>
-                                <span style="color: #6b7280; font-size: 11px;">CEO, Mimo</span>
-                            </td>
-                            <td align="right" style="font-size: 12px; color: #374151;">
-                                <strong>16 / September / 2026</strong><br>
-                                <span style="color: #10b981; font-weight: bold; font-size: 11px;">✔ Verified Completion</span>
-                            </td>
-                        </tr>
-                    </table>
-
                 </div>
-            </div>
-        </section>
-        <hr>
+            </section>
 
-        <!-- Projects Section -->
-        <section id="projects">
-            <h2>Featured Projects</h2>
-            <ol>
-                <li><strong>Personal Portfolio:</strong> A clean semantic layout with direct client inquiry channels.</li>
-                <li><strong>Coaching Institute Website:</strong> An organized education portal with timetables and trial bookings.</li>
-                <li><strong>Stationery & Book Depot:</strong> A product catalog with pricing tables and WhatsApp ordering.</li>
-            </ol>
-        </section>
-        <hr>
+            <!-- Projects Section -->
+            <section id="projects">
+                <h2>Featured Projects</h2>
+                <ol>
+                    <li><strong>Personal Portfolio:</strong> A responsive web portfolio with integrated client communication channels.</li>
+                    <li><strong>Coaching Institute Website:</strong> A structured layout featuring courses, schedules, and trial bookings.</li>
+                    <li><strong>Stationery Storefront:</strong> An online product catalog with pricing tables and WhatsApp ordering.</li>
+                </ol>
+            </section>
 
-        <!-- ================= DEMO 1: COACHING INSTITUTE ================= -->
-        <section id="coaching-demo">
-            <center>
-                <h2>--- PROJECT DEMO 1: COACHING INSTITUTE LANDING PAGE ---</h2>
-                <p><em>(Live demonstration of an academic landing page)</em></p>
-            </center>
+            <!-- ================= DEMO 1: COACHING INSTITUTE ================= -->
+            <section id="coaching-demo">
+                <span class="demo-tag">Live Client Demo 1</span>
+                <h2>Target Science & Math Academy</h2>
+                <p><strong>Excellence in Education for Secondary Classes | Kakadeo / Barra, Kanpur</strong></p>
 
-            <p align="center">
-                <img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=900&auto=format&fit=crop&q=80" alt="Students studying in a classroom" width="100%" style="max-width:750px; border-radius:8px;">
-            </p>
+                <img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=900&auto=format&fit=crop&q=80" alt="Students in Classroom">
 
-            <h3>Target Science & Math Academy</h3>
-            <p><strong>Excellence in Education for Secondary Classes | Kakadeo / Barra, Kanpur</strong></p>
-            
-            <h4>About the Academy</h4>
-            <p>
-                Target Academy specializes in conceptual understanding and board exam excellence for CBSE, ICSE, and UP Board students. 
-                Our limited batch sizes allow individualized guidance to bring out every student's best performance.
-            </p>
+                <h4>About the Academy</h4>
+                <p>
+                    Target Academy specializes in conceptual understanding and board exam excellence for CBSE, ICSE, and UP Board students. 
+                    Small batch sizes ensure personalized guidance so every student achieves academic success.
+                </p>
 
-            <p align="center">
-                <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=800&auto=format&fit=crop&q=80" alt="Student writing notes with study books" width="100%" style="max-width:650px; border-radius:8px;">
-            </p>
+                <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=800&auto=format&fit=crop&q=80" alt="Student studying">
 
-            <h4>Batch Timings & Courses</h4>
-            <table border="1" cellpadding="8" cellspacing="0">
-                <thead>
-                    <tr>
-                        <th>Batch</th>
-                        <th>Subjects</th>
-                        <th>Timings</th>
-                        <th>Days</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Junior Batch (Classes 6-8)</td>
-                        <td>Mathematics, General Science</td>
-                        <td>4:00 PM - 5:30 PM</td>
-                        <td>Monday to Friday</td>
-                    </tr>
-                    <tr>
-                        <td>Foundation Batch (Class 9)</td>
-                        <td>Maths, Physics, Chemistry</td>
-                        <td>5:30 PM - 7:00 PM</td>
-                        <td>Monday to Saturday</td>
-                    </tr>
-                    <tr>
-                        <td>Board Target Batch (Class 10)</td>
-                        <td>Complete Science & Mathematics</td>
-                        <td>7:00 PM - 8:30 PM</td>
-                        <td>Monday to Saturday</td>
-                    </tr>
-                </tbody>
-            </table>
+                <h4>Batch Timings & Courses</h4>
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Batch</th>
+                                <th>Subjects</th>
+                                <th>Timings</th>
+                                <th>Days</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Junior Batch (Classes 6-8)</td>
+                                <td>Mathematics, General Science</td>
+                                <td>4:00 PM - 5:30 PM</td>
+                                <td>Monday to Friday</td>
+                            </tr>
+                            <tr>
+                                <td>Foundation Batch (Class 9)</td>
+                                <td>Maths, Physics, Chemistry</td>
+                                <td>5:30 PM - 7:00 PM</td>
+                                <td>Monday to Saturday</td>
+                            </tr>
+                            <tr>
+                                <td>Board Target Batch (Class 10)</td>
+                                <td>Complete Science & Mathematics</td>
+                                <td>7:00 PM - 8:30 PM</td>
+                                <td>Monday to Saturday</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
 
-            <h4>Key Highlights</h4>
-            <ul>
-                <li>Experienced subject specialists dedicated to core concept clarity</li>
-                <li>Capped batches (15–20 students only) ensuring personal mentoring</li>
-                <li>Regular chapter tests with evaluated report cards shared with parents</li>
-                <li>Comprehensive study kits, formula reference cards, and question banks</li>
-            </ul>
+                <h4>Transparent Fee Structure</h4>
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Course</th>
+                                <th>Monthly Fee</th>
+                                <th>Trial Class</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Junior Batch</td>
+                                <td>₹800 / month</td>
+                                <td>2 Days Free Demo</td>
+                            </tr>
+                            <tr>
+                                <td>Foundation Batch</td>
+                                <td>₹1,200 / month</td>
+                                <td>2 Days Free Demo</td>
+                            </tr>
+                            <tr>
+                                <td>Board Target Batch</td>
+                                <td>₹1,500 / month</td>
+                                <td>2 Days Free Demo</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
 
-            <h4>Transparent Fee Structure</h4>
-            <table border="1" cellpadding="8" cellspacing="0">
-                <thead>
-                    <tr>
-                        <th>Course</th>
-                        <th>Monthly Fee</th>
-                        <th>Demo Offer</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Junior Batch</td>
-                        <td>₹800 / month</td>
-                        <td>2 Days Free Demo</td>
-                    </tr>
-                    <tr>
-                        <td>Foundation Batch</td>
-                        <td>₹1,200 / month</td>
-                        <td>2 Days Free Demo</td>
-                    </tr>
-                    <tr>
-                        <td>Board Target Batch</td>
-                        <td>₹1,500 / month</td>
-                        <td>2 Days Free Demo</td>
-                    </tr>
-                </tbody>
-            </table>
-
-            <p>
-                <a href="https://wa.me/919795222082?text=Hello,%20I%20saw%20your%20Coaching%20Demo%20website%20and%20want%20to%20know%20more." target="_blank">
-                    <button type="button">Book a Free Demo Class (WhatsApp)</button>
+                <a href="https://wa.me/919795222082?text=Hello,%20I%20saw%20your%20Coaching%20Demo%20website%20and%20want%20to%20know%20more." target="_blank" class="btn btn-whatsapp">
+                    Book a Free Demo Class (WhatsApp)
                 </a>
-            </p>
-        </section>
-        <hr>
+            </section>
 
-        <!-- ================= DEMO 2: STATIONERY & BOOK STORE ================= -->
-        <section id="stationery-demo">
-            <center>
-                <h2>--- PROJECT DEMO 2: STATIONERY & BOOK STORE CATALOG ---</h2>
-                <p><em>(Live demonstration of a retail catalog web page)</em></p>
-            </center>
+            <!-- ================= DEMO 2: STATIONERY & BOOK STORE ================= -->
+            <section id="stationery-demo">
+                <span class="demo-tag">Live Client Demo 2</span>
+                <h2>Patel Book Depot & School Stationery</h2>
+                <p><strong>Address:</strong> Shop No. 12, Main Market Road, Kanpur, UP | <strong>Store Timings:</strong> 9:00 AM - 9:00 PM</p>
 
-            <p align="center">
-                <img src="https://images.unsplash.com/photo-1583485088034-697b5bc54ccd?w=900&auto=format&fit=crop&q=80" alt="Stationery items pens notebooks desk setup" width="100%" style="max-width:750px; border-radius:8px;">
-            </p>
+                <img src="https://images.unsplash.com/photo-1583485088034-697b5bc54ccd?w=900&auto=format&fit=crop&q=80" alt="Stationery Desk Setup">
 
-            <h3>Patel Book Depot & School Stationery</h3>
-            <p><strong>Your Trusted One-Stop Destination for Textbooks, Registers & Fine Stationery</strong></p>
-            <p><strong>Address:</strong> Shop No. 12, Main Market Road, Kanpur, UP | <strong>Store Timings:</strong> 9:00 AM - 9:00 PM (All 7 Days)</p>
+                <h4>Available Textbooks & Study Materials</h4>
+                <ul>
+                    <li><strong>NCERT Curriculum:</strong> Complete sets for all grades from Primary to Class 12.</li>
+                    <li><strong>Reference Books:</strong> Standard editions from RD Sharma, RS Aggarwal, and S. Chand.</li>
+                    <li><strong>Board Preparation:</strong> Past 10-year question banks, exemplar papers, and mock tests.</li>
+                </ul>
 
-            <h4>Available Books & Study Material</h4>
-            <ul>
-                <li><strong>NCERT Curriculum:</strong> Complete sets for all grades from Primary to Class 12.</li>
-                <li><strong>Reference Books:</strong> Standard editions from RD Sharma, RS Aggarwal, and S. Chand.</li>
-                <li><strong>Exam Preparation:</strong> Past 10-year question banks, exemplar papers, and mock test papers.</li>
-                <li><strong>Competition Guides:</strong> Olympiad, NTSE, and foundational entrance guides.</li>
-            </ul>
+                <img src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=800&auto=format&fit=crop&q=80" alt="Books stacked neatly">
 
-            <p align="center">
-                <img src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=800&auto=format&fit=crop&q=80" alt="Books stacked neatly in library or shop" width="100%" style="max-width:650px; border-radius:8px;">
-            </p>
+                <h4>Stationery & Supplies Price List</h4>
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Item Description</th>
+                                <th>Brand / Details</th>
+                                <th>Price</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Classmate Premium Registers</td>
+                                <td>Pack of 6 (Ruled, 172 Pages)</td>
+                                <td>₹320</td>
+                            </tr>
+                            <tr>
+                                <td>A4 Project Sheets</td>
+                                <td>Pack of 50 Sheets (One-side ruled)</td>
+                                <td>₹75</td>
+                            </tr>
+                            <tr>
+                                <td>Precision Geometry Box</td>
+                                <td>Camlin / Doms Mathematical Instruments</td>
+                                <td>₹110</td>
+                            </tr>
+                            <tr>
+                                <td>Smooth Gel / Ball Pens</td>
+                                <td>Pack of 10 (Waterproof blue/black ink)</td>
+                                <td>₹100</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
 
-            <h4>Stationery & Supplies Price List</h4>
-            <table border="1" cellpadding="8" cellspacing="0">
-                <thead>
-                    <tr>
-                        <th>Item Description</th>
-                        <th>Brand / Details</th>
-                        <th>Price</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Classmate Premium Registers</td>
-                        <td>Pack of 6 (Ruled, 172 Pages)</td>
-                        <td>₹320</td>
-                    </tr>
-                    <tr>
-                        <td>A4 Project & Assignment Sheets</td>
-                        <td>Pack of 50 Sheets (One-side ruled)</td>
-                        <td>₹75</td>
-                    </tr>
-                    <tr>
-                        <td>Precision Geometry Box</td>
-                        <td>Camlin / Doms Mathematical Instruments</td>
-                        <td>₹110</td>
-                    </tr>
-                    <tr>
-                        <td>Smooth Gel / Ball Pens</td>
-                        <td>Pack of 10 (Waterproof blue/black ink)</td>
-                        <td>₹100</td>
-                    </tr>
-                    <tr>
-                        <td>Student Art Kit</td>
-                        <td>Drawing book, sketch pens, and oil pastels</td>
-                        <td>₹250</td>
-                    </tr>
-                </tbody>
-            </table>
-
-            <h4>In-Store Services</h4>
-            <ul>
-                <li>School syllabus bookset pre-booking for every academic session</li>
-                <li>High-speed Xerox, color prints, spiral binding, and file lamination</li>
-                <li>Instant order dispatch via WhatsApp for local neighborhood pickup</li>
-            </ul>
-
-            <p>
-                <a href="https://wa.me/919795222082?text=Hello,%20I%20saw%20your%20Stationery%20Store%20catalog%20and%20want%20to%20inquire%20about%20books/supplies." target="_blank">
-                    <button type="button">Order Supplies via WhatsApp</button>
+                <a href="https://wa.me/919795222082?text=Hello,%20I%20saw%20your%20Stationery%20Store%20catalog%20and%20want%20to%20inquire%20about%20books/supplies." target="_blank" class="btn btn-whatsapp">
+                    Order Supplies via WhatsApp
                 </a>
-            </p>
-        </section>
-        <hr>
+            </section>
 
-        <!-- ================= CONTACT SECTION ================= -->
-        <section id="contact">
-            <h2>Get in Touch / Hire Me</h2>
-            <p>Ready to get a clean, high-performance website designed for your business, shop, or coaching class? Reach out directly:</p>
+            <!-- ================= CONTACT SECTION ================= -->
+            <section id="contact">
+                <h2>Get in Touch / Hire Me</h2>
+                <p>Looking for a clean, fast website for your shop, store, or coaching institute? Reach out directly:</p>
 
-            <p>
-                <a href="https://wa.me/919795222082?text=Hello%20Ayush,%20I%20visited%20your%20portfolio%20and%20want%20to%20discuss%20a%20website." target="_blank">
-                    <button type="button">Chat on WhatsApp</button>
-                </a>
-            </p>
+                <div style="margin: 16px 0;">
+                    <a href="https://wa.me/919795222082?text=Hello%20Ayush,%20I%20visited%20your%20portfolio%20and%20want%20to%20discuss%20a%20website." target="_blank" class="btn btn-whatsapp" style="margin-right: 10px;">
+                        Chat on WhatsApp
+                    </a>
+                    <a href="tel:+919795222082" class="btn btn-primary">
+                        Call Directly: +91 9795222082
+                    </a>
+                </div>
 
-            <p>
-                <strong>Direct Call:</strong> 
-                <a href="tel:+919795222082">+91 9795222082</a>
-            </p>
+                <p><strong>Email:</strong> <a href="mailto:stv9610@gmail.com" style="color:#3b82f6;">stv9610@gmail.com</a></p>
 
-            <p>
-                <strong>Email:</strong> 
-                <a href="mailto:stv9610@gmail.com">stv9610@gmail.com</a>
-            </p>
+                <form action="mailto:stv9610@gmail.com" method="post" enctype="text/plain">
+                    <h3 style="margin-top: 0;">Send a Project Inquiry</h3>
+                    
+                    <label for="client_name">Your Name</label>
+                    <input type="text" id="client_name" name="Client Name" placeholder="e.g. Rahul Sharma" required>
 
-            <h3>Send a Project Inquiry:</h3>
-            <form action="mailto:stv9610@gmail.com" method="post" enctype="text/plain">
-                <p>
-                    <label for="client_name">Your Name:</label><br>
-                    <input type="text" id="client_name" name="Client Name" required>
-                </p>
-                <p>
-                    <label for="client_contact">Contact Phone / Email:</label><br>
-                    <input type="text" id="client_contact" name="Client Contact" required>
-                </p>
-                <p>
-                    <label for="work_details">Project Requirements (Coaching, Retail Shop, Portfolio, etc.):</label><br>
-                    <textarea id="work_details" name="Requirements" rows="4" cols="40" required></textarea>
-                </p>
-                <p>
-                    <button type="submit">Submit Request</button>
-                    <button type="reset">Clear Form</button>
-                </p>
-            </form>
-        </section>
-    </main>
-    <hr>
+                    <label for="client_contact">Phone Number or Email</label>
+                    <input type="text" id="client_contact" name="Client Contact" placeholder="e.g. +91 9876543210" required>
 
-    <!-- ================= FOOTER SECTION ================= -->
-    <footer>
-        <p>&copy; 2026 | Ayush Verma - Certified Web Designer | Kanpur, Uttar Pradesh</p>
-    </footer>
+                    <label for="work_details">Project Requirements</label>
+                    <textarea id="work_details" name="Requirements" rows="4" placeholder="Mention if you need a website for coaching, a shop, or personal use..." required></textarea>
+
+                    <button type="submit" class="btn btn-primary">Submit Inquiry</button>
+                </form>
+            </section>
+        </main>
+
+        <!-- ================= FOOTER SECTION ================= -->
+        <footer>
+            <p>&copy; 2026 Ayush Verma | Freelance Web Designer | Kanpur, Uttar Pradesh</p>
+        </footer>
+    </div>
 
 </body>
 </html>
+               
