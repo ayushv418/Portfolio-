@@ -1,10 +1,9 @@
-
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ayush Verma | Professional Web Designer</title>
+    <title>Ayush Verma | High-Growth Web Solutions for Businesses</title>
     <style>
         /* ===== GLOBAL RESET & VARIABLES ===== */
         * {
@@ -16,57 +15,81 @@
         }
 
         body {
-            background-color: #f8fafc;
-            color: #1e293b;
+            background-color: #0b1120;
+            color: #f1f5f9;
             line-height: 1.6;
             padding: 0 16px;
         }
 
         .container {
-            max-width: 900px;
+            max-width: 960px;
             margin: 0 auto;
-            padding: 24px 0;
+            padding: 24px 0 80px 0;
         }
 
         /* ===== HEADER STYLING ===== */
         header {
-            background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+            background: linear-gradient(135deg, #1e1b4b, #312e81, #1e3a8a);
             color: #ffffff;
-            padding: 40px 24px;
-            border-radius: 16px;
+            padding: 48px 24px;
+            border-radius: 20px;
             text-align: center;
-            box-shadow: 0 10px 25px rgba(30, 58, 138, 0.2);
+            box-shadow: 0 16px 36px rgba(0, 0, 0, 0.5);
             margin-bottom: 24px;
+            border: 1px solid #3730a3;
+        }
+
+        .urgent-pill {
+            display: inline-block;
+            background-color: #ef4444;
+            color: #ffffff;
+            font-size: 0.8rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 6px 14px;
+            border-radius: 30px;
+            margin-bottom: 14px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
         }
 
         header h1 {
-            font-size: 2.2rem;
-            margin-bottom: 8px;
+            font-size: 2.4rem;
+            margin-bottom: 12px;
             letter-spacing: -0.5px;
+            line-height: 1.2;
         }
 
         header p {
-            font-size: 1.05rem;
-            opacity: 0.95;
-            max-width: 650px;
-            margin: 4px auto;
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 720px;
+            margin: 6px auto;
+            color: #cbd5e1;
         }
 
         /* ===== NAVIGATION BAR ===== */
         nav {
-            background-color: #ffffff;
+            background-color: #1e293b;
             padding: 14px 20px;
             border-radius: 12px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
             margin-bottom: 30px;
             text-align: center;
             position: sticky;
             top: 10px;
             z-index: 100;
+            border: 1px solid #334155;
         }
 
         nav a {
-            color: #3b82f6;
+            color: #60a5fa;
             text-decoration: none;
             font-weight: 600;
             font-size: 0.95rem;
@@ -76,42 +99,52 @@
         }
 
         nav a:hover {
-            color: #1e3a8a;
+            color: #93c5fd;
             text-decoration: underline;
         }
 
         /* ===== SECTIONS & CARDS ===== */
         section {
-            background-color: #ffffff;
-            padding: 32px 24px;
-            border-radius: 16px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+            background-color: #111827;
+            padding: 34px 26px;
+            border-radius: 18px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
             margin-bottom: 32px;
-            border: 1px solid #e2e8f0;
+            border: 1px solid #1f2937;
+        }
+
+        .alert-section {
+            background: linear-gradient(145deg, #1f1d24, #1a1014);
+            border: 1px solid #991b1b;
         }
 
         h2 {
-            font-size: 1.6rem;
-            color: #0f172a;
+            font-size: 1.65rem;
+            color: #ffffff;
             margin-bottom: 16px;
             border-left: 5px solid #3b82f6;
-            padding-left: 12px;
+            padding-left: 14px;
+        }
+
+        .alert-heading {
+            border-left-color: #ef4444 !important;
+            color: #fca5a5 !important;
         }
 
         h3 {
             font-size: 1.3rem;
-            color: #1e3a8a;
+            color: #93c5fd;
             margin: 20px 0 10px 0;
         }
 
         h4 {
-            font-size: 1.1rem;
-            color: #334155;
+            font-size: 1.15rem;
+            color: #e2e8f0;
             margin: 16px 0 8px 0;
         }
 
         p, ul, ol {
-            color: #475569;
+            color: #94a3b8;
             font-size: 1rem;
             margin-bottom: 14px;
         }
@@ -124,13 +157,119 @@
             margin-bottom: 8px;
         }
 
+        /* ===== URGENCY / WARNING BOX ===== */
+        .warning-box {
+            background-color: rgba(239, 68, 68, 0.1);
+            border: 1px solid #dc2626;
+            padding: 20px;
+            border-radius: 12px;
+            margin: 18px 0;
+        }
+
+        .warning-box h4 {
+            color: #f87171;
+            margin-top: 0;
+        }
+
+        /* ===== COMPARISON MATRIX ===== */
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 16px;
+            margin-top: 20px;
+        }
+
+        .comp-card-bad {
+            background-color: #1c1917;
+            border: 1px solid #7f1d1d;
+            border-radius: 12px;
+            padding: 20px;
+        }
+
+        .comp-card-good {
+            background-color: #0f172a;
+            border: 2px solid #2563eb;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 20px rgba(37, 99, 235, 0.15);
+        }
+
+        /* ===== PRICING BOXES (10k to 15k) ===== */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin-top: 24px;
+        }
+
+        .pricing-card {
+            border: 2px solid #334155;
+            border-radius: 16px;
+            padding: 30px 22px;
+            text-align: center;
+            background-color: #1e293b;
+            position: relative;
+        }
+
+        .pricing-card.premium {
+            border-color: #3b82f6;
+            background: linear-gradient(160deg, #1e293b, #0f172a);
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.25);
+        }
+
+        .tag-badge {
+            position: absolute;
+            top: -13px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #2563eb;
+            color: #ffffff;
+            font-size: 0.75rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            padding: 5px 14px;
+            border-radius: 20px;
+            letter-spacing: 0.5px;
+        }
+
+        .tag-badge-danger {
+            background-color: #ef4444;
+        }
+
+        .price {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: #ffffff;
+            margin: 16px 0 4px 0;
+        }
+
+        .price-sub {
+            color: #94a3b8;
+            font-size: 0.85rem;
+            margin-bottom: 16px;
+        }
+
+        .pricing-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0 24px 0;
+            text-align: left;
+        }
+
+        .pricing-card ul li {
+            padding: 8px 0;
+            border-bottom: 1px solid #334155;
+            font-size: 0.95rem;
+            color: #e2e8f0;
+        }
+
         /* ===== IMAGES ===== */
         img {
             max-width: 100%;
             height: auto;
             border-radius: 12px;
             margin: 16px 0;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+            border: 1px solid #334155;
             display: block;
         }
 
@@ -143,35 +282,32 @@
         table {
             width: 100%;
             border-collapse: collapse;
-            background-color: #ffffff;
+            background-color: #0f172a;
             border-radius: 8px;
             overflow: hidden;
+            border: 1px solid #334155;
         }
 
         th, td {
             padding: 12px 16px;
             text-align: left;
-            border-bottom: 1px solid #e2e8f0;
+            border-bottom: 1px solid #1e293b;
             font-size: 0.95rem;
         }
 
         th {
-            background-color: #f1f5f9;
-            color: #1e293b;
+            background-color: #1e293b;
+            color: #f1f5f9;
             font-weight: 600;
-        }
-
-        tr:hover {
-            background-color: #f8fafc;
         }
 
         /* ===== BUTTONS ===== */
         .btn {
             display: inline-block;
-            padding: 12px 24px;
-            border-radius: 8px;
+            padding: 14px 26px;
+            border-radius: 10px;
             text-decoration: none;
-            font-weight: 600;
+            font-weight: 700;
             font-size: 1rem;
             cursor: pointer;
             border: none;
@@ -183,7 +319,7 @@
         .btn-whatsapp {
             background-color: #22c55e;
             color: #ffffff;
-            box-shadow: 0 4px 12px rgba(34, 197, 94, 0.3);
+            box-shadow: 0 4px 14px rgba(34, 197, 94, 0.4);
         }
 
         .btn-whatsapp:hover {
@@ -192,22 +328,57 @@
         }
 
         .btn-primary {
-            background-color: #3b82f6;
+            background-color: #2563eb;
             color: #ffffff;
-            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+            box-shadow: 0 4px 14px rgba(37, 99, 235, 0.4);
         }
 
         .btn-primary:hover {
-            background-color: #2563eb;
+            background-color: #1d4ed8;
             transform: translateY(-2px);
+        }
+
+        .btn-urgent {
+            background-color: #ef4444;
+            color: #ffffff;
+            box-shadow: 0 4px 14px rgba(239, 68, 68, 0.4);
+        }
+
+        .btn-urgent:hover {
+            background-color: #dc2626;
+            transform: translateY(-2px);
+        }
+
+        /* ===== FLOATING WHATSAPP BUTTON ===== */
+        .floating-wa {
+            position: fixed;
+            bottom: 24px;
+            right: 20px;
+            background-color: #22c55e;
+            color: #ffffff;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            box-shadow: 0 8px 24px rgba(34, 197, 94, 0.5);
+            z-index: 999;
+            text-decoration: none;
+            transition: transform 0.2s ease;
+        }
+
+        .floating-wa:hover {
+            transform: scale(1.1);
         }
 
         /* ===== FORMS ===== */
         form {
-            background-color: #f8fafc;
-            padding: 24px;
+            background-color: #1e293b;
+            padding: 26px;
             border-radius: 12px;
-            border: 1px solid #e2e8f0;
+            border: 1px solid #334155;
             margin-top: 20px;
         }
 
@@ -215,41 +386,30 @@
             display: block;
             margin-bottom: 6px;
             font-weight: 600;
-            color: #334155;
+            color: #cbd5e1;
             font-size: 0.9rem;
         }
 
-        input[type="text"], input[type="tel"], textarea {
+        input[type="text"], textarea {
             width: 100%;
             padding: 12px;
-            border: 1px solid #cbd5e1;
+            border: 1px solid #475569;
             border-radius: 8px;
             margin-bottom: 16px;
             font-size: 0.95rem;
-            background-color: #ffffff;
+            background-color: #0f172a;
+            color: #ffffff;
             outline: none;
-            transition: border-color 0.2s;
         }
 
-        input[type="text"]:focus, input[type="tel"]:focus, textarea:focus {
+        input[type="text"]:focus, textarea:focus {
             border-color: #3b82f6;
         }
 
-        /* ===== FOOTER ===== */
-        footer {
-            text-align: center;
-            padding: 24px;
-            color: #64748b;
-            font-size: 0.9rem;
-            border-top: 1px solid #e2e8f0;
-            margin-top: 40px;
-        }
-
-        /* ===== PROJECT DEMO BADGE ===== */
         .demo-tag {
             display: inline-block;
-            background-color: #dbeafe;
-            color: #1e40af;
+            background-color: #1e3a8a;
+            color: #93c5fd;
             padding: 4px 12px;
             border-radius: 20px;
             font-size: 0.85rem;
@@ -258,119 +418,161 @@
             letter-spacing: 0.5px;
             margin-bottom: 10px;
         }
+
+        footer {
+            text-align: center;
+            padding: 24px;
+            color: #64748b;
+            font-size: 0.9rem;
+            border-top: 1px solid #1f2937;
+            margin-top: 40px;
+        }
     </style>
 </head>
 <body>
 
+    <!-- Floating Quick Inquiry WhatsApp -->
+    <a href="https://wa.me/919795222082?text=URGENT%20INQUIRY:%20Hello%20Ayush,%20I%20need%20a%20high-converting%20business%20website%20before%20my%20competitors%20take%20over." target="_blank" class="floating-wa" title="Urgent Web Inquiry">
+        💬
+    </a>
+
     <div class="container">
         <!-- ================= HEADER SECTION ================= -->
         <header>
-            <h1>Ayush Verma</h1>
-            <p><strong>Certified Web Designer | Kanpur, Uttar Pradesh</strong></p>
-            <p>Crafting fast, clean, and high-impact web pages for businesses and coaching institutes.</p>
+            <span class="urgent-pill">Critical Business Notice</span>
+            <h1>Without A Modern Digital Asset, Your Local Business Is Invisible</h1>
+            <p><strong>Ayush Verma | Elite Web Architect for High-Growth Local Businesses & Institutes</strong></p>
+            <p>Kanpur customers search and decide on mobile phones. If you don't own an authoritative, high-converting digital storefront, 90% of your potential revenue is going straight to competitors.</p>
         </header>
 
         <!-- ================= NAVIGATION BAR ================= -->
         <nav>
-            <a href="#about">About</a>
-            <a href="#services">Services</a>
-            <a href="#certification">Certification</a>
-            <a href="#projects">Projects</a>
-            <a href="#coaching-demo">Coaching Demo</a>
-            <a href="#stationery-demo">Stationery Demo</a>
-            <a href="#contact">Contact</a>
+            <a href="#reality-check">The Harsh Reality</a>
+            <a href="#solutions">Why You Can't Survive Without It</a>
+            <a href="#packages">Investment Tiers</a>
+            <a href="#coaching-demo">Coaching Case Study</a>
+            <a href="#stationery-demo">Storefront Case Study</a>
+            <a href="#certification">Credentials</a>
+            <a href="#contact">Take Action Now</a>
         </nav>
 
         <!-- ================= MAIN CONTENT ================= -->
         <main>
-            <!-- About Section -->
-            <section id="about">
-                <h2>About Me</h2>
-                <p>
-                    Hello! I am <strong>Ayush Verma</strong>, a passionate web designer based in Kanpur. I specialize in building 
-                    clean, lightweight, and modern websites designed to help local business owners, educational centers, and retail stores attract more customers online.
-                </p>
-            </section>
-
-            <!-- Services Section -->
-            <section id="services">
-                <h2>Services Offered</h2>
-                <p>Tailored web solutions focused on speed, simplicity, and conversions:</p>
-                <ul>
-                    <li><strong>Single-Page Business Websites:</strong> Fast-loading, responsive web pages optimized for mobile devices.</li>
-                    <li><strong>Educational & Coaching Portals:</strong> Clear timetable schedules, batch announcements, and fee structures.</li>
-                    <li><strong>Digital Storefront Catalogs:</strong> Price lists and product highlights for local retail and stationery stores.</li>
-                    <li><strong>Direct Inquiry Integration:</strong> Instant WhatsApp and Call buttons for direct customer conversions.</li>
-                </ul>
-            </section>
-
-            <!-- ================= CERTIFICATION SECTION ================= -->
-            <section id="certification">
-                <h2>Professional Certification</h2>
+            <!-- THE HARSH REALITY / URGENCY -->
+            <section id="reality-check" class="alert-section">
+                <h2 class="alert-heading">⚠️ The Reality: Offline-Only Businesses Are Bleeding Revenue</h2>
+                <p>Word of mouth and traditional banners are no longer enough. The market dynamics in 2026 have completely shifted to mobile screens.</p>
                 
-                <div style="display: flex; justify-content: center; margin-top: 20px;">
-                    <div style="max-width: 500px; width: 100%; border: 3px solid #7c3aed; padding: 28px 24px; border-radius: 16px; background-color: #ffffff; box-shadow: 0 10px 25px rgba(124, 58, 237, 0.1); text-align: center;">
-                        
-                        <div style="text-align: right; margin-bottom: 8px;">
-                            <span style="background-color: #7c3aed; color: #ffffff; padding: 4px 14px; border-radius: 20px; font-weight: bold; font-size: 13px; letter-spacing: 0.5px;">mimo</span>
-                        </div>
+                <div class="warning-box">
+                    <h4>The Brutal Truth:</h4>
+                    <p style="color: #fca5a5; margin-bottom: 0;">
+                        Every single day you operate without a fast, dedicated web landing page, dozens of parents and buyers in your locality choose another coaching institute or book depot simply because they could verify schedules, catalogs, and contact details online in 3 seconds.
+                    </p>
+                </div>
 
-                        <div style="font-size: 42px; margin: 10px 0;">🛡️</div>
-
-                        <h3 style="color: #6d28d9; letter-spacing: 1.5px; margin: 0; font-size: 15px; text-transform: uppercase;">Certificate of Completion</h3>
-                        <p style="color: #64748b; font-size: 13px; margin: 8px 0 0 0;">has been awarded to</p>
-
-                        <h2 style="font-size: 26px; color: #0f172a; margin: 10px 0; border-bottom: 2px solid #f1f5f9; padding-bottom: 12px; border-left: none;">Ayush Verma</h2>
-
-                        <p style="color: #64748b; font-size: 13px; margin: 6px 0;">for successful completion of</p>
-                        <h3 style="font-size: 24px; color: #7c3aed; margin: 4px 0 16px 0; letter-spacing: 1px;">HTML</h3>
-
-                        <p style="color: #475569; font-size: 13px; line-height: 1.5; margin-bottom: 24px;">
-                            <em>"This curriculum provides an understanding of the core concepts of websites and the HTML knowledge required to create web pages."</em>
-                        </p>
-
-                        <div style="display: flex; justify-content: space-between; border-top: 1px dashed #cbd5e1; padding-top: 16px; font-size: 12px;">
-                            <div style="text-align: left;">
-                                <strong style="color: #1e293b;">Johannes Berger</strong><br>
-                                <span style="color: #94a3b8;">CEO, Mimo</span>
-                            </div>
-                            <div style="text-align: right;">
-                                <strong style="color: #1e293b;">16 / September / 2026</strong><br>
-                                <span style="color: #16a34a; font-weight: bold;">✔ Verified Completion</span>
-                            </div>
-                        </div>
-
+                <div class="comparison-grid">
+                    <div class="comp-card-bad">
+                        <h4 style="color:#ef4444;">❌ Sticking to Offline Alone</h4>
+                        <ul style="color:#f87171;">
+                            <li>Zero visibility when your physical shutter is down.</li>
+                            <li>Customers have to physically travel or save numbers to ask basic questions.</li>
+                            <li>Competitors with simple websites look more credible and steal your admissions.</li>
+                            <li>Zero measurable authority in your neighborhood.</li>
+                        </ul>
+                    </div>
+                    <div class="comp-card-good">
+                        <h4 style="color:#60a5fa;">✅ With Our Authority Web Asset</h4>
+                        <ul style="color:#93c5fd;">
+                            <li>24/7 lead generation engine capturing inquiries while you sleep.</li>
+                            <li>Instant 1-tap WhatsApp admissions & inventory orders.</li>
+                            <li>A modern, polished brand that commands premium pricing.</li>
+                            <li>Counter QR codes turning every footfall into a repeat customer.</li>
+                        </ul>
                     </div>
                 </div>
             </section>
 
-            <!-- Projects Section -->
-            <section id="projects">
-                <h2>Featured Projects</h2>
-                <ol>
-                    <li><strong>Personal Portfolio:</strong> A responsive web portfolio with integrated client communication channels.</li>
-                    <li><strong>Coaching Institute Website:</strong> A structured layout featuring courses, schedules, and trial bookings.</li>
-                    <li><strong>Stationery Storefront:</strong> An online product catalog with pricing tables and WhatsApp ordering.</li>
-                </ol>
+            <!-- WHY YOU CAN'T SURVIVE WITHOUT THIS ASSET -->
+            <section id="solutions">
+                <h2>The 3 Pillars of Dominating Your Local Market</h2>
+                <p>We do not build simple hobby pages. We engineer digital assets designed specifically to capture and convert paying clients:</p>
+
+                <ul>
+                    <li><strong>Instant Action Funnel:</strong> Visitors do not have to copy numbers or search directories. One tap opens WhatsApp with a pre-filled message directly targeting admissions or orders.</li>
+                    <li><strong>Authoritative Transparent Presentation:</strong> Organized timetables, course structures, and price lists clear customer doubt before they even speak to you.</li>
+                    <li><strong>Counter QR Code Integration:</strong> Every visitor walking past your reception or counter can scan your personalized QR code and instantly browse your entire catalog.</li>
+                </ul>
+            </section>
+
+            <!-- PRICING PACKAGES (₹10,000 - ₹15,000) -->
+            <section id="packages">
+                <h2>High-ROI Investment Tiers</h2>
+                <p>Think of this not as an expense, but as a permanent digital asset that brings in new clients week after week without recurring agency retainers.</p>
+
+                <div class="pricing-grid">
+                    <!-- Growth Accelerator Tier -->
+                    <div class="pricing-card">
+                        <span class="tag-badge">Market Entry</span>
+                        <h3>Business Growth Foundation</h3>
+                        <p>For established local stores & individual tuition centres ready to secure their locality.</p>
+                        <div class="price">₹10,000</div>
+                        <p class="price-sub">One-Time Asset Setup | No Recurring Monthly Fees</p>
+                        <ul>
+                            <li>✔ Complete High-Performance Semantic Web Asset</li>
+                            <li>✔ Business Details, Timings & Google Maps Integration</li>
+                            <li>✔ Frictionless 1-Tap Direct WhatsApp Conversion Gateway</li>
+                            <li>✔ Full Mobile & Tablet Responsive Architecture</li>
+                            <li>✔ Permanent Fast Cloud Hosting Included</li>
+                            <li>✔ 72-Hour Express Launch Guarantee</li>
+                        </ul>
+                        <a href="https://wa.me/919795222082?text=Hello%20Ayush,%20I%20want%20to%20lock%20in%20the%20₹10,000%20Business%20Growth%20Asset." target="_blank" class="btn btn-primary" style="width:100%;">Claim Foundation Tier</a>
+                    </div>
+
+                    <!-- Market Dominator Tier -->
+                    <div class="pricing-card premium">
+                        <span class="tag-badge tag-badge-danger">Full Market Dominance</span>
+                        <h3>Complete Authority Suite</h3>
+                        <p>For premier coaching academies & high-volume retail hubs who cannot afford to lose a single client.</p>
+                        <div class="price">₹15,000</div>
+                        <p class="price-sub">All-Inclusive Turnkey Solution</p>
+                        <ul>
+                            <li>✔ <strong>Everything in Business Growth Tier</strong></li>
+                            <li>✔ Comprehensive Multi-Batch Timetable / Product Catalog Matrix</li>
+                            <li>✔ High-Resolution Visual Gallery Showcase</li>
+                            <li>✔ Automated Student Lead & In-Store Inquiry Capture System</li>
+                            <li>✔ <strong>2x Custom Printable Counter QR Codes (Laminated Design Ready)</strong></li>
+                            <li>✔ Priority VIP Code Refinement & Launch Management</li>
+                            <li>✔ Zero Downtime Architecture</li>
+                        </ul>
+                        <a href="https://wa.me/919795222082?text=Hello%20Ayush,%20I%20want%20the%20₹15,000%20Authority%20Suite%20before%20slots%20fill%20up." target="_blank" class="btn btn-urgent" style="width:100%;">Lock In Authority Suite</a>
+                    </div>
+                </div>
+
+                <div class="warning-box" style="margin-top: 25px; border-color: #2563eb; background-color: rgba(37, 99, 235, 0.1);">
+                    <h4 style="color: #93c5fd;">⚡ Strictly Limited Client Intake</h4>
+                    <p style="color: #cbd5e1; margin-bottom: 0;">
+                        To maintain elite development standards and direct client focus, I take on only <strong>2 business deployments per week</strong> in Kanpur. Secure your deployment window now before your competitors capture the digital space.
+                    </p>
+                </div>
             </section>
 
             <!-- ================= DEMO 1: COACHING INSTITUTE ================= -->
             <section id="coaching-demo">
-                <span class="demo-tag">Live Client Demo 1</span>
+                <span class="demo-tag">Live Architecture Proof 1</span>
                 <h2>Target Science & Math Academy</h2>
-                <p><strong>Excellence in Education for Secondary Classes | Kakadeo / Barra, Kanpur</strong></p>
+                <p><strong>Secondary Classes Tuition & Coaching | Kakadeo / Barra, Kanpur</strong></p>
 
-                <img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=900&auto=format&fit=crop&q=80" alt="Students in Classroom">
+                <img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=900&auto=format&fit=crop&q=80" alt="Classroom batch in session">
 
-                <h4>About the Academy</h4>
+                <h4>Institutional Overview</h4>
                 <p>
-                    Target Academy specializes in conceptual understanding and board exam excellence for CBSE, ICSE, and UP Board students. 
-                    Small batch sizes ensure personalized guidance so every student achieves academic success.
+                    Target Academy provides conceptual mastery and targeted board preparation for CBSE, ICSE, and UP Board students. 
+                    Strictly controlled batch sizes ensure individualized mentorship and top academic percentiles.
                 </p>
 
-                <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=800&auto=format&fit=crop&q=80" alt="Student studying">
+                <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=800&auto=format&fit=crop&q=80" alt="Focused student studying">
 
-                <h4>Batch Timings & Courses</h4>
+                <h4>Batch Schedules & Curriculum</h4>
                 <div class="table-responsive">
                     <table>
                         <thead>
@@ -383,19 +585,19 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td>Junior Batch (Classes 6-8)</td>
+                                <td>Junior Foundation (Classes 6-8)</td>
                                 <td>Mathematics, General Science</td>
                                 <td>4:00 PM - 5:30 PM</td>
                                 <td>Monday to Friday</td>
                             </tr>
                             <tr>
-                                <td>Foundation Batch (Class 9)</td>
+                                <td>Pre-Board Batch (Class 9)</td>
                                 <td>Maths, Physics, Chemistry</td>
                                 <td>5:30 PM - 7:00 PM</td>
                                 <td>Monday to Saturday</td>
                             </tr>
                             <tr>
-                                <td>Board Target Batch (Class 10)</td>
+                                <td>Board Target Mastery (Class 10)</td>
                                 <td>Complete Science & Mathematics</td>
                                 <td>7:00 PM - 8:30 PM</td>
                                 <td>Monday to Saturday</td>
@@ -404,137 +606,184 @@
                     </table>
                 </div>
 
-                <h4>Transparent Fee Structure</h4>
+                <h4>Transparent Tuition Structure</h4>
                 <div class="table-responsive">
                     <table>
                         <thead>
                             <tr>
                                 <th>Course</th>
                                 <th>Monthly Fee</th>
-                                <th>Trial Class</th>
+                                <th>Assessment Class</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td>Junior Batch</td>
+                                <td>Junior Foundation</td>
                                 <td>₹800 / month</td>
-                                <td>2 Days Free Demo</td>
+                                <td>2 Days Trial Included</td>
                             </tr>
                             <tr>
-                                <td>Foundation Batch</td>
+                                <td>Pre-Board Batch</td>
                                 <td>₹1,200 / month</td>
-                                <td>2 Days Free Demo</td>
+                                <td>2 Days Trial Included</td>
                             </tr>
                             <tr>
-                                <td>Board Target Batch</td>
+                                <td>Board Target Mastery</td>
                                 <td>₹1,500 / month</td>
-                                <td>2 Days Free Demo</td>
+                                <td>2 Days Trial Included</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
 
-                <a href="https://wa.me/919795222082?text=Hello,%20I%20saw%20your%20Coaching%20Demo%20website%20and%20want%20to%20know%20more." target="_blank" class="btn btn-whatsapp">
-                    Book a Free Demo Class (WhatsApp)
+                <a href="https://wa.me/919795222082?text=Hello,%20I%20am%20inquiring%20about%20Target%20Academy%20demo%20admissions." target="_blank" class="btn btn-whatsapp">
+                    Book an Admission Inquiry via WhatsApp
                 </a>
             </section>
 
             <!-- ================= DEMO 2: STATIONERY & BOOK STORE ================= -->
             <section id="stationery-demo">
-                <span class="demo-tag">Live Client Demo 2</span>
+                <span class="demo-tag">Live Architecture Proof 2</span>
                 <h2>Patel Book Depot & School Stationery</h2>
-                <p><strong>Address:</strong> Shop No. 12, Main Market Road, Kanpur, UP | <strong>Store Timings:</strong> 9:00 AM - 9:00 PM</p>
+                <p><strong>Address:</strong> Shop No. 12, Main Market Road, Kanpur, UP | <strong>Store Timings:</strong> 9:00 AM - 9:00 PM (Daily)</p>
 
-                <img src="https://images.unsplash.com/photo-1583485088034-697b5bc54ccd?w=900&auto=format&fit=crop&q=80" alt="Stationery Desk Setup">
+                <img src="https://images.unsplash.com/photo-1583485088034-697b5bc54ccd?w=900&auto=format&fit=crop&q=80" alt="Stationery supplies layout">
 
-                <h4>Available Textbooks & Study Materials</h4>
+                <h4>Stock Availability</h4>
                 <ul>
-                    <li><strong>NCERT Curriculum:</strong> Complete sets for all grades from Primary to Class 12.</li>
-                    <li><strong>Reference Books:</strong> Standard editions from RD Sharma, RS Aggarwal, and S. Chand.</li>
-                    <li><strong>Board Preparation:</strong> Past 10-year question banks, exemplar papers, and mock tests.</li>
+                    <li><strong>NCERT Official Editions:</strong> Complete sets available for all grades from Primary to Class 12.</li>
+                    <li><strong>Authoritative Reference Guides:</strong> RD Sharma, RS Aggarwal, and S. Chand.</li>
+                    <li><strong>Board Question Banks:</strong> 10-year solved papers and exemplar mock sets.</li>
                 </ul>
 
-                <img src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=800&auto=format&fit=crop&q=80" alt="Books stacked neatly">
+                <img src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=800&auto=format&fit=crop&q=80" alt="Organized academic bookshelves">
 
-                <h4>Stationery & Supplies Price List</h4>
+                <h4>Stationery Catalog & Rates</h4>
                 <div class="table-responsive">
                     <table>
                         <thead>
                             <tr>
-                                <th>Item Description</th>
-                                <th>Brand / Details</th>
+                                <th>Item</th>
+                                <th>Specification</th>
                                 <th>Price</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td>Classmate Premium Registers</td>
+                                <td>Classmate Long Registers</td>
                                 <td>Pack of 6 (Ruled, 172 Pages)</td>
                                 <td>₹320</td>
                             </tr>
                             <tr>
-                                <td>A4 Project Sheets</td>
+                                <td>A4 Assignment Sheets</td>
                                 <td>Pack of 50 Sheets (One-side ruled)</td>
                                 <td>₹75</td>
                             </tr>
                             <tr>
-                                <td>Precision Geometry Box</td>
-                                <td>Camlin / Doms Mathematical Instruments</td>
+                                <td>Precision Geometry Instruments</td>
+                                <td>Camlin / Doms Brand</td>
                                 <td>₹110</td>
                             </tr>
                             <tr>
-                                <td>Smooth Gel / Ball Pens</td>
-                                <td>Pack of 10 (Waterproof blue/black ink)</td>
+                                <td>Waterproof Gel Pen Set</td>
+                                <td>Pack of 10</td>
                                 <td>₹100</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
 
-                <a href="https://wa.me/919795222082?text=Hello,%20I%20saw%20your%20Stationery%20Store%20catalog%20and%20want%20to%20inquire%20about%20books/supplies." target="_blank" class="btn btn-whatsapp">
-                    Order Supplies via WhatsApp
+                <a href="https://wa.me/919795222082?text=Hello,%20I%20want%20to%20order%20stationery%20supplies%20from%20Patel%20Book%20Depot." target="_blank" class="btn btn-whatsapp">
+                    Direct WhatsApp Inventory Order
                 </a>
+            </section>
+
+            <!-- ================= CERTIFICATION SECTION ================= -->
+            <section id="certification">
+                <h2>Industry Verified Development Standards</h2>
+                
+                <div style="display: flex; justify-content: center; margin-top: 20px;">
+                    <div style="max-width: 520px; width: 100%; border: 3px solid #7c3aed; padding: 28px 24px; border-radius: 16px; background-color: #1e1b4b; box-shadow: 0 10px 25px rgba(124, 58, 237, 0.2); text-align: center;">
+                        
+                        <div style="text-align: right; margin-bottom: 8px;">
+                            <span style="background-color: #7c3aed; color: #ffffff; padding: 4px 14px; border-radius: 20px; font-weight: bold; font-size: 13px;">mimo</span>
+                        </div>
+
+                        <div style="font-size: 42px; margin: 10px 0;">🛡️</div>
+
+                        <h3 style="color: #a78bfa; letter-spacing: 1.5px; margin: 0; font-size: 15px; text-transform: uppercase;">Certificate of Completion</h3>
+                        <p style="color: #94a3b8; font-size: 13px; margin: 8px 0 0 0;">has been awarded to</p>
+
+                        <h2 style="font-size: 26px; color: #ffffff; margin: 10px 0; border-bottom: 2px solid #312e81; padding-bottom: 12px; border-left: none;">Ayush Verma</h2>
+
+                        <p style="color: #94a3b8; font-size: 13px; margin: 6px 0;">for successful completion of</p>
+                        <h3 style="font-size: 24px; color: #a78bfa; margin: 4px 0 16px 0;">HTML</h3>
+
+                        <p style="color: #cbd5e1; font-size: 13px; line-height: 1.5; margin-bottom: 24px;">
+                            <em>"This curriculum provides an understanding of the core concepts of websites and the HTML knowledge required to create web pages."</em>
+                        </p>
+
+                        <div style="display: flex; justify-content: space-between; border-top: 1px dashed #4338ca; padding-top: 16px; font-size: 12px;">
+                            <div style="text-align: left;">
+                                <strong style="color: #f1f5f9;">Johannes Berger</strong><br>
+                                <span style="color: #94a3b8;">CEO, Mimo</span>
+                            </div>
+                            <div style="text-align: right;">
+                                <strong style="color: #f1f5f9;">16 / September / 2026</strong><br>
+                                <span style="color: #4ade80; font-weight: bold;">✔ Verified Authority</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
             </section>
 
             <!-- ================= CONTACT SECTION ================= -->
             <section id="contact">
-                <h2>Get in Touch / Hire Me</h2>
-                <p>Looking for a clean, fast website for your shop, store, or coaching institute? Reach out directly:</p>
+                <h2>Secure Your Digital Asset Before Next Week</h2>
+                <p>Every week you delay is revenue handed directly to your competitors. Let's build your authoritative web presence now:</p>
 
-                <div style="margin: 16px 0;">
-                    <a href="https://wa.me/919795222082?text=Hello%20Ayush,%20I%20visited%20your%20portfolio%20and%20want%20to%20discuss%20a%20website." target="_blank" class="btn btn-whatsapp" style="margin-right: 10px;">
-                        Chat on WhatsApp
+                <div style="margin: 20px 0;">
+                    <a href="https://wa.me/919795222082?text=PRIORITY%20BOOKING:%20Hello%20Ayush,%20I%20want%20to%20discuss%20deploying%20a%20website%20for%20my%20business." target="_blank" class="btn btn-urgent" style="margin-right: 12px;">
+                        Lock In Project via WhatsApp
                     </a>
                     <a href="tel:+919795222082" class="btn btn-primary">
-                        Call Directly: +91 9795222082
+                        Direct Line: +91 9795222082
                     </a>
                 </div>
 
-                <p><strong>Email:</strong> <a href="mailto:stv9610@gmail.com" style="color:#3b82f6;">stv9610@gmail.com</a></p>
+                <p><strong>Official Email:</strong> <a href="mailto:stv9610@gmail.com" style="color:#60a5fa;">stv9610@gmail.com</a></p>
 
                 <form action="mailto:stv9610@gmail.com" method="post" enctype="text/plain">
-                    <h3 style="margin-top: 0;">Send a Project Inquiry</h3>
+                    <h3 style="margin-top: 0; color: #ffffff;">Reserve Your Deployment Window</h3>
                     
-                    <label for="client_name">Your Name</label>
-                    <input type="text" id="client_name" name="Client Name" placeholder="e.g. Rahul Sharma" required>
+                    <label for="client_name">Business / Owner Name</label>
+                    <input type="text" id="client_name" name="Client Name" placeholder="e.g. Target Academy / Rajesh Sharma" required>
 
-                    <label for="client_contact">Phone Number or Email</label>
-                    <input type="text" id="client_contact" name="Client Contact" placeholder="e.g. +91 9876543210" required>
+                    <label for="client_contact">Direct WhatsApp Contact Number</label>
+                    <input type="text" id="client_contact" name="Client Contact" placeholder="e.g. 9795222082" required>
 
-                    <label for="work_details">Project Requirements</label>
-                    <textarea id="work_details" name="Requirements" rows="4" placeholder="Mention if you need a website for coaching, a shop, or personal use..." required></textarea>
+                    <label for="investment_tier">Selected Package Tier</label>
+                    <input type="text" id="investment_tier" name="Selected Tier" placeholder="₹10,000 Foundation OR ₹15,000 Authority Suite" required>
 
-                    <button type="submit" class="btn btn-primary">Submit Inquiry</button>
+                    <label for="work_details">Business Details & Requirements</label>
+                    <textarea id="work_details" name="Requirements" rows="3" placeholder="Provide current location, services, or special requirements..." required></textarea>
+
+                    <button type="submit" class="btn btn-urgent" style="width:100%;">Submit Priority Reservation</button>
                 </form>
             </section>
         </main>
 
         <!-- ================= FOOTER SECTION ================= -->
         <footer>
-            <p>&copy; 2026 Ayush Verma | Freelance Web Designer | Kanpur, Uttar Pradesh</p>
+            <p>&copy; 2026 Ayush Verma | High-Converting Digital Infrastructure | Kanpur, Uttar Pradesh</p>
         </footer>
     </div>
 
 </body>
 </html>
-               
+
+             
+            
+    
+                                 
