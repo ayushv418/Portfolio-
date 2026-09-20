@@ -3,74 +3,72 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ayush Verma | Premium Digital Architecture</title>
+    <title>Ayush Verma | Website Designer</title>
     <style>
-        /* ===== GLOBAL RESET & DESIGN SYSTEM ===== */
+        /* ===== SIMPLE & CLEAN STYLING ===== */
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             scroll-behavior: smooth;
         }
 
         body {
-            background-color: #090d16;
+            background-color: #0b0f19;
             color: #f1f5f9;
             line-height: 1.6;
             padding: 0 16px;
         }
 
         .container {
-            max-width: 940px;
+            max-width: 920px;
             margin: 0 auto;
-            padding: 24px 0 80px 0;
+            padding: 24px 0 90px 0;
         }
 
-        /* ===== HERO HEADER ===== */
+        /* ===== HEADER ===== */
         header {
-            background: linear-gradient(135deg, #0f172a, #1e293b, #172554);
+            background: linear-gradient(135deg, #0f172a, #1e3a8a);
             color: #ffffff;
-            padding: 44px 24px;
-            border-radius: 20px;
+            padding: 44px 20px;
+            border-radius: 18px;
             text-align: center;
-            box-shadow: 0 16px 36px rgba(0, 0, 0, 0.45);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
             margin-bottom: 24px;
-            border: 1px solid #1e3a8a;
+            border: 1px solid #2e3856;
         }
 
-        .badge-pill {
+        .badge {
             display: inline-block;
-            background-color: #2563eb;
-            color: #ffffff;
-            font-size: 0.75rem;
+            background: rgba(59, 130, 246, 0.2);
+            color: #93c5fd;
+            border: 1px solid rgba(96, 165, 250, 0.4);
+            font-size: 0.8rem;
             font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            padding: 5px 14px;
-            border-radius: 30px;
+            padding: 4px 14px;
+            border-radius: 20px;
             margin-bottom: 12px;
         }
 
         header h1 {
             font-size: 2.3rem;
             margin-bottom: 10px;
-            letter-spacing: -0.5px;
         }
 
         header p {
             font-size: 1.05rem;
             color: #cbd5e1;
-            max-width: 700px;
-            margin: 4px auto;
+            max-width: 680px;
+            margin: 6px auto;
         }
 
-        /* ===== NAVIGATION ===== */
+        /* ===== NAVIGATION BAR ===== */
         nav {
             background-color: #111827;
-            padding: 12px 18px;
+            padding: 12px 16px;
             border-radius: 12px;
-            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
             margin-bottom: 30px;
             text-align: center;
             position: sticky;
@@ -80,32 +78,31 @@
         }
 
         nav a {
-            color: #60a5fa;
+            color: #94a3b8;
             text-decoration: none;
             font-weight: 600;
-            font-size: 0.92rem;
-            margin: 0 10px;
+            font-size: 0.9rem;
+            margin: 0 8px;
             display: inline-block;
-            transition: color 0.2s ease;
+            transition: color 0.2s;
         }
 
         nav a:hover {
-            color: #93c5fd;
-            text-decoration: underline;
+            color: #60a5fa;
         }
 
         /* ===== SECTIONS ===== */
         section {
-            background-color: #0f172a;
-            padding: 32px 24px;
-            border-radius: 18px;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-            margin-bottom: 32px;
-            border: 1px solid #1e293b;
+            background-color: #111827;
+            padding: 30px 22px;
+            border-radius: 16px;
+            box-shadow: 0 4px 18px rgba(0, 0, 0, 0.3);
+            margin-bottom: 30px;
+            border: 1px solid #1f2937;
         }
 
         h2 {
-            font-size: 1.55rem;
+            font-size: 1.5rem;
             color: #ffffff;
             margin-bottom: 16px;
             border-left: 4px solid #3b82f6;
@@ -113,29 +110,66 @@
         }
 
         h3 {
-            font-size: 1.25rem;
+            font-size: 1.2rem;
             color: #93c5fd;
             margin: 18px 0 10px 0;
         }
 
         h4 {
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             color: #e2e8f0;
-            margin: 16px 0 8px 0;
+            margin: 14px 0 8px 0;
         }
 
-        p, ul, ol {
+        p, ul {
             color: #94a3b8;
             font-size: 0.98rem;
             margin-bottom: 14px;
         }
 
-        ul, ol {
-            padding-left: 22px;
+        ul {
+            padding-left: 20px;
         }
 
         li {
-            margin-bottom: 7px;
+            margin-bottom: 6px;
+        }
+
+        /* ===== TWO-COLUMN CARDS FOR ONLINE & OFFLINE ===== */
+        .category-box {
+            background: #0f172a;
+            border: 1px solid #1e293b;
+            border-radius: 14px;
+            padding: 24px;
+            margin-bottom: 20px;
+        }
+
+        .category-box.offline {
+            border-left: 5px solid #22c55e;
+        }
+
+        .category-box.online {
+            border-left: 5px solid #3b82f6;
+        }
+
+        .tag-title {
+            display: inline-block;
+            font-size: 0.78rem;
+            font-weight: 700;
+            padding: 3px 10px;
+            border-radius: 12px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .tag-offline {
+            background-color: rgba(34, 197, 94, 0.15);
+            color: #4ade80;
+        }
+
+        .tag-online {
+            background-color: rgba(59, 130, 246, 0.15);
+            color: #60a5fa;
         }
 
         /* ===== COMPACT CERTIFICATE CARD ===== */
@@ -149,12 +183,11 @@
             background: #ffffff;
             color: #0f172a;
             width: 100%;
-            max-width: 580px;
+            max-width: 540px;
             border-radius: 12px;
             padding: 20px 24px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
             border: 3px solid #7c3aed;
-            position: relative;
         }
 
         .cert-header {
@@ -163,14 +196,13 @@
             align-items: center;
             border-bottom: 1px solid #e2e8f0;
             padding-bottom: 8px;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
         }
 
         .cert-header .logo {
             font-size: 0.9rem;
             font-weight: 800;
             color: #7c3aed;
-            letter-spacing: 0.5px;
         }
 
         .cert-header .tag {
@@ -179,18 +211,17 @@
             background-color: #f3e8ff;
             color: #6b21a8;
             padding: 3px 10px;
-            border-radius: 12px;
-            text-transform: uppercase;
+            border-radius: 10px;
         }
 
         .cert-body {
             text-align: center;
-            padding: 6px 0 12px 0;
+            padding: 6px 0 10px 0;
         }
 
         .cert-body .cert-title {
-            font-size: 0.82rem;
-            letter-spacing: 1.5px;
+            font-size: 0.78rem;
+            letter-spacing: 1px;
             text-transform: uppercase;
             color: #64748b;
             font-weight: 700;
@@ -198,14 +229,14 @@
         }
 
         .cert-body h3 {
-            font-size: 1.45rem;
+            font-size: 1.4rem;
             color: #0f172a;
             margin: 4px 0 2px 0;
             font-weight: 800;
         }
 
         .cert-body .subject {
-            font-size: 1.15rem;
+            font-size: 1.1rem;
             color: #7c3aed;
             font-weight: 700;
             margin: 2px 0 6px 0;
@@ -215,7 +246,7 @@
             font-size: 0.8rem;
             color: #64748b;
             line-height: 1.4;
-            max-width: 440px;
+            max-width: 420px;
             margin: 0 auto;
         }
 
@@ -224,83 +255,19 @@
             justify-content: space-between;
             align-items: center;
             border-top: 1px dashed #cbd5e1;
-            padding-top: 10px;
+            padding-top: 8px;
             margin-top: 8px;
             font-size: 0.75rem;
             color: #475569;
-        }
-
-        /* ===== PRICING TIERS (10K - 15K VALUE DRIVEN) ===== */
-        .pricing-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 22px;
-            margin-top: 20px;
-        }
-
-        .pricing-card {
-            border: 2px solid #1e293b;
-            border-radius: 16px;
-            padding: 28px 22px;
-            text-align: center;
-            background-color: #111827;
-            position: relative;
-        }
-
-        .pricing-card.premium {
-            border-color: #3b82f6;
-            background: linear-gradient(165deg, #111827, #0f172a);
-            box-shadow: 0 10px 28px rgba(59, 130, 246, 0.2);
-        }
-
-        .popular-pill {
-            position: absolute;
-            top: -12px;
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: #2563eb;
-            color: #ffffff;
-            font-size: 0.72rem;
-            font-weight: 800;
-            text-transform: uppercase;
-            padding: 4px 12px;
-            border-radius: 20px;
-        }
-
-        .price {
-            font-size: 2.3rem;
-            font-weight: 800;
-            color: #ffffff;
-            margin: 12px 0 2px 0;
-        }
-
-        .price-sub {
-            color: #94a3b8;
-            font-size: 0.82rem;
-            margin-bottom: 16px;
-        }
-
-        .pricing-card ul {
-            list-style: none;
-            padding: 0;
-            margin: 18px 0 22px 0;
-            text-align: left;
-        }
-
-        .pricing-card ul li {
-            padding: 7px 0;
-            border-bottom: 1px solid #1e293b;
-            font-size: 0.92rem;
-            color: #cbd5e1;
         }
 
         /* ===== IMAGES ===== */
         img {
             max-width: 100%;
             height: auto;
-            border-radius: 12px;
+            border-radius: 10px;
             margin: 14px 0;
-            border: 1px solid #1e293b;
+            border: 1px solid #1f2937;
             display: block;
         }
 
@@ -313,26 +280,26 @@
         table {
             width: 100%;
             border-collapse: collapse;
-            background-color: #111827;
+            background-color: #0f172a;
             border-radius: 8px;
             overflow: hidden;
-            border: 1px solid #1e293b;
+            border: 1px solid #1f2937;
         }
 
         th, td {
-            padding: 12px 14px;
+            padding: 10px 14px;
             text-align: left;
             border-bottom: 1px solid #1e293b;
-            font-size: 0.92rem;
+            font-size: 0.9rem;
         }
 
         th {
             background-color: #1e293b;
-            color: #f1f5f9;
+            color: #f8fafc;
             font-weight: 600;
         }
 
-        /* ===== BUTTONS ===== */
+        /* ===== BUTTONS & CONTACT CARDS ===== */
         .btn {
             display: inline-block;
             padding: 12px 24px;
@@ -344,29 +311,58 @@
             border: none;
             transition: all 0.2s ease;
             text-align: center;
-            margin-top: 8px;
         }
 
         .btn-whatsapp {
             background-color: #22c55e;
             color: #ffffff;
-            box-shadow: 0 4px 12px rgba(34, 197, 94, 0.35);
-        }
-
-        .btn-whatsapp:hover {
-            background-color: #16a34a;
-            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(34, 197, 94, 0.3);
         }
 
         .btn-primary {
             background-color: #2563eb;
             color: #ffffff;
-            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.35);
         }
 
-        .btn-primary:hover {
-            background-color: #1d4ed8;
-            transform: translateY(-2px);
+        /* DIRECT CONTACT INFO BOXES */
+        .contact-info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 16px;
+            margin: 20px 0;
+        }
+
+        .contact-info-card {
+            background-color: #0f172a;
+            border: 1px solid #1e293b;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .contact-icon {
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+
+        .contact-label {
+            font-size: 0.85rem;
+            color: #94a3b8;
+            margin-bottom: 4px;
+        }
+
+        .contact-value {
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: #ffffff;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .contact-value:hover {
+            color: #60a5fa;
+            text-decoration: underline;
         }
 
         /* ===== FLOATING WHATSAPP BUTTON ===== */
@@ -383,7 +379,7 @@
             align-items: center;
             justify-content: center;
             font-size: 30px;
-            box-shadow: 0 8px 24px rgba(34, 197, 94, 0.5);
+            box-shadow: 0 6px 20px rgba(34, 197, 94, 0.4);
             z-index: 999;
             text-decoration: none;
             transition: transform 0.2s ease;
@@ -393,18 +389,18 @@
             transform: scale(1.1);
         }
 
-        /* ===== FORM ===== */
+        /* ===== INQUIRY FORM ===== */
         form {
-            background-color: #111827;
-            padding: 24px;
+            background-color: #0f172a;
+            padding: 22px;
             border-radius: 12px;
             border: 1px solid #1e293b;
-            margin-top: 18px;
+            margin-top: 20px;
         }
 
         label {
             display: block;
-            margin-bottom: 5px;
+            margin-bottom: 6px;
             font-weight: 600;
             color: #cbd5e1;
             font-size: 0.88rem;
@@ -417,7 +413,7 @@
             border-radius: 8px;
             margin-bottom: 14px;
             font-size: 0.92rem;
-            background-color: #090d16;
+            background-color: #0b0f19;
             color: #ffffff;
             outline: none;
         }
@@ -426,73 +422,91 @@
             border-color: #3b82f6;
         }
 
-        .demo-tag {
-            display: inline-block;
-            background-color: #1e3a8a;
-            color: #93c5fd;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 8px;
-        }
-
         footer {
             text-align: center;
             padding: 24px;
             color: #64748b;
             font-size: 0.88rem;
-            border-top: 1px solid #1e293b;
+            border-top: 1px solid #1f2937;
             margin-top: 36px;
         }
     </style>
 </head>
 <body>
 
-    <!-- Floating Quick WhatsApp Button -->
-    <a href="https://wa.me/919795222082?text=Hello%20Ayush,%20I%20am%20interested%20in%20deploying%20a%20website%20for%20my%20business." target="_blank" class="floating-wa" title="Chat on WhatsApp">
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/+91 9795222082?text=Hello%20Ayush,%20I%20want%20to%20get%20a%20website%20made." target="_blank" class="floating-wa" title="Chat on WhatsApp">
         💬
     </a>
 
     <div class="container">
         <!-- ================= HEADER SECTION ================= -->
         <header>
-            <span class="badge-pill">Premium Web Architect</span>
-            <h1>High-ROI Web Assets for Local Businesses</h1>
-            <p><strong>Ayush Verma | Certified Web Developer | Kanpur</strong></p>
-            <p>Turn your offline coaching institute, bookstore, or business into an authoritative digital asset that generates direct customer inquiries around the clock.</p>
+            <span class="badge">Website Designer</span>
+            <h1>Ayush Verma</h1>
+            <p><strong>Fast, Clean & Simple Websites for Everyone | Kanpur & Online</strong></p>
+            <p>I build mobile-friendly websites for local shops, coaching institutes, and online personal brands to help them reach more customers.</p>
         </header>
 
         <!-- ================= NAVIGATION BAR ================= -->
         <nav>
-            <a href="#certification">Credentials</a>
-            <a href="#solutions">Why It Pays Off</a>
-            <a href="#packages">Investment Tiers</a>
+            <a href="#services">What I Make</a>
+            <a href="#certification">My Certificate</a>
             <a href="#coaching-demo">Coaching Demo</a>
-            <a href="#stationery-demo">Storefront Demo</a>
-            <a href="#contact">Contact</a>
+            <a href="#stationery-demo">Shop Demo</a>
+            <a href="#contact">Contact Me</a>
         </nav>
 
         <!-- ================= MAIN CONTENT ================= -->
         <main>
-            <!-- ================= COMPACT CERTIFICATION SECTION ================= -->
+            <!-- ================= SERVICES: ONLINE VS OFFLINE SEPARATE ================= -->
+            <section id="services">
+                <h2>Websites I Build (Online & Offline)</h2>
+                <p>Choose the kind of website you need. I build both with simple steps:</p>
+
+                <!-- 1. OFFLINE / LOCAL BUSINESSES -->
+                <div class="category-box offline">
+                    <span class="tag-title tag-offline">1. Offline & Local Businesses</span>
+                    <h3 style="color: #4ade80; margin-top: 0;">For Local Shops, Tutors & Coaching Centers</h3>
+                    <p>If you have a physical shop, coaching class, or clinic and want nearby people to find you on their phones:</p>
+                    <ul>
+                        <li><strong>Coaching & Tutors:</strong> Show batch times, subjects, fee structure, and address.</li>
+                        <li><strong>Retail Stores & Bookshops:</strong> Display item lists, books catalog, and store timing.</li>
+                        <li><strong>1-Tap WhatsApp Call:</strong> Customers can tap once to call or message your number.</li>
+                        <li><strong>Free Counter QR Code:</strong> A printable QR code you can paste on your counter or banner.</li>
+                    </ul>
+                </div>
+
+                <!-- 2. ONLINE / REMOTE WORK -->
+                <div class="category-box online">
+                    <span class="tag-title tag-online">2. Online & Remote Brands</span>
+                    <h3 style="color: #60a5fa; margin-top: 0;">For Freelancers, Creators & Online Services</h3>
+                    <p>If you work online, offer digital services, or need a personal profile for clients anywhere in India or the world:</p>
+                    <ul>
+                        <li><strong>Personal Portfolio:</strong> Show your work, past projects, skills, and resume.</li>
+                        <li><strong>Service Landing Pages:</strong> A single fast page to explain what you offer and get clients to message you.</li>
+                        <li><strong>Link-in-Bio Pages:</strong> One simple link containing all your social handles, YouTube, and contact options.</li>
+                        <li><strong>Instant Mobile Loading:</strong> Opens in less than a second on any internet connection.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- ================= CERTIFICATION SECTION ================= -->
             <section id="certification">
-                <h2>Verified Credentials</h2>
-                <p>Built with clean semantic standards and verified modern web development architecture:</p>
+                <h2>Verified Web Development Skill</h2>
+                <p>Officially certified in creating semantic and modern web layouts:</p>
                 
                 <div class="cert-container">
                     <div class="cert-card">
                         <div class="cert-header">
                             <span class="logo">mimo</span>
-                            <span class="tag">Verified Credential</span>
+                            <span class="tag">Verified</span>
                         </div>
                         <div class="cert-body">
                             <p class="cert-title">Certificate of Completion</p>
                             <h3>Ayush Verma</h3>
                             <div class="subject">HTML Web Development</div>
-                            <p>Demonstrated complete mastery of semantic layout structure, accessibility, and high-performance web standards.</p>
+                            <p>Demonstrated core understanding of semantic layout, web structure, and accessibility standards for building modern web pages.</p>
                         </div>
                         <div class="cert-footer">
                             <div>
@@ -501,88 +515,32 @@
                             </div>
                             <div style="text-align: right;">
                                 <strong>16 / September / 2026</strong><br>
-                                <span style="color:#16a34a; font-weight: bold;">✔ Authenticated</span>
+                                <span style="color:#16a34a; font-weight: bold;">✔ Verified</span>
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- WHY IT DELIVERS REAL VALUE -->
-            <section id="solutions">
-                <h2>What Makes These Assets Worth ₹10k–₹15k?</h2>
-                <p>A simple DIY webpage does not bring customers. We build customized revenue engines:</p>
-
-                <ul>
-                    <li><strong>Frictionless WhatsApp Lead Funnel:</strong> Prospects do not need to save phone numbers or navigate complex forms. One tap launches a pre-filled direct WhatsApp inquiry.</li>
-                    <li><strong>Local Google Map & Location Integration:</strong> Ensures neighborhood clients find your exact directions effortlessly.</li>
-                    <li><strong>Physical Counter QR Code System:</strong> Turn every walking student or customer into a digital follower with an instant-scan counter QR code.</li>
-                    <li><strong>Zero Maintenance Headaches:</strong> Hosted on high-speed global infrastructure with no recurring monthly server bills.</li>
-                </ul>
-            </section>
-
-            <!-- PRICING PACKAGES (₹10,000 - ₹15,000) -->
-            <section id="packages">
-                <h2>Investment Tiers</h2>
-                <p>Predictable, one-time investment. No surprise charges, no technical overhead for your business:</p>
-
-                <div class="pricing-grid">
-                    <!-- 10K Tier -->
-                    <div class="pricing-card">
-                        <span class="popular-pill" style="background-color: #334155;">Standard Setup</span>
-                        <h3>Business Growth Asset</h3>
-                        <p>Ideal for established neighborhood stores & independent tuition centres.</p>
-                        <div class="price">₹10,000</div>
-                        <p class="price-sub">One-Time Asset Fee | No Recurring Hosting Costs</p>
-                        <ul>
-                            <li>✔ Complete High-Performance Single-Page Web Asset</li>
-                            <li>✔ Business Details, Timings & Location Maps</li>
-                            <li>✔ Frictionless 1-Tap WhatsApp Admission/Order Gateway</li>
-                            <li>✔ 100% Mobile & Tablet Optimized Interface</li>
-                            <li>✔ Lifetime Ultra-Fast Cloud Deployment</li>
-                            <li>✔ 48-Hour Turnaround Time</li>
-                        </ul>
-                        <a href="https://wa.me/919795222082?text=Hello%20Ayush,%20I%20want%20to%20reserve%20the%20₹10,000%20Business%20Growth%20Asset." target="_blank" class="btn btn-primary" style="width:100%;">Select ₹10,000 Plan</a>
-                    </div>
-
-                    <!-- 15K Tier -->
-                    <div class="pricing-card premium">
-                        <span class="popular-pill">Full Authority Package</span>
-                        <h3>Complete Authority Suite</h3>
-                        <p>Designed for premier coaching institutes & high-volume retail hubs.</p>
-                        <div class="price">₹15,000</div>
-                        <p class="price-sub">All-Inclusive Complete Turnkey Solution</p>
-                        <ul>
-                            <li>✔ <strong>Everything in Business Growth Plan</strong></li>
-                            <li>✔ Multi-Batch Timetable / Complete Inventory Catalog Table</li>
-                            <li>✔ High-Resolution Visual Gallery Showcase</li>
-                            <li>✔ Custom Customer Lead & Admission Inquiry Capture System</li>
-                            <li>✔ <strong>2x Custom Printable Counter QR Codes (Lamination Ready)</strong></li>
-                            <li>✔ Priority VIP Revisions & Ongoing Maintenance Support</li>
-                            <li>✔ Complete Google Business Profile Optimization Guidance</li>
-                        </ul>
-                        <a href="https://wa.me/919795222082?text=Hello%20Ayush,%20I%20want%20to%20discuss%20the%20₹15,000%20Authority%20Suite." target="_blank" class="btn btn-whatsapp" style="width:100%;">Select ₹15,000 Plan</a>
-                    </div>
-                </div>
-            </section>
-
             <!-- ================= DEMO 1: COACHING INSTITUTE ================= -->
             <section id="coaching-demo">
-                <span class="demo-tag">Live Working Architecture 1</span>
-                <h2>Target Science & Math Academy</h2>
-                <p><strong>Secondary Classes Coaching | Kakadeo / Barra, Kanpur</strong></p>
+                <h2>Demo Project 1: Coaching Institute Webpage</h2>
+                <p><em>(An example of what a local coaching website looks like)</em></p>
 
-                <img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=900&auto=format&fit=crop&q=80" alt="Classroom batch in session">
+                <h3>Target Science & Math Academy</h3>
+                <p><strong>Secondary Classes Tuition & Coaching | Kanpur</strong></p>
 
-                <h4>Institutional Overview</h4>
+                <img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=900&auto=format&fit=crop&q=80" alt="Students in Classroom">
+
+                <h4>About the Academy</h4>
                 <p>
                     Target Academy provides conceptual mastery and targeted board preparation for CBSE, ICSE, and UP Board students. 
-                    Strictly controlled batch sizes ensure individualized mentorship and top academic percentiles.
+                    Small batch sizes ensure personalized mentoring and academic excellence.
                 </p>
 
-                <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=800&auto=format&fit=crop&q=80" alt="Focused student studying">
+                <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=800&auto=format&fit=crop&q=80" alt="Student studying">
 
-                <h4>Batch Schedules & Curriculum</h4>
+                <h4>Batch Schedules & Timings</h4>
                 <div class="table-responsive">
                     <table>
                         <thead>
@@ -616,144 +574,144 @@
                     </table>
                 </div>
 
-                <h4>Transparent Tuition Structure</h4>
+                <h4>Tuition Fee Structure</h4>
                 <div class="table-responsive">
                     <table>
                         <thead>
                             <tr>
                                 <th>Course</th>
                                 <th>Monthly Fee</th>
-                                <th>Assessment Class</th>
+                                <th>Trial Class</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
                                 <td>Junior Foundation</td>
                                 <td>₹800 / month</td>
-                                <td>2 Days Trial Included</td>
+                                <td>2 Days Free Demo</td>
                             </tr>
                             <tr>
                                 <td>Pre-Board Batch</td>
                                 <td>₹1,200 / month</td>
-                                <td>2 Days Trial Included</td>
+                                <td>2 Days Free Demo</td>
                             </tr>
                             <tr>
                                 <td>Board Target Mastery</td>
                                 <td>₹1,500 / month</td>
-                                <td>2 Days Trial Included</td>
+                                <td>2 Days Free Demo</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
-
-                <a href="https://wa.me/919795222082?text=Hello,%20I%20am%20inquiring%20about%20Target%20Academy%20demo%20admissions." target="_blank" class="btn btn-whatsapp">
-                    Book an Admission Inquiry via WhatsApp
-                </a>
             </section>
 
-            <!-- ================= DEMO 2: STATIONERY & BOOK STORE ================= -->
+            <!-- ================= DEMO 2: RETAIL STOREFRONT ================= -->
             <section id="stationery-demo">
-                <span class="demo-tag">Live Working Architecture 2</span>
-                <h2>Patel Book Depot & School Stationery</h2>
-                <p><strong>Address:</strong> Shop No. 12, Main Market Road, Kanpur, UP | <strong>Store Timings:</strong> 9:00 AM - 9:00 PM (Daily)</p>
+                <h2>Demo Project 2: Store / Shop Catalog Webpage</h2>
+                <p><em>(An example of what a local retail store or book depot website looks like)</em></p>
 
-                <img src="https://images.unsplash.com/photo-1583485088034-697b5bc54ccd?w=900&auto=format&fit=crop&q=80" alt="Stationery supplies layout">
+                <h3>Patel Book Depot & School Stationery</h3>
+                <p><strong>Address:</strong> Shop No. 12, Main Market Road, Kanpur, UP | <strong>Store Timings:</strong> 9:00 AM - 9:00 PM</p>
 
-                <h4>Stock Availability</h4>
+                <img src="https://images.unsplash.com/photo-1583485088034-697b5bc54ccd?w=900&auto=format&fit=crop&q=80" alt="Stationery Desk Setup">
+
+                <h4>Available Textbooks & Study Materials</h4>
                 <ul>
-                    <li><strong>NCERT Official Editions:</strong> Complete sets available for all grades from Primary to Class 12.</li>
-                    <li><strong>Authoritative Reference Guides:</strong> RD Sharma, RS Aggarwal, and S. Chand.</li>
-                    <li><strong>Board Question Banks:</strong> 10-year solved papers and exemplar mock sets.</li>
+                    <li><strong>NCERT Curriculum:</strong> Complete sets for all grades from Primary to Class 12.</li>
+                    <li><strong>Reference Books:</strong> Standard editions from RD Sharma, RS Aggarwal, and S. Chand.</li>
+                    <li><strong>Board Preparation:</strong> Past 10-year question banks, exemplar papers, and mock test papers.</li>
                 </ul>
 
-                <img src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=800&auto=format&fit=crop&q=80" alt="Organized academic bookshelves">
+                <img src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=800&auto=format&fit=crop&q=80" alt="Books stacked neatly">
 
-                <h4>Stationery Catalog & Rates</h4>
+                <h4>Stationery Price List</h4>
                 <div class="table-responsive">
                     <table>
                         <thead>
                             <tr>
-                                <th>Item</th>
-                                <th>Specification</th>
+                                <th>Item Description</th>
+                                <th>Brand / Details</th>
                                 <th>Price</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td>Classmate Long Registers</td>
+                                <td>Classmate Premium Registers</td>
                                 <td>Pack of 6 (Ruled, 172 Pages)</td>
                                 <td>₹320</td>
                             </tr>
                             <tr>
-                                <td>A4 Assignment Sheets</td>
+                                <td>A4 Project Sheets</td>
                                 <td>Pack of 50 Sheets (One-side ruled)</td>
                                 <td>₹75</td>
                             </tr>
                             <tr>
-                                <td>Precision Geometry Instruments</td>
-                                <td>Camlin / Doms Brand</td>
+                                <td>Precision Geometry Box</td>
+                                <td>Camlin / Doms Mathematical Instruments</td>
                                 <td>₹110</td>
                             </tr>
                             <tr>
-                                <td>Waterproof Gel Pen Set</td>
-                                <td>Pack of 10</td>
+                                <td>Smooth Gel / Ball Pens</td>
+                                <td>Pack of 10 (Waterproof blue/black ink)</td>
                                 <td>₹100</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
-
-                <a href="https://wa.me/+91 9795222082?text=Hello,%20I%20want%20to%20order%20stationery%20supplies%20from%20Patel%20Book%20Depot." target="_blank" class="btn btn-whatsapp">
-                    Direct WhatsApp Inventory Order
-                </a>
             </section>
 
-            <!-- ================= CONTACT SECTION ================= -->
+            <!-- ================= CONTACT SECTION WITH CLEAR PHONE & EMAIL ================= -->
             <section id="contact">
-                <h2>Schedule a Direct Consultation</h2>
-                <p>Let's discuss how a custom web asset can establish direct digital authority for your business:</p>
+                <h2>Contact Me Directly</h2>
+                <p>If you want a website built for your shop, coaching, or personal work, get in touch with me directly:</p>
 
-                <div style="margin: 20px 0;">
-                    <a href="https://wa.me/+91 9795222082?text=Hello%20Ayush,%20I%20want%20to%20discuss%20deploying%20a%20website%20for%20my%20business." target="_blank" class="btn btn-primary" style="margin-right: 12px;">
-                        Connect on WhatsApp
-                    </a>
-                    <a href="tel:+91 9795222082" class="btn btn-primary" style="background-color: #334155;">
-                        Call: +91 9795222082
-                    </a>
+                <!-- BIG CLEAR PHONE & EMAIL BOXES -->
+                <div class="contact-info-grid">
+                    <div class="contact-info-card">
+                        <div class="contact-icon">📞</div>
+                        <div class="contact-label">Phone Call</div>
+                        <a href="tel:+91 9795222082" class="contact-value">+91 9795222082</a>
+                        <a href="tel:+91 9795222082" class="btn btn-primary" style="width: 100%;">Call Now</a>
+                    </div>
+
+                    <div class="contact-info-card">
+                        <div class="contact-icon">💬</div>
+                        <div class="contact-label">WhatsApp Chat</div>
+                        <a href="https://wa.me/+91 9795222082?text=Hello%20Ayush,%20I%20want%20to%20get%20a%20website%20made." target="_blank" class="contact-value">+91 9795222082</a>
+                        <a href="https://wa.me/+91 9795222082?text=Hello%20Ayush,%20I%20want%20to%20get%20a%20website%20made." target="_blank" class="btn btn-whatsapp" style="width: 100%;">Chat on WhatsApp</a>
+                    </div>
+
+                    <div class="contact-info-card">
+                        <div class="contact-icon">✉️</div>
+                        <div class="contact-label">Direct Email</div>
+                        <a href="mailto:stv9610@gmail.com" class="contact-value">stv9610@gmail.com</a>
+                        <a href="mailto:stv9610@gmail.com" class="btn btn-primary" style="background:#334155; width: 100%;">Send Email</a>
+                    </div>
                 </div>
 
-                <p><strong>Official Email:</strong> <a href="mailto:stv9610@gmail.com" style="color:#60a5fa;">stv9610@gmail.com</a></p>
-
+                <!-- QUICK MESSAGE FORM -->
                 <form action="mailto:stv9610@gmail.com" method="post" enctype="text/plain">
-                    <h3 style="margin-top: 0; color: #ffffff;">Project Inquiry Form</h3>
+                    <h3 style="margin-top: 0; color: #ffffff;">Or Send a Message Here:</h3>
                     
-                    <label for="client_name">Business / Owner Name</label>
-                    <input type="text" id="client_name" name="Client Name" placeholder="e.g. Target Academy / Rajesh Sharma" required>
+                    <label for="client_name">Your Name / Business Name:</label>
+                    <input type="text" id="client_name" name="Client Name" placeholder="e.g. Rahul Sharma" required>
 
-                    <label for="client_contact">Contact Number / WhatsApp</label>
+                    <label for="client_contact">Your Phone Number or WhatsApp:</label>
                     <input type="text" id="client_contact" name="Client Contact" placeholder="e.g. 9795222082" required>
 
-                    <label for="investment_tier">Preferred Package</label>
-                    <input type="text" id="investment_tier" name="Selected Tier" placeholder="₹10,000 Growth Asset OR ₹15,000 Authority Suite" required>
+                    <label for="work_details">What kind of website do you need? (Online or Offline):</label>
+                    <textarea id="work_details" name="Requirements" rows="3" placeholder="Tell me about your shop, coaching, or project..." required></textarea>
 
-                    <label for="work_details">Business Details & Requirements</label>
-                    <textarea id="work_details" name="Requirements" rows="3" placeholder="Provide current location, services, or special requirements..." required></textarea>
-
-                    <button type="submit" class="btn btn-primary" style="width:100%;">Submit Inquiry</button>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Send Message</button>
                 </form>
             </section>
         </main>
 
         <!-- ================= FOOTER SECTION ================= -->
         <footer>
-            <p>&copy; 2026 Ayush Verma | High-Performance Digital Architecture | Kanpur, Uttar Pradesh</p>
+            <p>&copy; 2026 Ayush Verma | Web Designer & Developer | Kanpur & Online</p>
         </footer>
     </div>
 
 </body>
 </html>
-
-            
-            
-             
-                            
