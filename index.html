@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ayush Verma | Website Designer</title>
     <style>
-        /* ===== SIMPLE & CLEAN STYLING ===== */
+        /* ===== GLOBAL SETUP ===== */
         * {
             box-sizing: border-box;
             margin: 0;
@@ -19,41 +19,82 @@
             color: #f1f5f9;
             line-height: 1.6;
             padding: 0 16px;
+            overflow-x: hidden;
         }
 
         .container {
             max-width: 920px;
             margin: 0 auto;
-            padding: 24px 0 90px 0;
+            padding: 24px 0 100px 0;
         }
 
-        /* ===== HEADER ===== */
+        /* ===== 1. ANIMATED HERO HEADER ===== */
         header {
-            background: linear-gradient(135deg, #0f172a, #1e3a8a);
+            background: linear-gradient(-45deg, #090d16, #1e1b4b, #172554, #0f172a);
+            background-size: 300% 300%;
+            animation: gradientBG 8s ease infinite;
             color: #ffffff;
-            padding: 44px 20px;
-            border-radius: 18px;
+            padding: 48px 20px;
+            border-radius: 22px;
             text-align: center;
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
             margin-bottom: 24px;
             border: 1px solid #2e3856;
+            position: relative;
         }
 
-        .badge {
-            display: inline-block;
-            background: rgba(59, 130, 246, 0.2);
-            color: #93c5fd;
-            border: 1px solid rgba(96, 165, 250, 0.4);
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Live Status Pill with Blinking Dot */
+        .live-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(34, 197, 94, 0.15);
+            border: 1px solid rgba(34, 197, 94, 0.4);
+            color: #4ade80;
             font-size: 0.8rem;
             font-weight: 700;
-            padding: 4px 14px;
-            border-radius: 20px;
-            margin-bottom: 12px;
+            padding: 6px 16px;
+            border-radius: 30px;
+            margin-bottom: 14px;
+            box-shadow: 0 0 15px rgba(34, 197, 94, 0.2);
         }
 
-        header h1 {
-            font-size: 2.3rem;
-            margin-bottom: 10px;
+        .blink-dot {
+            width: 9px;
+            height: 9px;
+            background-color: #22c55e;
+            border-radius: 50%;
+            display: inline-block;
+            box-shadow: 0 0 8px #22c55e;
+            animation: blinker 1.4s infinite;
+        }
+
+        @keyframes blinker {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.3; transform: scale(0.7); }
+        }
+
+        /* Shining Name Text */
+        .shining-name {
+            font-size: 2.6rem;
+            font-weight: 900;
+            margin-bottom: 8px;
+            background: linear-gradient(90deg, #ffffff, #60a5fa, #c084fc, #ffffff);
+            background-size: 200% auto;
+            color: transparent;
+            -webkit-background-clip: text;
+            background-clip: text;
+            animation: shineText 4s linear infinite;
+        }
+
+        @keyframes shineText {
+            to { background-position: 200% center; }
         }
 
         header p {
@@ -63,12 +104,13 @@
             margin: 6px auto;
         }
 
-        /* ===== NAVIGATION BAR ===== */
+        /* ===== 2. NAVIGATION BAR ===== */
         nav {
-            background-color: #111827;
-            padding: 12px 16px;
-            border-radius: 12px;
-            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+            background-color: rgba(17, 24, 39, 0.9);
+            backdrop-filter: blur(12px);
+            padding: 14px 16px;
+            border-radius: 14px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
             margin-bottom: 30px;
             text-align: center;
             position: sticky;
@@ -81,42 +123,49 @@
             color: #94a3b8;
             text-decoration: none;
             font-weight: 600;
-            font-size: 0.9rem;
-            margin: 0 8px;
+            font-size: 0.92rem;
+            margin: 0 10px;
             display: inline-block;
-            transition: color 0.2s;
+            transition: all 0.25s ease;
         }
 
         nav a:hover {
             color: #60a5fa;
+            transform: translateY(-2px);
         }
 
-        /* ===== SECTIONS ===== */
+        /* ===== 3. SECTIONS ===== */
         section {
             background-color: #111827;
-            padding: 30px 22px;
-            border-radius: 16px;
-            box-shadow: 0 4px 18px rgba(0, 0, 0, 0.3);
-            margin-bottom: 30px;
+            padding: 34px 24px;
+            border-radius: 18px;
+            box-shadow: 0 6px 22px rgba(0, 0, 0, 0.35);
+            margin-bottom: 32px;
             border: 1px solid #1f2937;
+            transition: all 0.3s ease;
+        }
+
+        section:hover {
+            border-color: #2e3d64;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
         }
 
         h2 {
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             color: #ffffff;
             margin-bottom: 16px;
             border-left: 4px solid #3b82f6;
-            padding-left: 12px;
+            padding-left: 14px;
         }
 
         h3 {
-            font-size: 1.2rem;
+            font-size: 1.25rem;
             color: #93c5fd;
             margin: 18px 0 10px 0;
         }
 
         h4 {
-            font-size: 1.05rem;
+            font-size: 1.08rem;
             color: #e2e8f0;
             margin: 14px 0 8px 0;
         }
@@ -132,47 +181,67 @@
         }
 
         li {
-            margin-bottom: 6px;
+            margin-bottom: 7px;
         }
 
-        /* ===== TWO-COLUMN CARDS FOR ONLINE & OFFLINE ===== */
+        /* ===== 4. GLOWING ANIMATED CATEGORY BOXES ===== */
         .category-box {
             background: #0f172a;
             border: 1px solid #1e293b;
-            border-radius: 14px;
+            border-radius: 16px;
             padding: 24px;
-            margin-bottom: 20px;
+            margin-bottom: 24px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .category-box:hover {
+            transform: translateY(-5px);
         }
 
         .category-box.offline {
-            border-left: 5px solid #22c55e;
+            border-left: 6px solid #22c55e;
+            animation: pulseGreenGlow 4s infinite alternate;
+        }
+
+        @keyframes pulseGreenGlow {
+            0% { box-shadow: 0 4px 15px rgba(34, 197, 94, 0.05); }
+            100% { box-shadow: 0 8px 28px rgba(34, 197, 94, 0.2); }
         }
 
         .category-box.online {
-            border-left: 5px solid #3b82f6;
+            border-left: 6px solid #3b82f6;
+            animation: pulseBlueGlow 4s infinite alternate;
+        }
+
+        @keyframes pulseBlueGlow {
+            0% { box-shadow: 0 4px 15px rgba(59, 130, 246, 0.05); }
+            100% { box-shadow: 0 8px 28px rgba(59, 130, 246, 0.2); }
         }
 
         .tag-title {
             display: inline-block;
-            font-size: 0.78rem;
-            font-weight: 700;
-            padding: 3px 10px;
+            font-size: 0.8rem;
+            font-weight: 800;
+            padding: 4px 14px;
             border-radius: 12px;
             margin-bottom: 10px;
             text-transform: uppercase;
+            letter-spacing: 0.6px;
         }
 
         .tag-offline {
-            background-color: rgba(34, 197, 94, 0.15);
+            background-color: rgba(34, 197, 94, 0.2);
             color: #4ade80;
+            border: 1px solid rgba(34, 197, 94, 0.3);
         }
 
         .tag-online {
-            background-color: rgba(59, 130, 246, 0.15);
+            background-color: rgba(59, 130, 246, 0.2);
             color: #60a5fa;
+            border: 1px solid rgba(59, 130, 246, 0.3);
         }
 
-        /* ===== COMPACT CERTIFICATE CARD ===== */
+        /* ===== 5. COMPACT CERTIFICATE CARD ===== */
         .cert-container {
             display: flex;
             justify-content: center;
@@ -184,10 +253,17 @@
             color: #0f172a;
             width: 100%;
             max-width: 540px;
-            border-radius: 12px;
-            padding: 20px 24px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            border-radius: 14px;
+            padding: 22px 26px;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
             border: 3px solid #7c3aed;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+        }
+
+        .cert-card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 16px 40px rgba(124, 58, 237, 0.3);
         }
 
         .cert-header {
@@ -200,7 +276,7 @@
         }
 
         .cert-header .logo {
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             font-weight: 800;
             color: #7c3aed;
         }
@@ -229,7 +305,7 @@
         }
 
         .cert-body h3 {
-            font-size: 1.4rem;
+            font-size: 1.45rem;
             color: #0f172a;
             margin: 4px 0 2px 0;
             font-weight: 800;
@@ -261,14 +337,20 @@
             color: #475569;
         }
 
-        /* ===== IMAGES ===== */
+        /* ===== 6. IMAGES WITH HOVER ZOOM ===== */
         img {
             max-width: 100%;
             height: auto;
-            border-radius: 10px;
+            border-radius: 12px;
             margin: 14px 0;
             border: 1px solid #1f2937;
             display: block;
+            transition: transform 0.4s ease, filter 0.4s ease;
+        }
+
+        img:hover {
+            transform: scale(1.02);
+            filter: brightness(1.05);
         }
 
         /* ===== TABLES ===== */
@@ -281,13 +363,13 @@
             width: 100%;
             border-collapse: collapse;
             background-color: #0f172a;
-            border-radius: 8px;
+            border-radius: 10px;
             overflow: hidden;
             border: 1px solid #1f2937;
         }
 
         th, td {
-            padding: 10px 14px;
+            padding: 12px 14px;
             text-align: left;
             border-bottom: 1px solid #1e293b;
             font-size: 0.9rem;
@@ -299,50 +381,103 @@
             font-weight: 600;
         }
 
-        /* ===== BUTTONS & CONTACT CARDS ===== */
+        tr:hover {
+            background-color: rgba(30, 41, 59, 0.5);
+        }
+
+        /* ===== 7. BUTTONS WITH SHINING LIGHT SWEEP ===== */
         .btn {
             display: inline-block;
             padding: 12px 24px;
-            border-radius: 8px;
+            border-radius: 10px;
             text-decoration: none;
             font-weight: 700;
             font-size: 0.95rem;
             cursor: pointer;
             border: none;
-            transition: all 0.2s ease;
+            transition: all 0.25s ease;
             text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Shimmering beam across button */
+        .btn::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -120%;
+            width: 60%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transform: skewX(-25deg);
+            animation: btnShine 3s infinite;
+        }
+
+        @keyframes btnShine {
+            0% { left: -120%; }
+            30% { left: 140%; }
+            100% { left: 140%; }
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
         }
 
         .btn-whatsapp {
             background-color: #22c55e;
             color: #ffffff;
-            box-shadow: 0 4px 12px rgba(34, 197, 94, 0.3);
+            box-shadow: 0 4px 16px rgba(34, 197, 94, 0.35);
+        }
+
+        .btn-whatsapp:hover {
+            background-color: #16a34a;
+            box-shadow: 0 6px 24px rgba(34, 197, 94, 0.5);
         }
 
         .btn-primary {
             background-color: #2563eb;
             color: #ffffff;
+            box-shadow: 0 4px 16px rgba(37, 99, 235, 0.35);
         }
 
-        /* DIRECT CONTACT INFO BOXES */
+        .btn-primary:hover {
+            background-color: #1d4ed8;
+            box-shadow: 0 6px 24px rgba(37, 99, 235, 0.5);
+        }
+
+        /* ===== 8. DIRECT CONTACT INFO CARDS ===== */
         .contact-info-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 16px;
-            margin: 20px 0;
+            margin: 22px 0;
         }
 
         .contact-info-card {
             background-color: #0f172a;
             border: 1px solid #1e293b;
-            padding: 20px;
-            border-radius: 12px;
+            padding: 22px;
+            border-radius: 14px;
             text-align: center;
+            transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .contact-info-card:hover {
+            transform: translateY(-5px);
+            border-color: #3b82f6;
+            box-shadow: 0 8px 24px rgba(59, 130, 246, 0.25);
         }
 
         .contact-icon {
-            font-size: 32px;
+            font-size: 34px;
             margin-bottom: 8px;
+            display: inline-block;
+            transition: transform 0.3s ease;
+        }
+
+        .contact-info-card:hover .contact-icon {
+            transform: scale(1.2) rotate(6deg);
         }
 
         .contact-label {
@@ -357,7 +492,8 @@
             color: #ffffff;
             text-decoration: none;
             display: block;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
+            transition: color 0.2s ease;
         }
 
         .contact-value:hover {
@@ -365,35 +501,47 @@
             text-decoration: underline;
         }
 
-        /* ===== FLOATING WHATSAPP BUTTON ===== */
+        /* ===== 9. FLOATING WHATSAPP WITH 3-RING PULSE ===== */
         .floating-wa {
             position: fixed;
             bottom: 24px;
-            right: 20px;
+            right: 22px;
             background-color: #22c55e;
             color: #ffffff;
-            width: 58px;
-            height: 58px;
+            width: 62px;
+            height: 62px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 30px;
-            box-shadow: 0 6px 20px rgba(34, 197, 94, 0.4);
+            font-size: 33px;
             z-index: 999;
             text-decoration: none;
             transition: transform 0.2s ease;
+            animation: radarWaves 2.2s infinite;
         }
 
         .floating-wa:hover {
-            transform: scale(1.1);
+            transform: scale(1.15);
+        }
+
+        @keyframes radarWaves {
+            0% {
+                box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.8), 0 0 0 0 rgba(34, 197, 94, 0.5);
+            }
+            50% {
+                box-shadow: 0 0 0 14px rgba(34, 197, 94, 0), 0 0 0 24px rgba(34, 197, 94, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(34, 197, 94, 0), 0 0 0 0 rgba(34, 197, 94, 0);
+            }
         }
 
         /* ===== INQUIRY FORM ===== */
         form {
             background-color: #0f172a;
-            padding: 22px;
-            border-radius: 12px;
+            padding: 24px;
+            border-radius: 14px;
             border: 1px solid #1e293b;
             margin-top: 20px;
         }
@@ -408,18 +556,20 @@
 
         input[type="text"], textarea {
             width: 100%;
-            padding: 11px;
+            padding: 12px;
             border: 1px solid #334155;
             border-radius: 8px;
-            margin-bottom: 14px;
+            margin-bottom: 16px;
             font-size: 0.92rem;
             background-color: #0b0f19;
             color: #ffffff;
             outline: none;
+            transition: all 0.25s ease;
         }
 
         input[type="text"]:focus, textarea:focus {
             border-color: #3b82f6;
+            box-shadow: 0 0 12px rgba(59, 130, 246, 0.35);
         }
 
         footer {
@@ -434,7 +584,7 @@
 </head>
 <body>
 
-    <!-- Floating WhatsApp Button -->
+    <!-- Floating WhatsApp Button with Triple Radar Pulse -->
     <a href="https://wa.me/+91 9795222082?text=Hello%20Ayush,%20I%20want%20to%20get%20a%20website%20made." target="_blank" class="floating-wa" title="Chat on WhatsApp">
         💬
     </a>
@@ -442,10 +592,14 @@
     <div class="container">
         <!-- ================= HEADER SECTION ================= -->
         <header>
-            <span class="badge">Website Designer</span>
-            <h1>Ayush Verma</h1>
-            <p><strong>Fast, Clean & Simple Websites for Everyone | Kanpur & Online</strong></p>
-            <p>I build mobile-friendly websites for local shops, coaching institutes, and online personal brands to help them reach more customers.</p>
+            <div class="live-status">
+                <span class="blink-dot"></span>
+                <span>Available for New Projects</span>
+            </div>
+            
+            <h1 class="shining-name">Ayush Verma</h1>
+            <p><strong>Fast, Clean & High-Performance Websites | Kanpur & Online</strong></p>
+            <p>I build modern web pages for local shops, coaching institutes, and online personal brands to help them attract more clients.</p>
         </header>
 
         <!-- ================= NAVIGATION BAR ================= -->
@@ -462,7 +616,7 @@
             <!-- ================= SERVICES: ONLINE VS OFFLINE SEPARATE ================= -->
             <section id="services">
                 <h2>Websites I Build (Online & Offline)</h2>
-                <p>Choose the kind of website you need. I build both with simple steps:</p>
+                <p>Choose what matches your business best:</p>
 
                 <!-- 1. OFFLINE / LOCAL BUSINESSES -->
                 <div class="category-box offline">
@@ -660,12 +814,12 @@
                 </div>
             </section>
 
-            <!-- ================= CONTACT SECTION WITH CLEAR PHONE & EMAIL ================= -->
+            <!-- ================= CONTACT SECTION WITH DIRECT PHONE & EMAIL ================= -->
             <section id="contact">
                 <h2>Contact Me Directly</h2>
                 <p>If you want a website built for your shop, coaching, or personal work, get in touch with me directly:</p>
 
-                <!-- BIG CLEAR PHONE & EMAIL BOXES -->
+                <!-- BIG CLEAR PHONE & EMAIL BOXES (WITH ANIMATIONS) -->
                 <div class="contact-info-grid">
                     <div class="contact-info-card">
                         <div class="contact-icon">📞</div>
