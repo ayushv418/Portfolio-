@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patel Book Depot & School Stationery | Kanpur</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: #0b0f19;
+            color: #f1f5f9;
+            line-height: 1.6;
+            padding: 0 16px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 24px 0 80px 0;
+        }
+
+        .back-nav {
+            margin-bottom: 20px;
+        }
+        .back-link {
+            color: #10b981;
+            text-decoration: none;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.95rem;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        header {
+            background: linear-gradient(135deg, #064e3b, #047857);
+            color: #ffffff;
+            padding: 40px 20px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+            margin-bottom: 24px;
+            border: 1px solid #059669;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(16, 185, 129, 0.25);
+            color: #a7f3d0;
+            border: 1px solid rgba(167, 243, 208, 0.4);
+            font-size: 0.8rem;
+            font-weight: 700;
+            padding: 4px 14px;
+            border-radius: 20px;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        header h1 {
+            font-size: 2.2rem;
+            margin-bottom: 8px;
+        }
+
+        header p {
+            font-size: 1.05rem;
+            color: #d1fae5;
+        }
+
+        section {
+            background-color: #111827;
+            padding: 28px 22px;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            margin-bottom: 26px;
+            border: 1px solid #1f2937;
+        }
+
+        h2 {
+            font-size: 1.45rem;
+            color: #ffffff;
+            margin-bottom: 14px;
+            border-left: 4px solid #10b981;
+            padding-left: 12px;
+        }
+
+        p, ul {
+            color: #94a3b8;
+            font-size: 0.98rem;
+            margin-bottom: 14px;
+        }
+
+        ul {
+            padding-left: 20px;
+        }
+
+        li {
+            margin-bottom: 7px;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 12px;
+            margin: 14px 0;
+            border: 1px solid #1f2937;
+            display: block;
+        }
+
+        .table-responsive {
+            overflow-x: auto;
+            margin: 16px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #0f172a;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid #1f2937;
+        }
+
+        th, td {
+            padding: 12px 14px;
+            text-align: left;
+            border-bottom: 1px solid #1e293b;
+            font-size: 0.92rem;
+        }
+
+        th {
+            background-color: #1e293b;
+            color: #f8fafc;
+            font-weight: 600;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.95rem;
+            cursor: pointer;
+            border: none;
+            text-align: center;
+            transition: all 0.2s ease;
+        }
+
+        .btn-whatsapp {
+            background-color: #22c55e;
+            color: #ffffff;
+            box-shadow: 0 4px 14px rgba(34, 197, 94, 0.35);
+        }
+
+        .btn-whatsapp:hover {
+            background-color: #16a34a;
+            transform: translateY(-2px);
+        }
+
+        .floating-wa {
+            position: fixed;
+            bottom: 24px;
+            right: 22px;
+            background-color: #22c55e;
+            color: #ffffff;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            box-shadow: 0 8px 24px rgba(34, 197, 94, 0.45);
+            z-index: 999;
+            text-decoration: none;
+        }
+
+        footer {
+            text-align: center;
+            padding: 24px;
+            color: #64748b;
+            font-size: 0.88rem;
+            border-top: 1px solid #1f2937;
+            margin-top: 36px;
+        }
+    </style>
+</head>
+<body>
+
+    <a href="https://wa.me/919795222082?text=Hello%20Patel%20Book%20Depot,%20I%20want%20to%20order%20books/stationery." target="_blank" class="floating-wa" title="WhatsApp Order">
+        💬
+    </a>
+
+    <div class="container">
+        <div class="back-nav">
+            <a href="index.html" class="back-link">← Back to Ayush Verma Portfolio</a>
+        </div>
+
+        <header>
+            <span class="badge">Open All 7 Days (9 AM - 9 PM)</span>
+            <h1>Patel Book Depot & School Stationery</h1>
+            <p><strong>Your Complete Textbooks & Academic Store | Kanpur</strong></p>
+        </header>
+
+        <section>
+            <h2>Available School & Competition Books</h2>
+            <p>We stock all syllabus books, guides, solved papers, and notebooks for schools across Kanpur:</p>
+            <ul>
+                <li><strong>NCERT Official Curriculum:</strong> Complete sets for Classes 1 to 12 (Hindi & English Medium).</li>
+                <li><strong>Standard Reference Books:</strong> RD Sharma, RS Aggarwal, Pradeep, and S. Chand.</li>
+                <li><strong>Board Exam Prep:</strong> Last 10-year question banks, solved exemplar papers, and mock papers.</li>
+                <li><strong>Competition Guides:</strong> Olympiad, NDA, and foundational entrance books.</li>
+            </ul>
+            <img src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=800&auto=format&fit=crop&q=80" alt="Books stacked on shelf">
+        </section>
+
+        <section>
+            <h2>Stationery Price List</h2>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Item Description</th>
+                            <th>Brand / Details</th>
+                            <th>Price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Classmate Long Registers</td>
+                            <td>Pack of 6 (Ruled, 172 Pages)</td>
+                            <td>₹320</td>
+                        </tr>
+                        <tr>
+                            <td>A4 Project & Practical Sheets</td>
+                            <td>Pack of 50 Sheets (One-side ruled)</td>
+                            <td>₹75</td>
+                        </tr>
+                        <tr>
+                            <td>Precision Geometry Box</td>
+                            <td>Camlin / Doms Mathematical Instruments</td>
+                            <td>₹110</td>
+                        </tr>
+                        <tr>
+                            <td>Smooth Gel & Ball Pens</td>
+                            <td>Pack of 10 (Waterproof Blue/Black)</td>
+                            <td>₹100</td>
+                        </tr>
+                        <tr>
+                            <td>Student Art Kit</td>
+                            <td>Drawing book, sketch pens & pastels</td>
+                            <td>₹250</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+                </a>
+            </p>
+        </section>
+
+        <section>
+            <h2>Store Address & Services</h2>
+            <p><strong>Address:</strong> Shop No. 12, Main Market Road, Kanpur, Uttar Pradesh</p>
+            <p><strong>Timings:</strong> 9:00 AM - 9:00 PM (Monday to Sunday)</p>
+            <p><strong>Services:</strong> High-speed Xerox, spiral binding, lamination, and WhatsApp home pickup orders.</p>
+        </section>
+
+        <footer>
+            <p>&copy; 2026 Patel Book Depot | Website Designed by <a href="index.html" style="color:#10b981; text-decoration:none;">Ayush Verma</a></p>
+        </footer>
+    </div>
+
+</body>
+</html>
