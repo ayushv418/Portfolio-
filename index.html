@@ -139,7 +139,6 @@
             to { transform: scale(1.08); opacity: 1; box-shadow: 0 0 60px rgba(255, 103, 0, 1); }
         }
 
-        /* ===== BACKGROUND AMBIENT GLOW ===== */
         .ambient-glow-orb {
             position: fixed;
             top: 20%;
@@ -797,7 +796,7 @@
     <div class="ambient-glow-orb"></div>
 
     <!-- AUDIO TOGGLE PILL -->
-    <div class="audio-toggle-bar" id="audioToggle" onclick="toggleAmbientManual()" title="Sound Experience">
+    <div class="audio-toggle-bar" id="audioToggle" onclick="toggleAudioPill()" title="Sound Experience">
         <div class="eq-bars">
             <span class="eq-bar"></span>
             <span class="eq-bar"></span>
@@ -806,8 +805,13 @@
         <span class="audio-text" id="audioLabel">Sound On</span>
     </div>
 
+    <!-- RELIABLE DIRECT AUDIO SOURCE (Wikimedia Commons / CDN) -->
+    <audio id="mediaPlayer" loop preload="auto" playsinline>
+        <source src="https://upload.wikimedia.org/wikipedia/commons/4/4b/Ambient_piano.ogg" type="audio/ogg">
+    </audio>
+
     <!-- FLOATING WHATSAPP BUTTON -->
-    <a href="https://wa.me/919795222082?text=Hello%20Ayush,%20I%20want%20to%20get%20a%20website%20made." target="_blank" class="floating-wa-pill interactive-btn">
+    <a href="url?id=0" target="_blank" class="floating-wa-pill interactive-btn">
         <span>💬</span> Chat on WhatsApp
     </a>
 
@@ -997,173 +1001,100 @@
         </footer>
     </div>
 
-    <!-- FAILPROOF WEB AUDIO ENGINE -->
+    <!-- SCRIPT FOR GUARANTEED SCROLL AUDIO PLAYBACK -->
     <script>
         const audioToggle = document.getElementById('audioToggle');
         const audioLabel = document.getElementById('audioLabel');
         const pureBoot = document.getElementById('pureBootScreen');
         const pureShutdown = document.getElementById('pureShutdownScreen');
+        const player = document.getElementById('mediaPlayer');
 
-        let audioCtx = null;
-        let masterGain = null;
-        let isAmbientActive = false;
-        let activeOscs = [];
+        let isAudioPlaying = false;
 
-        // 1. SILENT BOOT
+        // 1. SILENT BOOT ANIMATION
         window.addEventListener('load', () => {
             setTimeout(() => {
                 pureBoot.classList.add('booted');
             }, 1900);
         });
 
-        // 2. HARDWARE AUDIO CONTEXT - AUTO AWAKE ON FIRST TOUCH
-        function initAudioHardware() {
-            if (!audioCtx) {
-                const AudioClass = window.AudioContext || window.webkitAudioContext;
-                audioCtx = new AudioClass();
-                masterGain = audioCtx.createGain();
-                masterGain.connect(audioCtx.destination);
-            }
-            if (audioCtx.state === 'suspended') {
-                audioCtx.resume();
-            }
-        }
+        // 2. SCROLL TRIGGER (Real Audio Element - 100% Compatible with Android Media Volume)
+        function triggerScrollMusic() {
+            if (!isAudioPlaying) {
+                player.volume = 0.6; // Clear audible volume
+                player.play().then(() => {
+                    isAudioPlaying = true;
+                    audioToggle.classList.add('playing');
+                    audioLabel.textContent = "Ambient Playing";
 
-        // Silent heartbeat to keep audio hardware hot
-        function wakeAudioPipe() {
-            initAudioHardware();
-            try {
-                const dummy = audioCtx.createOscillator();
-                const dummyGain = audioCtx.createGain();
-                dummyGain.gain.value = 0.00001;
-                dummy.connect(dummyGain);
-                dummyGain.connect(audioCtx.destination);
-                dummy.start();
-                dummy.stop(audioCtx.currentTime + 0.01);
-            } catch(e) {}
-        }
-
-        // Wake up audio on very first touch/gesture
-        ['touchstart', 'pointerdown', 'mousedown'].forEach(evt => {
-            window.addEventListener(evt, wakeAudioPipe, { once: true, passive: true });
-        });
-
-        // 3. REAL CONTINUOUS AMBIENT CHORD GENERATOR
-        function startAmbientDrone() {
-            if (isAmbientActive) return;
-            initAudioHardware();
-
-            const now = audioCtx.currentTime;
-            masterGain.gain.setValueAtTime(0.001, now);
-            masterGain.gain.exponentialRampToValueAtTime(0.25, now + 1.8);
-
-            // 5 Celestial relaxing chord frequencies
-            const chordPitches = [130.81, 196.00, 246.94, 293.66, 392.00];
-
-            activeOscs = chordPitches.map((pitch, idx) => {
-                const osc = audioCtx.createOscillator();
-                const gain = audioCtx.createGain();
-
-                osc.type = 'sine';
-                osc.frequency.setValueAtTime(pitch, now);
-
-                // Individual harmonic balance
-                gain.gain.setValueAtTime(0.12, now);
-                osc.connect(gain);
-                gain.connect(masterGain);
-
-                osc.start();
-                return osc;
-            });
-
-            isAmbientActive = true;
-            audioToggle.classList.add('playing');
-            audioLabel.textContent = "Ambient Playing";
-        }
-
-        function stopAmbientDrone() {
-            if (!isAmbientActive || !audioCtx) return;
-            const now = audioCtx.currentTime;
-            masterGain.gain.setValueAtTime(masterGain.gain.value, now);
-            masterGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.3);
-
-            setTimeout(() => {
-                activeOscs.forEach(o => {
-                    try { o.stop(); o.disconnect(); } catch(e){}
+                    // Remove scroll listeners once playing
+                    window.removeEventListener('scroll', triggerScrollMusic);
+                    window.removeEventListener('touchmove', triggerScrollMusic);
+                }).catch(err => {
+                    // Browser waiting for first physical movement
                 });
-                activeOscs = [];
-                isAmbientActive = false;
+            }
+        }
+
+        // Native global scroll & touchmove
+        window.addEventListener('scroll', triggerScrollMusic, { passive: true });
+        window.addEventListener('touchmove', triggerScrollMusic, { passive: true });
+
+        // 3. MANUAL AUDIO PILL TOGGLE
+        function toggleAudioPill() {
+            if (player.paused) {
+                player.volume = 0.6;
+                player.play().then(() => {
+                    isAudioPlaying = true;
+                    audioToggle.classList.add('playing');
+                    audioLabel.textContent = "Ambient Playing";
+                });
+            } else {
+                player.pause();
+                isAudioPlaying = false;
                 audioToggle.classList.remove('playing');
                 audioLabel.textContent = "Sound Paused";
-            }, 300);
-        }
-
-        // 4. GUARANTEED NATIVE SCROLL TRIGGER
-        function onUserScrollAction() {
-            if (!isAmbientActive) {
-                wakeAudioPipe();
-                startAmbientDrone();
             }
         }
 
-        // Native scroll and wheel listeners
-        window.addEventListener('scroll', onUserScrollAction, { passive: true });
-        window.addEventListener('wheel', onUserScrollAction, { passive: true });
-
-        // Touch swipe detector without fragile formulas
-        let lastY = 0;
-        window.addEventListener('touchstart', (e) => {
-            if (e.touches && e.touches.length > 0) {
-                lastY = e.touches[0].clientY;
-            }
-        }, { passive: true });
-
-        window.addEventListener('touchmove', (e) => {
-            if (e.touches && e.touches.length > 0) {
-                const currentY = e.touches[0].clientY;
-                if (Math.abs(currentY - lastY) > 5) {
-                    onUserScrollAction();
-                }
-            }
-        }, { passive: true });
-
-        // 5. MANUAL AUDIO PILL TOGGLE
-        function toggleAmbientManual() {
-            wakeAudioPipe();
-            if (!isAmbientActive) {
-                startAmbientDrone();
-            } else {
-                stopAmbientDrone();
-            }
-        }
-
-        // 6. LOUD MECHANICAL BUTTON CLICK (Crisp Tock)
+        // 4. CRISP MECHANICAL BUTTON CLICK SOUND
+        let audioCtx;
         function playButtonTick() {
             try {
-                wakeAudioPipe();
+                if (!audioCtx) {
+                    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                }
+                if (audioCtx.state === 'suspended') {
+                    audioCtx.resume();
+                }
                 const now = audioCtx.currentTime;
                 const osc = audioCtx.createOscillator();
                 const gain = audioCtx.createGain();
 
                 osc.type = 'triangle';
                 osc.frequency.setValueAtTime(450, now);
-                osc.frequency.exponentialRampToValueAtTime(90, now + 0.045);
+                osc.frequency.exponentialRampToValueAtTime(80, now + 0.05);
 
-                gain.gain.setValueAtTime(0.7, now); // Loud & clear
-                gain.gain.exponentialRampToValueAtTime(0.001, now + 0.045);
+                gain.gain.setValueAtTime(0.8, now);
+                gain.gain.exponentialRampToValueAtTime(0.001, now + 0.05);
 
                 osc.connect(gain);
                 gain.connect(audioCtx.destination);
 
                 osc.start(now);
-                osc.stop(now + 0.045);
+                osc.stop(now + 0.05);
             } catch(e) {}
         }
 
-        // 7. PURE SHUTDOWN
+        // 5. PURE SHUTDOWN
         function triggerPureShutdown() {
             pureShutdown.classList.add('active');
-            stopAmbientDrone();
+            if (!player.paused) {
+                player.pause();
+                isAudioPlaying = false;
+                audioToggle.classList.remove('playing');
+                audioLabel.textContent = "Sound Paused";
+            }
             setTimeout(() => {
                 pureShutdown.classList.remove('active');
                 window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -1179,7 +1110,7 @@
             btn.classList.add('active');
         }
 
-        // Button Click Shockwave + Click Sound (No Music Trigger on Button)
+        // Shockwave Ripple on Buttons + Click Tick Sound
         document.querySelectorAll('.interactive-btn').forEach(button => {
             button.addEventListener('click', function (e) {
                 playButtonTick();
