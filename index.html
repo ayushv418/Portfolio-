@@ -39,7 +39,7 @@
             position: relative;
         }
 
-        /* ===== 1. SILENT BIG FUTURISTIC BOOT ANIMATION ===== */
+        /* ===== 1. SILENT BIG BOOT ANIMATION ===== */
         #pureBootScreen {
             position: fixed;
             inset: 0;
@@ -806,6 +806,12 @@
         <span class="audio-text" id="audioLabel">Sound On</span>
     </div>
 
+    <!-- DIRECT INLINE AUDIO ELEMENT (ZERO EXTERNAL FILE / NO NETWORK BLOCK) -->
+    <audio id="ambientAudio" loop preload="auto">
+        <source src="https://commondatastorage.googleapis.com/codeskulptor-demos/riceracer_assets/music/menu.ogg" type="audio/ogg">
+        <source src="https://ia801503.us.archive.org/15/items/chill-ambient-background-music-for-videos-2021/chill-ambient-background-music-for-videos-2021.mp3" type="audio/mpeg">
+    </audio>
+
     <!-- FLOATING WHATSAPP BUTTON -->
     <a href="https://wa.me/919795222082?text=Hello%20Ayush,%20I%20want%20to%20get%20a%20website%20made." target="_blank" class="floating-wa-pill interactive-btn">
         <span>💬</span> Chat on WhatsApp
@@ -997,112 +1003,119 @@
         </footer>
     </div>
 
-    <!-- JAVASCRIPT: GUARANTEED MOBILE AUDIO ON SCROLL -->
+    <!-- SCRIPT FOR GUARANTEED AUDIO & REAL AUDIBLE BUTTON CLICK -->
     <script>
         const audioToggle = document.getElementById('audioToggle');
         const audioLabel = document.getElementById('audioLabel');
         const pureBoot = document.getElementById('pureBootScreen');
         const pureShutdown = document.getElementById('pureShutdownScreen');
-
-        // HIGH-FIDELITY AMBIENT AUDIO ELEMENT CREATION (DIRECT STREAM)
-        const bgAudio = new Audio("https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=ambient-piano-amp-strings-10711.mp3");
-        bgAudio.loop = true;
-        bgAudio.preload = "auto";
-        bgAudio.volume = 0.4;
+        const ambientAudio = document.getElementById('ambientAudio');
 
         let isAudioPlaying = false;
-        let startTouchY = 0;
+        let startY = 0;
+        let audioCtx = null;
 
-        // 1. SILENT BOOT ANIMATION (Koi sound nahi)
+        // 1. SILENT BOOT ANIMATION
         window.addEventListener('load', () => {
             setTimeout(() => {
                 pureBoot.classList.add('booted');
             }, 1900);
         });
 
-        // 2. SCROLL / SWIPE TRIGGER TO ACTUALLY PLAY MUSIC
-        function executeAudioStart() {
-            if (isAudioPlaying) return;
-            
-            bgAudio.play().then(() => {
-                isAudioPlaying = true;
-                audioToggle.classList.add('playing');
-                audioLabel.textContent = "Ambient Playing";
-                
-                // Once running, remove listeners
-                window.removeEventListener('scroll', executeAudioStart);
-                window.removeEventListener('touchmove', executeAudioStart);
-                window.removeEventListener('wheel', executeAudioStart);
-            }).catch(err => {
-                console.log("Waiting for user scroll gesture: ", err);
-            });
+        // 2. FORCE UNLOCK AUDIO HARDWARE ON ANY TOUCH/GESTURE
+        function unlockAudioEngine() {
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+        }
+
+        // 3. SCROLL-ONLY TRIGGER TO PLAY AMBIENT AUDIO
+        function triggerScrollAudio() {
+            unlockAudioEngine();
+            if (!isAudioPlaying) {
+                ambientAudio.volume = 0.45;
+                const playPromise = ambientAudio.play();
+                if (playPromise !== undefined) {
+                    playPromise.then(() => {
+                        isAudioPlaying = true;
+                        audioToggle.classList.add('playing');
+                        audioLabel.textContent = "Ambient Playing";
+                    }).catch(e => {
+                        console.log("Audio waiting for slide: ", e);
+                    });
+                }
+            }
         }
 
         window.addEventListener('touchstart', (e) => {
-            startTouchY = e.touches[0].clientY;
+            startY = e.touches[0].clientY;
+            unlockAudioEngine();
         }, { passive: true });
 
         window.addEventListener('touchmove', (e) => {
-            if (!startTouchY) return;
-            const diff = Math.abs(e.touches[0].clientY - startTouchY);
-            // Ungli 8px se zyada slide hote hi music start
+            if (!startY) return;
+            const diff = Math.abs(e.touches[0].clientY - startY);
+            // 8 pixel scroll/slide hote hi music start
             if (diff > 8 && !isAudioPlaying) {
-                executeAudioStart();
+                triggerScrollAudio();
             }
         }, { passive: true });
 
-        window.addEventListener('scroll', executeAudioStart, { passive: true });
-        window.addEventListener('wheel', executeAudioStart, { passive: true });
+        window.addEventListener('wheel', () => {
+            triggerScrollAudio();
+        }, { passive: true });
 
-        // 3. MANUAL AUDIO PILL TOGGLE
+        // 4. MANUAL AUDIO TOGGLE
         function toggleAudio() {
-            if (bgAudio.paused) {
-                bgAudio.play().then(() => {
+            unlockAudioEngine();
+            if (ambientAudio.paused) {
+                ambientAudio.volume = 0.45;
+                ambientAudio.play().then(() => {
                     isAudioPlaying = true;
                     audioToggle.classList.add('playing');
                     audioLabel.textContent = "Ambient Playing";
                 });
             } else {
-                bgAudio.pause();
+                ambientAudio.pause();
                 isAudioPlaying = false;
                 audioToggle.classList.remove('playing');
                 audioLabel.textContent = "Sound Paused";
             }
         }
 
-        // 4. BUTTON CLICK TICK FEEDBACK
-        let audioCtx;
-        function playButtonTickSound() {
+        // 5. CRISP AUDIBLE BUTTON CLICK (Loud & Clear Mechanical Tock)
+        function playAudibleButtonTick() {
             try {
-                if (!audioCtx) {
-                    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-                }
-                if (audioCtx.state === 'suspended') {
-                    audioCtx.resume();
-                }
+                unlockAudioEngine();
                 const osc = audioCtx.createOscillator();
                 const gain = audioCtx.createGain();
 
-                osc.type = 'sine';
-                osc.frequency.setValueAtTime(650, audioCtx.currentTime);
-                osc.frequency.exponentialRampToValueAtTime(150, audioCtx.currentTime + 0.035);
+                // Punchy square/sine hybrid click
+                osc.type = 'triangle';
+                osc.frequency.setValueAtTime(400, audioCtx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(80, audioCtx.currentTime + 0.05);
 
-                gain.gain.setValueAtTime(0.12, audioCtx.currentTime);
-                gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.035);
+                gain.gain.setValueAtTime(0.4, audioCtx.currentTime); // Tej clear volume
+                gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.05);
 
                 osc.connect(gain);
                 gain.connect(audioCtx.destination);
 
                 osc.start();
-                osc.stop(audioCtx.currentTime + 0.035);
-            } catch (err) {}
+                osc.stop(audioCtx.currentTime + 0.05);
+            } catch (err) {
+                console.log(err);
+            }
         }
 
-        // 5. PURE SHUTDOWN
+        // 6. PURE SHUTDOWN
         function triggerPureShutdown() {
             pureShutdown.classList.add('active');
-            if (!bgAudio.paused) {
-                bgAudio.pause();
+            if (!ambientAudio.paused) {
+                ambientAudio.pause();
                 isAudioPlaying = false;
                 audioToggle.classList.remove('playing');
                 audioLabel.textContent = "Sound Paused";
@@ -1122,10 +1135,10 @@
             btn.classList.add('active');
         }
 
-        // Button Click Shockwave + Click Sound
+        // Button Click Shockwave + Loud Click Sound (No Music on Button Click)
         document.querySelectorAll('.interactive-btn').forEach(button => {
             button.addEventListener('click', function (e) {
-                playButtonTickSound();
+                playAudibleButtonTick();
 
                 const circle = document.createElement('span');
                 const diameter = Math.max(button.clientWidth, button.clientHeight);
