@@ -39,7 +39,7 @@
             position: relative;
         }
 
-        /* ===== 1. BIG FUTURISTIC BOOT ANIMATION ===== */
+        /* ===== 1. SILENT BIG FUTURISTIC BOOT ANIMATION ===== */
         #pureBootScreen {
             position: fixed;
             inset: 0;
@@ -64,7 +64,7 @@
             position: absolute;
             width: 130px;
             height: 130px;
-            border-radius: 42px; /* Bada Squircle curvature */
+            border-radius: 42px;
             border: 4px solid var(--xiaomi-orange);
             animation: squircleExpandBig 2.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
             box-shadow: 0 0 60px rgba(255, 103, 0, 0.8), inset 0 0 30px rgba(255, 103, 0, 0.4);
@@ -99,7 +99,7 @@
             pointer-events: none;
         }
 
-        /* ===== 2. PURE SHUTDOWN SCREEN ===== */
+        /* ===== 2. SHUTDOWN SCREEN ===== */
         #pureShutdownScreen {
             position: fixed;
             inset: 0;
@@ -780,7 +780,7 @@
 </head>
 <body>
 
-    <!-- 1. BIG BOOT ANIMATION (NO LOGO, NO TEXT) -->
+    <!-- 1. SILENT BIG BOOT ANIMATION -->
     <div id="pureBootScreen">
         <div class="mi-anim-core">
             <div class="mi-ring-outer"></div>
@@ -788,7 +788,7 @@
         </div>
     </div>
 
-    <!-- 2. PURE SHUTDOWN ANIMATION (NO LOGO, NO TEXT) -->
+    <!-- 2. PURE SHUTDOWN ANIMATION -->
     <div id="pureShutdownScreen">
         <div class="shutdown-glow-circle">⏻</div>
     </div>
@@ -980,7 +980,7 @@
                     <button type="submit" class="interactive-btn btn-apple-blue" style="width: 100%;">Submit Inquiry</button>
                 </form>
 
-                <!-- 3. PURE POWER OFF TRIGGER (NO NAME) -->
+                <!-- 3. PURE POWER OFF TRIGGER -->
                 <div class="shutdown-trigger-card">
                     <span style="font-size: 24px; display:block; margin-bottom: 4px;">⚡</span>
                     <strong style="color: #ffffff; font-size: 0.95rem;">Interactive Session Ending</strong>
@@ -997,146 +997,89 @@
         </footer>
     </div>
 
-    <!-- SCRIPT FOR WEB-SYNTHESIZED BOOT CHORD & SCROLL AMBIENT ENGINE -->
+    <!-- JAVASCRIPT: GUARANTEED MOBILE AUDIO ON SCROLL -->
     <script>
         const audioToggle = document.getElementById('audioToggle');
         const audioLabel = document.getElementById('audioLabel');
         const pureBoot = document.getElementById('pureBootScreen');
         const pureShutdown = document.getElementById('pureShutdownScreen');
 
-        let audioCtx;
-        let ambientGain;
+        // HIGH-FIDELITY AMBIENT AUDIO ELEMENT CREATION (DIRECT STREAM)
+        const bgAudio = new Audio("https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=ambient-piano-amp-strings-10711.mp3");
+        bgAudio.loop = true;
+        bgAudio.preload = "auto";
+        bgAudio.volume = 0.4;
+
         let isAudioPlaying = false;
         let startTouchY = 0;
 
-        // Initialize Web Audio Context
-        function initAudio() {
-            if (!audioCtx) {
-                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-            }
-            if (audioCtx.state === 'suspended') {
-                audioCtx.resume();
-            }
-        }
-
-        // 1. TEJ FUTURISTIC BOOT SOUND (CINEMATIC CHORD)
-        function playTejBootSound() {
-            try {
-                initAudio();
-                const now = audioCtx.currentTime;
-                // Layered cinematic frequencies (Deep bass + bright chime)
-                const freqs = [130.81, 196.00, 261.63, 392.00, 523.25];
-                
-                freqs.forEach((f, idx) => {
-                    const osc = audioCtx.createOscillator();
-                    const gain = audioCtx.createGain();
-                    
-                    osc.type = idx === 0 ? 'sawtooth' : 'sine';
-                    osc.frequency.setValueAtTime(f, now);
-                    
-                    // Thodi tej volume curve
-                    gain.gain.setValueAtTime(0.001, now);
-                    gain.gain.exponentialRampToValueAtTime(0.25, now + 0.15);
-                    gain.gain.exponentialRampToValueAtTime(0.0001, now + 1.8);
-                    
-                    osc.connect(gain);
-                    gain.connect(audioCtx.destination);
-                    
-                    osc.start(now);
-                    osc.stop(now + 1.8);
-                });
-            } catch (e) {}
-        }
-
-        // Boot Screen trigger
+        // 1. SILENT BOOT ANIMATION (Koi sound nahi)
         window.addEventListener('load', () => {
             setTimeout(() => {
-                playTejBootSound();
-            }, 300);
-
-            setTimeout(() => {
                 pureBoot.classList.add('booted');
-            }, 2100);
+            }, 1900);
         });
 
-        // 2. SELF-GENERATING AMBIENT CHORD ENGINE (100% RELIABLE, ZERO EXTERNAL DEPENDENCY)
-        function startSynthesizedAmbient() {
+        // 2. SCROLL / SWIPE TRIGGER TO ACTUALLY PLAY MUSIC
+        function executeAudioStart() {
             if (isAudioPlaying) return;
-            initAudio();
-
-            ambientGain = audioCtx.createGain();
-            ambientGain.gain.setValueAtTime(0.001, audioCtx.currentTime);
-            ambientGain.gain.exponentialRampToValueAtTime(0.18, audioCtx.currentTime + 2.5);
-            ambientGain.connect(audioCtx.destination);
-
-            // Calm celestial chords (F-Major9th ambient drone)
-            const chordFreqs = [174.61, 220.00, 261.63, 329.63, 392.00];
-
-            chordFreqs.forEach(freq => {
-                const osc = audioCtx.createOscillator();
-                const lfo = audioCtx.createOscillator();
-                const lfoGain = audioCtx.createGain();
-
-                osc.type = 'sine';
-                osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
-
-                // Subtle slow cosmic movement (LFO wave)
-                lfo.frequency.setValueAtTime(0.15 + Math.random() * 0.1, audioCtx.currentTime);
-                lfoGain.gain.setValueAtTime(1.5, audioCtx.currentTime);
-
-                lfo.connect(lfoGain);
-                lfoGain.connect(osc.frequency);
-
-                osc.connect(ambientGain);
-                osc.start();
-                lfo.start();
+            
+            bgAudio.play().then(() => {
+                isAudioPlaying = true;
+                audioToggle.classList.add('playing');
+                audioLabel.textContent = "Ambient Playing";
+                
+                // Once running, remove listeners
+                window.removeEventListener('scroll', executeAudioStart);
+                window.removeEventListener('touchmove', executeAudioStart);
+                window.removeEventListener('wheel', executeAudioStart);
+            }).catch(err => {
+                console.log("Waiting for user scroll gesture: ", err);
             });
-
-            isAudioPlaying = true;
-            audioToggle.classList.add('playing');
-            audioLabel.textContent = "Ambient Playing";
         }
 
-        // 3. SCROLL / SWIPE LISTENER FOR AMBIENT START
         window.addEventListener('touchstart', (e) => {
             startTouchY = e.touches[0].clientY;
-            initAudio();
         }, { passive: true });
 
         window.addEventListener('touchmove', (e) => {
             if (!startTouchY) return;
             const diff = Math.abs(e.touches[0].clientY - startTouchY);
-            if (diff > 10 && !isAudioPlaying) {
-                startSynthesizedAmbient();
+            // Ungli 8px se zyada slide hote hi music start
+            if (diff > 8 && !isAudioPlaying) {
+                executeAudioStart();
             }
         }, { passive: true });
 
-        window.addEventListener('wheel', () => {
-            if (!isAudioPlaying) {
-                startSynthesizedAmbient();
-            }
-        }, { passive: true });
+        window.addEventListener('scroll', executeAudioStart, { passive: true });
+        window.addEventListener('wheel', executeAudioStart, { passive: true });
 
-        // 4. MANUAL AUDIO TOGGLE
+        // 3. MANUAL AUDIO PILL TOGGLE
         function toggleAudio() {
-            initAudio();
-            if (!isAudioPlaying) {
-                startSynthesizedAmbient();
+            if (bgAudio.paused) {
+                bgAudio.play().then(() => {
+                    isAudioPlaying = true;
+                    audioToggle.classList.add('playing');
+                    audioLabel.textContent = "Ambient Playing";
+                });
             } else {
-                if (ambientGain) {
-                    ambientGain.gain.setValueAtTime(ambientGain.gain.value, audioCtx.currentTime);
-                    ambientGain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.4);
-                }
+                bgAudio.pause();
                 isAudioPlaying = false;
                 audioToggle.classList.remove('playing');
                 audioLabel.textContent = "Sound Paused";
             }
         }
 
-        // 5. BUTTON TICK SOUND
+        // 4. BUTTON CLICK TICK FEEDBACK
+        let audioCtx;
         function playButtonTickSound() {
             try {
-                initAudio();
+                if (!audioCtx) {
+                    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                }
+                if (audioCtx.state === 'suspended') {
+                    audioCtx.resume();
+                }
                 const osc = audioCtx.createOscillator();
                 const gain = audioCtx.createGain();
 
@@ -1155,11 +1098,11 @@
             } catch (err) {}
         }
 
-        // 6. PURE SHUTDOWN
+        // 5. PURE SHUTDOWN
         function triggerPureShutdown() {
             pureShutdown.classList.add('active');
-            if (isAudioPlaying && ambientGain) {
-                ambientGain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.5);
+            if (!bgAudio.paused) {
+                bgAudio.pause();
                 isAudioPlaying = false;
                 audioToggle.classList.remove('playing');
                 audioLabel.textContent = "Sound Paused";
