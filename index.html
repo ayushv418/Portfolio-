@@ -1002,137 +1002,140 @@
     </div>
 
     <!-- SCRIPT FOR GUARANTEED SCROLL AUDIO PLAYBACK -->
-    <script>
-        const audioToggle = document.getElementById('audioToggle');
-        const audioLabel = document.getElementById('audioLabel');
-        const pureBoot = document.getElementById('pureBootScreen');
-        const pureShutdown = document.getElementById('pureShutdownScreen');
-        const player = document.getElementById('mediaPlayer');
+   <script>
+    const audioToggle = document.getElementById('audioToggle');
+    const audioLabel = document.getElementById('audioLabel');
+    const pureBoot = document.getElementById('pureBootScreen');
+    const pureShutdown = document.getElementById('pureShutdownScreen');
+    const player = document.getElementById('mediaPlayer');
 
-        let isAudioPlaying = false;
+    let isAudioPlaying = false;
+    let audioCtx = null;
 
-        // 1. SILENT BOOT ANIMATION
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                pureBoot.classList.add('booted');
-            }, 1900);
-        });
+    // 1. Silent Boot Animation
+    window.addEventListener('load', () => {
+        setTimeout(() => {
+            if (pureBoot) pureBoot.classList.add('booted');
+        }, 1900);
+    });
 
-        // 2. SCROLL TRIGGER (Real Audio Element - 100% Compatible with Android Media Volume)
-        function triggerScrollMusic() {
-            if (!isAudioPlaying) {
-                player.volume = 0.6; // Clear audible volume
-                player.play().then(() => {
-                    isAudioPlaying = true;
-                    audioToggle.classList.add('playing');
-                    audioLabel.textContent = "Ambient Playing";
-
-                    // Remove scroll listeners once playing
-                    window.removeEventListener('scroll', triggerScrollMusic);
-                    window.removeEventListener('touchmove', triggerScrollMusic);
-                }).catch(err => {
-                    // Browser waiting for first physical movement
-                });
-            }
+    // 2. Hardware Audio Force Unlocker
+    function forceUnlockAudio() {
+        if (!audioCtx) {
+            const AudioClass = window.AudioContext || window.webkitAudioContext;
+            audioCtx = new AudioClass();
         }
-
-        // Native global scroll & touchmove
-        window.addEventListener('scroll', triggerScrollMusic, { passive: true });
-        window.addEventListener('touchmove', triggerScrollMusic, { passive: true });
-
-        // 3. MANUAL AUDIO PILL TOGGLE
-        function toggleAudioPill() {
-            if (player.paused) {
-                player.volume = 0.6;
-                player.play().then(() => {
-                    isAudioPlaying = true;
-                    audioToggle.classList.add('playing');
-                    audioLabel.textContent = "Ambient Playing";
-                });
-            } else {
-                player.pause();
-                isAudioPlaying = false;
-                audioToggle.classList.remove('playing');
-                audioLabel.textContent = "Sound Paused";
-            }
+        if (audioCtx.state === 'suspended') {
+            audioCtx.resume();
         }
+    }
 
-        // 4. CRISP MECHANICAL BUTTON CLICK SOUND
-        let audioCtx;
-        function playButtonTick() {
-            try {
-                if (!audioCtx) {
-                    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-                }
-                if (audioCtx.state === 'suspended') {
-                    audioCtx.resume();
-                }
-                const now = audioCtx.currentTime;
-                const osc = audioCtx.createOscillator();
-                const gain = audioCtx.createGain();
-
-                osc.type = 'triangle';
-                osc.frequency.setValueAtTime(450, now);
-                osc.frequency.exponentialRampToValueAtTime(80, now + 0.05);
-
-                gain.gain.setValueAtTime(0.8, now);
-                gain.gain.exponentialRampToValueAtTime(0.001, now + 0.05);
-
-                osc.connect(gain);
-                gain.connect(audioCtx.destination);
-
-                osc.start(now);
-                osc.stop(now + 0.05);
-            } catch(e) {}
-        }
-
-        // 5. PURE SHUTDOWN
-        function triggerPureShutdown() {
-            pureShutdown.classList.add('active');
-            if (!player.paused) {
-                player.pause();
-                isAudioPlaying = false;
-                audioToggle.classList.remove('playing');
-                audioLabel.textContent = "Sound Paused";
-            }
-            setTimeout(() => {
-                pureShutdown.classList.remove('active');
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            }, 3000);
-        }
-
-        // Tab Switcher
-        function switchAppleTab(tabId, btn) {
-            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-
-            document.getElementById(tabId).classList.add('active');
-            btn.classList.add('active');
-        }
-
-        // Shockwave Ripple on Buttons + Click Tick Sound
-        document.querySelectorAll('.interactive-btn').forEach(button => {
-            button.addEventListener('click', function (e) {
-                playButtonTick();
-
-                const circle = document.createElement('span');
-                const diameter = Math.max(button.clientWidth, button.clientHeight);
-                const radius = diameter / 2;
-
-                const rect = button.getBoundingClientRect();
-                circle.style.width = circle.style.height = `${diameter}px`;
-                circle.style.left = `${e.clientX - rect.left - radius}px`;
-                circle.style.top = `${e.clientY - rect.top - radius}px`;
-                circle.classList.add('shockwave-wave');
-
-                const existingWave = button.querySelector('.shockwave-wave');
-                if (existingWave) {
-                    existingWave.remove();
-                }
-
-                button.appendChild(circle);
+    // 3. Guaranteed Scroll / Swipe Audio Trigger
+    function playAudioEngine() {
+        forceUnlockAudio();
+        if (!isAudioPlaying) {
+            player.volume = 0.8;
+            player.play().then(() => {
+                isAudioPlaying = true;
+                audioToggle.classList.add('playing');
+                audioLabel.textContent = "Ambient Playing";
+            }).catch(e => {
+                // Fallback direct unblock
+                console.log("Audio waiting:", e);
             });
+        }
+    }
+
+    // Screen par ungli touch ya slide hote hi hardware unlock & play
+    window.addEventListener('touchstart', forceUnlockAudio, { passive: true });
+    window.addEventListener('touchmove', playAudioEngine, { passive: true });
+    window.addEventListener('scroll', playAudioEngine, { passive: true });
+
+    // 4. Toggle Pill Par Tap Karne Se Bhi 100% Chalega
+    function toggleAudioPill() {
+        forceUnlockAudio();
+        if (player.paused) {
+            player.volume = 0.8;
+            player.play().then(() => {
+                isAudioPlaying = true;
+                audioToggle.classList.add('playing');
+                audioLabel.textContent = "Ambient Playing";
+            });
+        } else {
+            player.pause();
+            isAudioPlaying = false;
+            audioToggle.classList.remove('playing');
+            audioLabel.textContent = "Sound Paused";
+        }
+    }
+
+    // 5. Loud Button Tick Sound
+    function playButtonTick() {
+        try {
+            forceUnlockAudio();
+            const now = audioCtx.currentTime;
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+
+            osc.type = 'triangle';
+            osc.frequency.setValueAtTime(500, now);
+            osc.frequency.exponentialRampToValueAtTime(100, now + 0.05);
+
+            gain.gain.setValueAtTime(1.0, now); // Full Loud
+            gain.gain.exponentialRampToValueAtTime(0.001, now + 0.05);
+
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+
+            osc.start(now);
+            osc.stop(now + 0.05);
+        } catch(e) {}
+    }
+
+    // 6. Shutdown
+    function triggerPureShutdown() {
+        pureShutdown.classList.add('active');
+        if (!player.paused) {
+            player.pause();
+            isAudioPlaying = false;
+            audioToggle.classList.remove('playing');
+            audioLabel.textContent = "Sound Paused";
+        }
+        setTimeout(() => {
+            pureShutdown.classList.remove('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }, 3000);
+    }
+
+    // Tab Switcher
+    function switchAppleTab(tabId, btn) {
+        document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        document.getElementById(tabId).classList.add('active');
+        btn.classList.add('active');
+    }
+
+    // Shockwave + Button Sound
+    document.querySelectorAll('.interactive-btn').forEach(button => {
+        button.addEventListener('click', function (e) {
+            playButtonTick();
+
+            const circle = document.createElement('span');
+            const diameter = Math.max(button.clientWidth, button.clientHeight);
+            const radius = diameter / 2;
+            const rect = button.getBoundingClientRect();
+            circle.style.width = circle.style.height = `${diameter}px`;
+            circle.style.left = `${e.clientX - rect.left - radius}px`;
+            circle.style.top = `${e.clientY - rect.top - radius}px`;
+            circle.classList.add('shockwave-wave');
+
+            const existingWave = button.querySelector('.shockwave-wave');
+            if (existingWave) existingWave.remove();
+            button.appendChild(circle);
         });
-    </script>
-</body>
+    });
+</script>
+ 
+    
+     </body>
 </html>
