@@ -16,6 +16,7 @@
             --text-secondary: #86868b;
             --accent-blue: #2997ff;
             --accent-green: #30d158;
+            --xiaomi-orange: #ff6700;
             --radius-large: 24px;
             --radius-pill: 980px;
         }
@@ -24,7 +25,7 @@
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, sans-serif;
             -webkit-font-smoothing: antialiased;
             scroll-behavior: smooth;
         }
@@ -38,109 +39,154 @@
             position: relative;
         }
 
-        /* ===== 1. APPLE IPHONE BOOT / SWITCH-ON ANIMATION ===== */
-        #appleBootScreen {
+        /* ===== 1. XIAOMI / HYPEROS BOOT SCREEN (SWITCH ON) ===== */
+        #xiaomiBootScreen {
             position: fixed;
             inset: 0;
             background: #000000;
             z-index: 99999;
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
-            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s ease, visibility 0.8s;
+            padding: 60px 20px;
+            transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s ease, visibility 0.7s;
         }
 
-        .apple-boot-logo {
-            font-size: 3.5rem;
+        .xiaomi-center-group {
+            margin-top: auto;
+            margin-bottom: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            animation: miLogoPop 2.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        /* Official Xiaomi Orange Squircle Badge */
+        .mi-badge-box {
+            width: 76px;
+            height: 76px;
+            background: linear-gradient(135deg, #ff7a18 0%, #ff5200 100%);
+            border-radius: 24px; /* Xiaomi squircle curvature */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 12px 35px rgba(255, 103, 0, 0.45);
+        }
+
+        .mi-logo-svg {
+            width: 44px;
+            height: 44px;
+            fill: #ffffff;
+        }
+
+        .xiaomi-brand-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
             color: #ffffff;
+            margin-top: 18px;
+        }
+
+        /* Xiaomi "Powered by HyperOS" Footer */
+        .xiaomi-boot-footer {
+            text-align: center;
             opacity: 0;
-            transform: scale(0.85);
-            animation: appleBootLogoAnim 2.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-            filter: drop-shadow(0 0 25px rgba(255, 255, 255, 0.6));
+            animation: miFooterFade 1.6s ease forwards 0.4s;
         }
 
-        .boot-bar-container {
-            width: 140px;
-            height: 4px;
-            background: rgba(255, 255, 255, 0.15);
-            border-radius: 4px;
-            margin-top: 24px;
-            overflow: hidden;
-            opacity: 0;
-            animation: bootBarFade 2s forwards 0.3s;
+        .powered-by-text {
+            font-size: 0.7rem;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 4px;
         }
 
-        .boot-bar-progress {
-            width: 0%;
-            height: 100%;
-            background: #ffffff;
-            border-radius: 4px;
-            animation: bootProgressFill 1.8s cubic-bezier(0.4, 0, 0.2, 1) forwards 0.4s;
+        .hyperos-title {
+            font-size: 1rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            background: linear-gradient(90deg, #ff6700, #ff9f43, #ffffff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
         }
 
-        @keyframes appleBootLogoAnim {
-            0% { opacity: 0; transform: scale(0.8); }
-            40% { opacity: 1; transform: scale(1); }
-            85% { opacity: 1; transform: scale(1); }
-            100% { opacity: 0; transform: scale(1.1); }
+        @keyframes miLogoPop {
+            0% { transform: scale(0.7); opacity: 0; }
+            35% { transform: scale(1); opacity: 1; }
+            85% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(1.08); opacity: 0; }
         }
 
-        @keyframes bootBarFade {
-            0% { opacity: 0; }
-            30% { opacity: 1; }
-            85% { opacity: 1; }
+        @keyframes miFooterFade {
+            0% { opacity: 0; transform: translateY(8px); }
+            40% { opacity: 0.9; transform: translateY(0); }
+            85% { opacity: 0.9; }
             100% { opacity: 0; }
         }
 
-        @keyframes bootProgressFill {
-            0% { width: 0%; }
-            100% { width: 100%; }
-        }
-
-        #appleBootScreen.power-on-done {
+        #xiaomiBootScreen.booted {
             opacity: 0;
             visibility: hidden;
             pointer-events: none;
-            transform: scale(1.05);
+            transform: scale(1.04);
         }
 
-        /* ===== 2. APPLE SHUTDOWN / SWITCH-OFF OVERLAY ===== */
-        #appleShutdownScreen {
+        /* ===== 2. XIAOMI SHUTDOWN SCREEN (SWITCH OFF) ===== */
+        #xiaomiShutdownScreen {
             position: fixed;
             inset: 0;
-            background: #000000;
+            background: rgba(0, 0, 0, 0.96);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             z-index: 999999;
             display: none;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             opacity: 0;
-            transition: opacity 0.6s ease;
+            transition: opacity 0.5s ease;
         }
 
-        #appleShutdownScreen.active {
+        #xiaomiShutdownScreen.active {
             display: flex;
             opacity: 1;
         }
 
-        .shutdown-spinner {
-            width: 38px;
-            height: 38px;
-            border: 3.5px solid rgba(255, 255, 255, 0.18);
-            border-top-color: #ffffff;
+        .mi-power-circle {
+            width: 70px;
+            height: 70px;
             border-radius: 50%;
-            animation: spinShut 0.8s linear infinite;
-            margin-bottom: 18px;
+            background: rgba(255, 103, 0, 0.15);
+            border: 2px solid var(--xiaomi-orange);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            color: var(--xiaomi-orange);
+            margin-bottom: 20px;
+            box-shadow: 0 0 30px rgba(255, 103, 0, 0.4);
+            animation: miPulseGlow 1.4s infinite alternate;
         }
 
-        @keyframes spinShut {
-            to { transform: rotate(360deg); }
+        @keyframes miPulseGlow {
+            from { transform: scale(0.96); }
+            to { transform: scale(1.05); }
         }
 
-        .shutdown-text {
+        .mi-shutdown-text {
+            color: #ffffff;
+            font-size: 1.1rem;
+            font-weight: 700;
+            letter-spacing: -0.2px;
+            margin-bottom: 6px;
+        }
+
+        .mi-sub-shutdown {
             color: #86868b;
-            font-size: 0.85rem;
+            font-size: 0.78rem;
             letter-spacing: 1px;
             text-transform: uppercase;
         }
@@ -153,7 +199,7 @@
             transform: translate(-50%, -50%);
             width: 500px;
             height: 500px;
-            background: radial-gradient(circle, rgba(41, 151, 255, 0.15), rgba(191, 90, 242, 0.08), transparent 70%);
+            background: radial-gradient(circle, rgba(41, 151, 255, 0.15), rgba(255, 103, 0, 0.08), transparent 70%);
             filter: blur(80px);
             z-index: 0;
             pointer-events: none;
@@ -744,7 +790,7 @@
             100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
         }
 
-        /* ===== BOTTOM SHUTDOWN / EXIT EXPERIENCE CARD ===== */
+        /* ===== XIAOMI HYPEROS SHUTDOWN TRIGGER CARD ===== */
         .shutdown-trigger-card {
             text-align: center;
             margin-top: 50px;
@@ -752,16 +798,15 @@
             border-radius: 22px;
             background: rgba(255, 255, 255, 0.02);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            position: relative;
         }
 
-        .shutdown-btn {
-            background: rgba(255, 59, 48, 0.15);
-            border: 1px solid rgba(255, 59, 48, 0.4);
-            color: #ff453a;
-            padding: 12px 24px;
+        .mi-shutdown-btn {
+            background: rgba(255, 103, 0, 0.15);
+            border: 1px solid rgba(255, 103, 0, 0.5);
+            color: #ff7a18;
+            padding: 13px 26px;
             border-radius: var(--radius-pill);
-            font-size: 0.88rem;
+            font-size: 0.9rem;
             font-weight: 700;
             cursor: pointer;
             display: inline-flex;
@@ -771,8 +816,8 @@
             transition: all 0.25s ease;
         }
 
-        .shutdown-btn:hover {
-            background: rgba(255, 59, 48, 0.3);
+        .mi-shutdown-btn:hover {
+            background: rgba(255, 103, 0, 0.3);
             transform: scale(1.03);
         }
 
@@ -787,18 +832,29 @@
 </head>
 <body>
 
-    <!-- 1. APPLE BOOT / SWITCH-ON SCREEN -->
-    <div id="appleBootScreen">
-        <div class="apple-boot-logo"></div>
-        <div class="boot-bar-container">
-            <div class="boot-bar-progress"></div>
+    <!-- 1. XIAOMI / HYPEROS BOOT SCREEN -->
+    <div id="xiaomiBootScreen">
+        <div></div>
+        <div class="xiaomi-center-group">
+            <div class="mi-badge-box">
+                <!-- Official Mi Logo SVG -->
+                <svg class="mi-logo-svg" viewBox="0 0 1024 1024">
+                    <path d="M720 304v416h-96V496c0-53-43-96-96-96s-96 43-96 96v224h-96V304h96v112c26-30 65-48 108-48s82 18 108 48V304h76zm-416 0v416h-96V304h96z"/>
+                </svg>
+            </div>
+            <div class="xiaomi-brand-name">Xiaomi</div>
+        </div>
+        <div class="xiaomi-boot-footer">
+            <div class="powered-by-text">Powered by</div>
+            <div class="hyperos-title">Xiaomi HyperOS</div>
         </div>
     </div>
 
-    <!-- 2. APPLE SHUTDOWN / SWITCH-OFF SCREEN -->
-    <div id="appleShutdownScreen">
-        <div class="shutdown-spinner"></div>
-        <div class="shutdown-text">Powering Off...</div>
+    <!-- 2. XIAOMI SHUTDOWN SCREEN -->
+    <div id="xiaomiShutdownScreen">
+        <div class="mi-power-circle">⏻</div>
+        <div class="mi-shutdown-text">Power off</div>
+        <div class="mi-sub-shutdown">Shutting down device...</div>
     </div>
 
     <!-- BACKGROUND GLOW -->
@@ -979,7 +1035,7 @@
 
                 <form action="https://formsubmit.co/stv9610@gmail.com" method="POST">
                     <input type="hidden" name="_captcha" value="false">
-                    <input type="hidden" name="_subject" value="Apple-Style Web Inquiry Received!">
+                    <input type="hidden" name="_subject" value="Web Inquiry Received!">
                     
                     <label style="display:block; font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 6px;">Your Name / Institution</label>
                     <input type="text" name="Client_Name" placeholder="e.g. Guidance Academy" required>
@@ -993,13 +1049,13 @@
                     <button type="submit" class="interactive-btn btn-apple-blue" style="width: 100%;">Submit Inquiry</button>
                 </form>
 
-                <!-- 3. APPLE SHUTDOWN / EXIT EXPERIENCE -->
+                <!-- 3. XIAOMI POWER OFF TRIGGER -->
                 <div class="shutdown-trigger-card">
                     <span style="font-size: 24px; display:block; margin-bottom: 4px;">⚡</span>
-                    <strong style="color: #ffffff; font-size: 0.95rem;">Reached the end of the experience?</strong>
-                    <p style="color: var(--text-secondary); font-size: 0.82rem; margin-top: 4px;">Simulate an authentic Apple shutdown sequence.</p>
-                    <button type="button" class="shutdown-btn interactive-btn" onclick="triggerAppleShutdown()">
-                        <span>⏻</span> Slide to Power Off
+                    <strong style="color: #ffffff; font-size: 0.95rem;">Xiaomi HyperOS Power Sequence</strong>
+                    <p style="color: var(--text-secondary); font-size: 0.82rem; margin-top: 4px;">Simulate authentic Xiaomi power shutdown.</p>
+                    <button type="button" class="mi-shutdown-btn interactive-btn" onclick="triggerXiaomiShutdown()">
+                        <span>⏻</span> Power Off Device
                     </button>
                 </div>
             </section>
@@ -1010,78 +1066,72 @@
         </footer>
     </div>
 
-    <!-- JAVASCRIPT: SCROLL-ONLY AUDIO + CLICK SOUND FEEDBACK + BOOT/SHUTDOWN -->
+    <!-- SCRIPT FOR SMART SCROLL AUDIO + BUTTON TICK + XIAOMI BOOT/SHUTDOWN -->
     <script>
         const audio = document.getElementById('ambientAudio');
         const audioToggle = document.getElementById('audioToggle');
         const audioLabel = document.getElementById('audioLabel');
-        const bootScreen = document.getElementById('appleBootScreen');
-        const shutdownScreen = document.getElementById('appleShutdownScreen');
+        const miBootScreen = document.getElementById('xiaomiBootScreen');
+        const miShutdownScreen = document.getElementById('xiaomiShutdownScreen');
 
         let isAudioPlaying = false;
+        let touchStartY = 0;
+        let isScrolledGesture = false;
 
-        // 1. APPLE BOOT SCREEN TIMER (2.2s auto boot)
+        // 1. XIAOMI BOOT SCREEN (Auto exits in 2.2 seconds)
         window.addEventListener('load', () => {
             setTimeout(() => {
-                bootScreen.classList.add('power-on-done');
+                miBootScreen.classList.add('booted');
             }, 2200);
         });
 
-        // 2. REAL-TIME SYNTHESIZED BUTTON CLICK SOUND (Apple UI Tock)
-        let audioCtx;
-        function playAppleButtonSound() {
-            try {
-                if (!audioCtx) {
-                    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-                }
-                if (audioCtx.state === 'suspended') {
-                    audioCtx.resume();
-                }
-                const osc = audioCtx.createOscillator();
-                const gain = audioCtx.createGain();
-
-                osc.type = 'sine';
-                osc.frequency.setValueAtTime(800, audioCtx.currentTime);
-                osc.frequency.exponentialRampToValueAtTime(200, audioCtx.currentTime + 0.04);
-
-                gain.gain.setValueAtTime(0.12, audioCtx.currentTime);
-                gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.04);
-
-                osc.connect(gain);
-                gain.connect(audioCtx.destination);
-
-                osc.start();
-                osc.stop(audioCtx.currentTime + 0.04);
-            } catch (err) {
-                // Ignore if audio context not permitted
+        // 2. SMART SCROLL-ONLY AUDIO TRIGGER
+        // Priming audio with 0 volume on touchstart so mobile browser permissions pass
+        window.addEventListener('touchstart', (e) => {
+            touchStartY = e.touches[0].clientY;
+            isScrolledGesture = false;
+            if (!isAudioPlaying) {
+                audio.volume = 0;
+                audio.play().catch(() => {});
             }
-        }
+        }, { passive: true });
 
-        // 3. SCROLL / SWIPE ONLY AUDIO TRIGGER (Button click bilkul nahi karega)
-        function triggerAudioStrictlyOnScroll() {
+        // Activates strictly when user slides/scrolls > 10px
+        window.addEventListener('touchmove', (e) => {
+            if (!touchStartY) return;
+            const diff = Math.abs(e.touches[0].clientY - touchStartY);
+            if (diff > 10) {
+                isScrolledGesture = true;
+                if (!isAudioPlaying) {
+                    audio.volume = 0.35;
+                    isAudioPlaying = true;
+                    audioToggle.classList.add('playing');
+                    audioLabel.textContent = "Ambient Playing";
+                }
+            }
+        }, { passive: true });
+
+        // If user simply tapped/clicked without scrolling, immediately stop audio
+        window.addEventListener('touchend', () => {
+            if (!isScrolledGesture && !isAudioPlaying) {
+                audio.pause();
+                audio.currentTime = 0;
+            }
+        }, { passive: true });
+
+        // Desktop mouse wheel scroll detection
+        window.addEventListener('wheel', () => {
             if (!isAudioPlaying) {
                 audio.volume = 0.35;
                 audio.play().then(() => {
                     isAudioPlaying = true;
                     audioToggle.classList.add('playing');
                     audioLabel.textContent = "Ambient Playing";
-
-                    // Remove scroll listeners once audio has started
-                    window.removeEventListener('scroll', triggerAudioStrictlyOnScroll);
-                    window.removeEventListener('touchmove', triggerAudioStrictlyOnScroll);
-                    window.removeEventListener('wheel', triggerAudioStrictlyOnScroll);
-                }).catch(() => {
-                    // Mobile browser restricted zero-touch, waits for first continuous finger slide
-                });
+                }).catch(() => {});
             }
-        }
+        }, { passive: true });
 
-        // ONLY SCROLL AND TOUCHMOVE LISTENERS (NO CLICK LISTENERS HERE)
-        window.addEventListener('scroll', triggerAudioStrictlyOnScroll, { passive: true });
-        window.addEventListener('touchmove', triggerAudioStrictlyOnScroll, { passive: true });
-        window.addEventListener('wheel', triggerAudioStrictlyOnScroll, { passive: true });
-
-        // 4. Manual Audio Pill Toggle
+        // 3. MANUAL AUDIO TOGGLE PILL
         function toggleAudio() {
             if (audio.paused) {
                 audio.volume = 0.35;
@@ -1097,15 +1147,42 @@
             }
         }
 
-        // 5. Apple Shutdown Trigger
-        function triggerAppleShutdown() {
-            shutdownScreen.classList.add('active');
+        // 4. REAL-TIME SYSTEM BUTTON CLICK TICK (Click sound only, no music)
+        let audioCtx;
+        function playButtonTickSound() {
+            try {
+                if (!audioCtx) {
+                    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                }
+                if (audioCtx.state === 'suspended') {
+                    audioCtx.resume();
+                }
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(650, audioCtx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(150, audioCtx.currentTime + 0.035);
+
+                gain.gain.setValueAtTime(0.12, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.035);
+
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+
+                osc.start();
+                osc.stop(audioCtx.currentTime + 0.035);
+            } catch (err) {}
+        }
+
+        // 5. XIAOMI SHUTDOWN SEQUENCE
+        function triggerXiaomiShutdown() {
+            miShutdownScreen.classList.add('active');
             if (!audio.paused) {
                 audio.pause();
             }
             setTimeout(() => {
-                // Reboot / Turn back on after 3 seconds
-                shutdownScreen.classList.remove('active');
+                miShutdownScreen.classList.remove('active');
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             }, 3000);
         }
@@ -1119,13 +1196,13 @@
             btn.classList.add('active');
         }
 
-        // Button Click Shockwave + Click Sound (NO MUSIC TRIGGER)
+        // Button Click Shockwave + System Tick
         document.querySelectorAll('.interactive-btn').forEach(button => {
             button.addEventListener('click', function (e) {
-                // 1. Play Button Click Sound
-                playAppleButtonSound();
+                // Play System Click Sound
+                playButtonTickSound();
 
-                // 2. Shockwave visual animation
+                // Shockwave Ripple
                 const circle = document.createElement('span');
                 const diameter = Math.max(button.clientWidth, button.clientHeight);
                 const radius = diameter / 2;
