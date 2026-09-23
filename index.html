@@ -6,9 +6,6 @@
     <title>Ayush Verma — Digital Experiences & Web Engineering</title>
     
     <meta name="description" content="Minimal, ultra-fast web interfaces for coaching institutes, businesses, and online creators by Ayush Verma.">
-    <meta property="og:title" content="Ayush Verma — Web Designer & Developer">
-    <meta property="og:description" content="Designed with performance, aesthetics, and high-impact conversion.">
-    <meta property="og:type" content="website">
 
     <style>
         :root {
@@ -20,7 +17,7 @@
             --accent-blue: #2997ff;
             --accent-green: #30d158;
             --accent-purple: #bf5af2;
-            --radius-large: 26px;
+            --radius-large: 24px;
             --radius-pill: 980px;
         }
 
@@ -42,7 +39,50 @@
             position: relative;
         }
 
-        /* ===== BACKGROUND COSMIC AURA GLOW (CINEMATIC) ===== */
+        /* ===== 1. ENTRY CINEMATIC INTRO OVERLAY (2.5s) ===== */
+        #introLoader {
+            position: fixed;
+            inset: 0;
+            background: #000000;
+            z-index: 99999;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 16px;
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.8s;
+        }
+
+        .intro-ring {
+            width: 44px;
+            height: 44px;
+            border: 3px solid rgba(255, 255, 255, 0.1);
+            border-top-color: var(--accent-blue);
+            border-radius: 50%;
+            animation: spinRing 0.9s linear infinite;
+        }
+
+        @keyframes spinRing {
+            to { transform: rotate(360deg); }
+        }
+
+        .intro-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            background: linear-gradient(180deg, #ffffff, #86868b);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        #introLoader.hide {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        /* ===== BACKGROUND AMBIENT GLOW ===== */
         .ambient-glow-orb {
             position: fixed;
             top: 20%;
@@ -65,12 +105,12 @@
         .container {
             max-width: 900px;
             margin: 0 auto;
-            padding: 40px 0 120px 0;
+            padding: 40px 0 100px 0;
             position: relative;
             z-index: 1;
         }
 
-        /* ===== APPLE STYLE AUDIO PILL ===== */
+        /* ===== AUDIO CONTROLLER PILL ===== */
         .audio-toggle-bar {
             position: fixed;
             top: 18px;
@@ -107,7 +147,6 @@
             background-color: var(--accent-blue);
             border-radius: 2px;
             height: 4px;
-            transition: height 0.2s ease;
         }
 
         .playing .eq-bar:nth-child(1) { animation: eqJump 0.8s ease-in-out infinite alternate; }
@@ -126,7 +165,7 @@
             letter-spacing: 0.2px;
         }
 
-        /* ===== HERO HEADER ===== */
+        /* ===== HEADER ===== */
         header {
             padding: 85px 24px 60px 24px;
             text-align: center;
@@ -145,7 +184,6 @@
             padding: 6px 14px;
             border-radius: var(--radius-pill);
             margin-bottom: 20px;
-            box-shadow: 0 0 20px rgba(48, 209, 88, 0.15);
         }
 
         .live-dot {
@@ -163,10 +201,10 @@
         }
 
         h1.hero-title {
-            font-size: clamp(2.8rem, 7vw, 4.4rem);
+            font-size: clamp(2.6rem, 6.5vw, 4.2rem);
             font-weight: 800;
-            letter-spacing: -1.8px;
-            line-height: 1.06;
+            letter-spacing: -1.6px;
+            line-height: 1.08;
             margin-bottom: 18px;
             background: linear-gradient(180deg, #ffffff 40%, #8c8c94 100%);
             -webkit-background-clip: text;
@@ -175,7 +213,7 @@
         }
 
         header p.hero-sub {
-            font-size: clamp(1.1rem, 2.5vw, 1.35rem);
+            font-size: clamp(1.05rem, 2.4vw, 1.3rem);
             color: var(--text-secondary);
             max-width: 620px;
             margin: 0 auto;
@@ -198,7 +236,6 @@
             position: sticky;
             top: 14px;
             z-index: 900;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
         }
 
         nav a {
@@ -216,7 +253,7 @@
             background: rgba(255, 255, 255, 0.08);
         }
 
-        /* ===== SECTIONS (GLASSMORPHIC CARDS) ===== */
+        /* ===== SECTIONS ===== */
         section {
             background: var(--surface-glass);
             border: 1px solid var(--surface-border);
@@ -225,16 +262,15 @@
             margin-bottom: 32px;
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+            transition: border-color 0.3s ease;
         }
 
         section:hover {
             border-color: rgba(255, 255, 255, 0.22);
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
         }
 
         h2.sec-heading {
-            font-size: 1.85rem;
+            font-size: 1.8rem;
             font-weight: 700;
             letter-spacing: -0.8px;
             margin-bottom: 12px;
@@ -318,44 +354,43 @@
             font-weight: 700;
         }
 
-        /* ===== MEDIUM SIZE HYPER-REALISTIC CERTIFICATE ===== */
+        /* ===== COMPACT REALISTIC CERTIFICATE (380px) ===== */
         .cert-outer-wrapper {
-            max-width: 450px;
+            max-width: 380px; /* Thoda aur compact aur sharp */
             margin: 0 auto;
             position: relative;
-            padding: 4px;
+            padding: 3px;
             background: linear-gradient(135deg, #c5a059 0%, #fdf0cd 50%, #99732d 100%);
-            border-radius: 18px;
-            box-shadow: 0 20px 45px rgba(197, 160, 89, 0.22), 0 10px 30px rgba(0, 0, 0, 0.8);
-            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            border-radius: 14px;
+            box-shadow: 0 15px 35px rgba(197, 160, 89, 0.2), 0 10px 30px rgba(0, 0, 0, 0.8);
+            transition: transform 0.3s ease;
         }
 
         .cert-outer-wrapper:hover {
-            transform: translateY(-6px) scale(1.01);
+            transform: translateY(-3px);
         }
 
         .cert-card-real {
             background: #ffffff;
             color: #1a1a1a;
-            border-radius: 14px;
-            padding: 26px 24px;
+            border-radius: 11px;
+            padding: 20px 18px;
             position: relative;
             overflow: hidden;
-            border: 1.5px solid #dfc480;
+            border: 1px solid #dfc480;
         }
 
-        /* Guilloché security pattern */
         .cert-card-real::before {
             content: "MIMO VERIFIED CREDENTIAL • MIMO ACADEMY • OFFICIAL RECORD • ";
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%) rotate(-25deg);
-            font-size: 1.25rem;
+            font-size: 1.05rem;
             font-weight: 900;
             color: rgba(124, 58, 237, 0.04);
             white-space: nowrap;
-            letter-spacing: 2.5px;
+            letter-spacing: 2px;
             pointer-events: none;
             width: 250%;
             text-align: center;
@@ -365,62 +400,61 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1.5px solid #f1f1f4;
-            padding-bottom: 10px;
-            margin-bottom: 12px;
+            border-bottom: 1px solid #f1f1f4;
+            padding-bottom: 8px;
+            margin-bottom: 10px;
         }
 
         .mimo-brand {
-            font-size: 1.3rem;
+            font-size: 1.15rem;
             font-weight: 900;
-            letter-spacing: -0.5px;
             color: #7c3aed;
         }
 
         .cert-serial {
             font-family: monospace;
-            font-size: 0.68rem;
+            font-size: 0.62rem;
             color: #64748b;
             background: #f8fafc;
-            padding: 3px 6px;
+            padding: 2px 5px;
             border-radius: 4px;
             border: 1px solid #e2e8f0;
         }
 
         .cert-heading-small {
-            font-size: 0.7rem;
-            letter-spacing: 1.6px;
+            font-size: 0.65rem;
+            letter-spacing: 1.4px;
             text-transform: uppercase;
             color: #94a3b8;
             font-weight: 800;
             text-align: center;
-            margin-bottom: 4px;
+            margin-bottom: 3px;
         }
 
         .recipient-name {
-            font-size: 1.6rem;
+            font-size: 1.38rem;
             font-weight: 900;
             text-align: center;
             color: #0f172a;
-            letter-spacing: -0.4px;
-            margin-bottom: 2px;
+            letter-spacing: -0.3px;
+            margin-bottom: 1px;
         }
 
         .cert-track {
             text-align: center;
-            font-size: 1rem;
+            font-size: 0.9rem;
             font-weight: 700;
             color: #7c3aed;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
         }
 
         .cert-statement {
-            font-size: 0.79rem;
+            font-size: 0.73rem;
             color: #475569;
             text-align: center;
-            line-height: 1.45;
-            max-width: 370px;
-            margin: 0 auto 16px auto;
+            line-height: 1.4;
+            max-width: 320px;
+            margin: 0 auto 12px auto;
         }
 
         .cert-seal-row {
@@ -428,33 +462,33 @@
             justify-content: space-between;
             align-items: flex-end;
             border-top: 1px dashed #cbd5e1;
-            padding-top: 12px;
+            padding-top: 10px;
         }
 
         .gold-seal {
-            width: 48px;
-            height: 48px;
+            width: 40px;
+            height: 40px;
             background: radial-gradient(circle, #ffe27a 0%, #d4af37 60%, #996515 100%);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 4px 10px rgba(212, 175, 55, 0.45);
-            border: 2px dashed #ffffff;
+            box-shadow: 0 3px 8px rgba(212, 175, 55, 0.4);
+            border: 1.5px dashed #ffffff;
             color: #5c3a00;
-            font-size: 19px;
+            font-size: 16px;
             font-weight: bold;
         }
 
         .sig-block {
             text-align: left;
-            font-size: 0.72rem;
+            font-size: 0.66rem;
             color: #334155;
         }
 
         .sig-font {
             font-family: "Brush Script MT", cursive, sans-serif;
-            font-size: 1.2rem;
+            font-size: 1.05rem;
             color: #1e1b4b;
             display: block;
             margin-bottom: 1px;
@@ -480,7 +514,7 @@
         }
 
         .demo-item:hover {
-            transform: translateY(-5px);
+            transform: translateY(-4px);
             border-color: rgba(255, 255, 255, 0.3);
         }
 
@@ -496,17 +530,17 @@
             margin-bottom: 20px;
         }
 
-        /* ===== UNFORGETTABLE SHOCKWAVE PULSE BUTTONS ===== */
+        /* ===== BUTTONS & SHOCKWAVE ===== */
         .interactive-btn {
             position: relative;
             display: inline-flex;
             align-items: center;
             justify-content: center;
             gap: 8px;
-            padding: 15px 26px;
+            padding: 14px 24px;
             border-radius: var(--radius-pill);
             text-decoration: none;
-            font-size: 0.95rem;
+            font-size: 0.92rem;
             font-weight: 700;
             overflow: hidden;
             border: none;
@@ -519,11 +553,10 @@
             transform: scale(0.94);
         }
 
-        /* Expanding Shockwave Wave */
         .shockwave-wave {
             position: absolute;
             border-radius: 50%;
-            background: rgba(255, 255, 255, 0.65);
+            background: rgba(255, 255, 255, 0.6);
             transform: scale(0);
             animation: shockwaveAnim 0.65s cubic-bezier(0, 0.6, 0.4, 1);
             pointer-events: none;
@@ -539,26 +572,14 @@
         .btn-apple-blue {
             background: linear-gradient(135deg, #0071e3, #2997ff);
             color: #ffffff;
-            box-shadow: 0 4px 22px rgba(41, 151, 255, 0.4);
-            animation: pulseBlueShadow 3s infinite alternate;
-        }
-
-        @keyframes pulseBlueShadow {
-            0% { box-shadow: 0 4px 18px rgba(41, 151, 255, 0.35); }
-            100% { box-shadow: 0 8px 34px rgba(41, 151, 255, 0.7); }
+            box-shadow: 0 4px 20px rgba(41, 151, 255, 0.4);
         }
 
         .btn-apple-green {
             background: linear-gradient(135deg, #28a745, #30d158);
             color: #000000;
             font-weight: 800;
-            box-shadow: 0 4px 22px rgba(48, 209, 88, 0.4);
-            animation: pulseGreenShadow 3s infinite alternate;
-        }
-
-        @keyframes pulseGreenShadow {
-            0% { box-shadow: 0 4px 18px rgba(48, 209, 88, 0.35); }
-            100% { box-shadow: 0 8px 34px rgba(48, 209, 88, 0.7); }
+            box-shadow: 0 4px 20px rgba(48, 209, 88, 0.4);
         }
 
         .btn-apple-glass {
@@ -567,7 +588,7 @@
             border: 1px solid var(--surface-border);
         }
 
-        /* ===== CONTACT PILL CARDS ===== */
+        /* ===== CONTACT CARDS ===== */
         .contact-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -627,12 +648,11 @@
             font-size: 0.95rem;
             margin-bottom: 16px;
             outline: none;
-            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+            transition: border-color 0.2s ease;
         }
 
         input:focus, textarea:focus {
             border-color: var(--accent-blue);
-            box-shadow: 0 0 16px rgba(41, 151, 255, 0.3);
         }
 
         /* ===== FLOATING WHATSAPP PILL ===== */
@@ -661,6 +681,26 @@
             100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
         }
 
+        /* ===== BOTTOM CELEBRATION BADGE (DECORATIVE HOOK) ===== */
+        .bottom-badge-banner {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px dashed rgba(255, 255, 255, 0.2);
+            opacity: 0;
+            transform: scale(0.95);
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .bottom-badge-banner.show {
+            opacity: 1;
+            transform: scale(1);
+            border-color: var(--accent-blue);
+            box-shadow: 0 0 30px rgba(41, 151, 255, 0.25);
+        }
+
         footer {
             text-align: center;
             padding: 40px 0;
@@ -672,7 +712,13 @@
 </head>
 <body>
 
-    <!-- BACKGROUND LIGHTING -->
+    <!-- 1. ENTRY INTRO SCREEN (DISAPPEARS IN 2.3s) -->
+    <div id="introLoader">
+        <div class="intro-ring"></div>
+        <div class="intro-title">Ayush Verma — Web Experience</div>
+    </div>
+
+    <!-- BACKGROUND GLOW -->
     <div class="ambient-glow-orb"></div>
 
     <!-- AUDIO TOGGLE PILL -->
@@ -773,14 +819,14 @@
                             <h3>Patel Book Depot</h3>
                             <p>Streamlined storefront catalog with textbook categories, transparent stationery rate lists, and store pickup ordering.</p>
                         </div>
-                        <a href="stationery.html" target="_blank" class="interactive-btn btn-apple-green">
+                        <a href="stationary.html" target="_blank" class="interactive-btn btn-apple-green">
                             View Stationery Experience ↗
                         </a>
                     </div>
                 </div>
             </section>
 
-            <!-- MEDIUM REALISTIC CERTIFICATE -->
+            <!-- COMPACT REALISTIC CERTIFICATE -->
             <section id="credentials">
                 <h2 class="sec-heading" style="text-align: center;">Verified Credentials</h2>
                 <p class="sec-sub" style="text-align: center;">Official authenticated proof of web engineering standards.</p>
@@ -796,21 +842,21 @@
                         <h3 class="recipient-name">Ayush Verma</h3>
                         <p class="cert-track">HTML5 Semantic Web Development</p>
                         <p class="cert-statement">
-                            Demonstrated verified technical competency in semantic structure, high-speed performance optimization, and mobile responsive standards.
+                            Demonstrated verified technical competency in semantic structure, performance optimization, and mobile responsive standards.
                         </p>
 
                         <div class="cert-seal-row">
                             <div class="sig-block">
                                 <span class="sig-font">Johannes Berger</span>
                                 <strong>Johannes Berger</strong><br>
-                                <span style="color:#64748b; font-size:0.65rem;">CEO, Mimo Academy</span>
+                                <span style="color:#64748b; font-size:0.62rem;">CEO, Mimo Academy</span>
                             </div>
 
                             <div class="gold-seal" title="Gold Seal">
                                 ★
                             </div>
 
-                            <div style="text-align: right; font-size: 0.7rem; color: #334155;">
+                            <div style="text-align: right; font-size: 0.66rem; color: #334155;">
                                 <strong>Issue Date</strong><br>
                                 <span>September 2026</span><br>
                                 <span style="color:#16a34a; font-weight:800;">✔ Authenticated</span>
@@ -863,6 +909,13 @@
 
                     <button type="submit" class="interactive-btn btn-apple-blue" style="width: 100%;">Submit Inquiry</button>
                 </form>
+
+                <!-- 2. BOTTOM HOOK BANNER -->
+                <div class="bottom-badge-banner" id="bottomHook">
+                    <span style="font-size: 26px; display:block; margin-bottom: 6px;">✨</span>
+                    <strong style="color: #ffffff; font-size: 1rem;">Ready to upgrade your business online?</strong>
+                    <p style="color: var(--text-secondary); font-size: 0.85rem; margin-top: 4px;">Let's build something exceptional together in Kanpur.</p>
+                </div>
             </section>
         </main>
 
@@ -871,44 +924,50 @@
         </footer>
     </div>
 
-    <!-- JAVASCRIPT: 2-SECOND DELAY MUSIC ENGINE + SHOCKWAVE EFFECTS -->
+    <!-- SCRIPT FOR INTRO + SLIDE-TRIGGER AUDIO + BOTTOM DETECTOR -->
     <script>
         const audio = document.getElementById('ambientAudio');
         const audioToggle = document.getElementById('audioToggle');
         const audioLabel = document.getElementById('audioLabel');
+        const introLoader = document.getElementById('introLoader');
+        const bottomHook = document.getElementById('bottomHook');
+
         let isAudioPlaying = false;
-        let timerTriggered = false;
 
-        // USER FIRST TOUCH TRIGGER -> 2 SECOND DELAY START
-        function scheduleMusicOnTouch() {
-            if (!timerTriggered && !isAudioPlaying) {
-                timerTriggered = true;
+        // 1. Cinematic Intro Screen (Auto hides after 2.3 seconds)
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                introLoader.classList.add('hide');
+            }, 2300);
+        });
 
-                // 2 second timer setup
-                setTimeout(() => {
-                    audio.volume = 0.35;
-                    audio.play().then(() => {
-                        isAudioPlaying = true;
-                        audioToggle.classList.add('playing');
-                        audioLabel.textContent = "Ambient Playing";
-                    }).catch(() => {
-                        // Agar browser ne roka toh toggle pill tap karne par chalega
-                    });
-                }, 2000); // 2000ms = Theek 2 second baad
-
-                // Listeners ko unbind kar do taaki baar-baar timer na chale
-                ['click', 'touchstart', 'scroll'].forEach(evt => {
-                    window.removeEventListener(evt, scheduleMusicOnTouch);
+        // 2. Slide/Scroll Triggered Music Start
+        function startMusicOnSlide() {
+            if (!isAudioPlaying) {
+                audio.volume = 0.35;
+                audio.play().then(() => {
+                    isAudioPlaying = true;
+                    audioToggle.classList.add('playing');
+                    audioLabel.textContent = "Ambient Playing";
+                    
+                    // Remove listeners once audio has started playing
+                    window.removeEventListener('scroll', startMusicOnSlide);
+                    window.removeEventListener('touchmove', startMusicOnSlide);
+                }).catch(() => {
+                    // Browser prevented audio
                 });
+            }
+
+            // 3. Detect when user reaches bottom for celebration animation
+            if ((window.innerHeight + window.scrollY) >= (document.body.offsetHeight - 250)) {
+                bottomHook.classList.add('show');
             }
         }
 
-        // Kisi bhi jagah ungli touch ya halka scroll hote hi 2-sec timer shuru
-        ['click', 'touchstart', 'scroll'].forEach(evt => {
-            window.addEventListener(evt, scheduleMusicOnTouch, { passive: true });
-        });
+        window.addEventListener('scroll', startMusicOnSlide, { passive: true });
+        window.addEventListener('touchmove', startMusicOnSlide, { passive: true });
 
-        // Manual Pill Toggle (Agar user pause ya play karna chahe)
+        // Manual Audio Toggle
         function toggleAudio() {
             if (audio.paused) {
                 audio.volume = 0.35;
@@ -933,7 +992,7 @@
             btn.classList.add('active');
         }
 
-        // Shockwave Ripple on Buttons
+        // Shockwave Ripple
         document.querySelectorAll('.interactive-btn').forEach(button => {
             button.addEventListener('click', function (e) {
                 const circle = document.createElement('span');
