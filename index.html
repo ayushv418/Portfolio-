@@ -796,7 +796,7 @@
     <div class="ambient-glow-orb"></div>
 
     <!-- AUDIO TOGGLE PILL -->
-    <div class="audio-toggle-bar" id="audioToggle" onclick="toggleAudioPill()" title="Sound Experience">
+    <div class="audio-toggle-bar" id="audioToggle" onclick="toggleAudio()" title="Sound Experience">
         <div class="eq-bars">
             <span class="eq-bar"></span>
             <span class="eq-bar"></span>
@@ -805,13 +805,13 @@
         <span class="audio-text" id="audioLabel">Sound On</span>
     </div>
 
-    <!-- RELIABLE DIRECT AUDIO SOURCE (Wikimedia Commons / CDN) -->
-    <audio id="mediaPlayer" loop preload="auto" playsinline>
-        <source src="https://upload.wikimedia.org/wikipedia/commons/4/4b/Ambient_piano.ogg" type="audio/ogg">
+    <!-- Background Ambient Track -->
+    <audio id="ambientAudio" loop preload="auto">
+        <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=ambient-piano-amp-strings-10711.mp3" type="audio/mpeg">
     </audio>
 
     <!-- FLOATING WHATSAPP BUTTON -->
-    <a href="url?id=0" target="_blank" class="floating-wa-pill interactive-btn">
+    <a href="https://wa.me/919795222082?text=Hello%20Ayush,%20I%20want%20to%20get%20a%20website%20made." target="_blank" class="floating-wa-pill interactive-btn">
         <span>💬</span> Chat on WhatsApp
     </a>
 
@@ -1001,141 +1001,160 @@
         </footer>
     </div>
 
-    <!-- SCRIPT FOR GUARANTEED SCROLL AUDIO PLAYBACK -->
-   <script>
-    const audioToggle = document.getElementById('audioToggle');
-    const audioLabel = document.getElementById('audioLabel');
-    const pureBoot = document.getElementById('pureBootScreen');
-    const pureShutdown = document.getElementById('pureShutdownScreen');
-    const player = document.getElementById('mediaPlayer');
+    <!-- SCRIPT FOR CLICK MUSIC + LOUD CHIME TICK SOUND -->
+    <script>
+        const audio = document.getElementById('ambientAudio');
+        const audioToggle = document.getElementById('audioToggle');
+        const audioLabel = document.getElementById('audioLabel');
+        const pureBoot = document.getElementById('pureBootScreen');
+        const pureShutdown = document.getElementById('pureShutdownScreen');
 
-    let isAudioPlaying = false;
-    let audioCtx = null;
+        let isAudioStarted = false;
+        let audioCtx = null;
 
-    // 1. Silent Boot Animation
-    window.addEventListener('load', () => {
-        setTimeout(() => {
-            if (pureBoot) pureBoot.classList.add('booted');
-        }, 1900);
-    });
-
-    // 2. Hardware Audio Force Unlocker
-    function forceUnlockAudio() {
-        if (!audioCtx) {
-            const AudioClass = window.AudioContext || window.webkitAudioContext;
-            audioCtx = new AudioClass();
-        }
-        if (audioCtx.state === 'suspended') {
-            audioCtx.resume();
-        }
-    }
-
-    // 3. Guaranteed Scroll / Swipe Audio Trigger
-    function playAudioEngine() {
-        forceUnlockAudio();
-        if (!isAudioPlaying) {
-            player.volume = 0.8;
-            player.play().then(() => {
-                isAudioPlaying = true;
-                audioToggle.classList.add('playing');
-                audioLabel.textContent = "Ambient Playing";
-            }).catch(e => {
-                // Fallback direct unblock
-                console.log("Audio waiting:", e);
-            });
-        }
-    }
-
-    // Screen par ungli touch ya slide hote hi hardware unlock & play
-    window.addEventListener('touchstart', forceUnlockAudio, { passive: true });
-    window.addEventListener('touchmove', playAudioEngine, { passive: true });
-    window.addEventListener('scroll', playAudioEngine, { passive: true });
-
-    // 4. Toggle Pill Par Tap Karne Se Bhi 100% Chalega
-    function toggleAudioPill() {
-        forceUnlockAudio();
-        if (player.paused) {
-            player.volume = 0.8;
-            player.play().then(() => {
-                isAudioPlaying = true;
-                audioToggle.classList.add('playing');
-                audioLabel.textContent = "Ambient Playing";
-            });
-        } else {
-            player.pause();
-            isAudioPlaying = false;
-            audioToggle.classList.remove('playing');
-            audioLabel.textContent = "Sound Paused";
-        }
-    }
-
-    // 5. Loud Button Tick Sound
-    function playButtonTick() {
-        try {
-            forceUnlockAudio();
-            const now = audioCtx.currentTime;
-            const osc = audioCtx.createOscillator();
-            const gain = audioCtx.createGain();
-
-            osc.type = 'triangle';
-            osc.frequency.setValueAtTime(500, now);
-            osc.frequency.exponentialRampToValueAtTime(100, now + 0.05);
-
-            gain.gain.setValueAtTime(1.0, now); // Full Loud
-            gain.gain.exponentialRampToValueAtTime(0.001, now + 0.05);
-
-            osc.connect(gain);
-            gain.connect(audioCtx.destination);
-
-            osc.start(now);
-            osc.stop(now + 0.05);
-        } catch(e) {}
-    }
-
-    // 6. Shutdown
-    function triggerPureShutdown() {
-        pureShutdown.classList.add('active');
-        if (!player.paused) {
-            player.pause();
-            isAudioPlaying = false;
-            audioToggle.classList.remove('playing');
-            audioLabel.textContent = "Sound Paused";
-        }
-        setTimeout(() => {
-            pureShutdown.classList.remove('active');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }, 3000);
-    }
-
-    // Tab Switcher
-    function switchAppleTab(tabId, btn) {
-        document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-        document.getElementById(tabId).classList.add('active');
-        btn.classList.add('active');
-    }
-
-    // Shockwave + Button Sound
-    document.querySelectorAll('.interactive-btn').forEach(button => {
-        button.addEventListener('click', function (e) {
-            playButtonTick();
-
-            const circle = document.createElement('span');
-            const diameter = Math.max(button.clientWidth, button.clientHeight);
-            const radius = diameter / 2;
-            const rect = button.getBoundingClientRect();
-            circle.style.width = circle.style.height = `${diameter}px`;
-            circle.style.left = `${e.clientX - rect.left - radius}px`;
-            circle.style.top = `${e.clientY - rect.top - radius}px`;
-            circle.classList.add('shockwave-wave');
-
-            const existingWave = button.querySelector('.shockwave-wave');
-            if (existingWave) existingWave.remove();
-            button.appendChild(circle);
+        // 1. Silent Boot Animation (Auto Hide)
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                if (pureBoot) pureBoot.classList.add('booted');
+            }, 1900);
         });
-    });
-</script>
- 
-    
-     </body>
+
+        // 2. Hardware Audio Unlocker
+        function unlockAudioCtx() {
+            if (!audioCtx) {
+                const AudioClass = window.AudioContext || window.webkitAudioContext;
+                audioCtx = new AudioClass();
+            }
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+        }
+
+        // 3. User First Click/Tap Se Music Chalu (Pehle Wala Smooth Flow)
+        function startMusicOnFirstClick() {
+            unlockAudioCtx();
+            if (!isAudioStarted) {
+                audio.volume = 0.45;
+                audio.play().then(() => {
+                    isAudioStarted = true;
+                    audioToggle.classList.add('playing');
+                    audioLabel.textContent = "Ambient Playing";
+                    // Listeners hata do
+                    window.removeEventListener('click', startMusicOnFirstClick);
+                    window.removeEventListener('touchstart', startMusicOnFirstClick);
+                }).catch(e => {
+                    // Agar browser ne roka toh pill tap karne par start hoga
+                });
+            }
+        }
+
+        window.addEventListener('click', startMusicOnFirstClick);
+        window.addEventListener('touchstart', startMusicOnFirstClick);
+
+        // 4. Manual Audio Pill Toggle
+        function toggleAudio() {
+            unlockAudioCtx();
+            if (audio.paused) {
+                audio.volume = 0.45;
+                audio.play().then(() => {
+                    isAudioStarted = true;
+                    audioToggle.classList.add('playing');
+                    audioLabel.textContent = "Ambient Playing";
+                });
+            } else {
+                audio.pause();
+                isAudioStarted = false;
+                audioToggle.classList.remove('playing');
+                audioLabel.textContent = "Play Ambient";
+            }
+        }
+
+        // 5. TEJ & ACCHI PUNCHY BUTTON CLICK SOUND (Rich Apple Tock Chime)
+        function playLoudPunchyButtonSound() {
+            try {
+                unlockAudioCtx();
+                const now = audioCtx.currentTime;
+
+                // Layer 1: High crisp pop
+                const osc1 = audioCtx.createOscillator();
+                const gain1 = audioCtx.createGain();
+                osc1.type = 'sine';
+                osc1.frequency.setValueAtTime(800, now);
+                osc1.frequency.exponentialRampToValueAtTime(140, now + 0.06);
+
+                gain1.gain.setValueAtTime(0.7, now);
+                gain1.gain.exponentialRampToValueAtTime(0.001, now + 0.06);
+
+                osc1.connect(gain1);
+                gain1.connect(audioCtx.destination);
+
+                osc1.start(now);
+                osc1.stop(now + 0.06);
+
+                // Layer 2: Deep solid thud
+                const osc2 = audioCtx.createOscillator();
+                const gain2 = audioCtx.createGain();
+                osc2.type = 'triangle';
+                osc2.frequency.setValueAtTime(320, now);
+                osc2.frequency.exponentialRampToValueAtTime(60, now + 0.08);
+
+                gain2.gain.setValueAtTime(0.85, now);
+                gain2.gain.exponentialRampToValueAtTime(0.001, now + 0.08);
+
+                osc2.connect(gain2);
+                gain2.connect(audioCtx.destination);
+
+                osc2.start(now);
+                osc2.stop(now + 0.08);
+            } catch (err) {}
+        }
+
+        // 6. Pure Shutdown Trigger
+        function triggerPureShutdown() {
+            pureShutdown.classList.add('active');
+            if (!audio.paused) {
+                audio.pause();
+                isAudioStarted = false;
+                audioToggle.classList.remove('playing');
+                audioLabel.textContent = "Play Ambient";
+            }
+            setTimeout(() => {
+                pureShutdown.classList.remove('active');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }, 3000);
+        }
+
+        // Tab Switcher
+        function switchAppleTab(tabId, btn) {
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+            btn.classList.add('active');
+        }
+
+        // Button Click Shockwave + TEJ CLICK SOUND
+        document.querySelectorAll('.interactive-btn').forEach(button => {
+            button.addEventListener('click', function (e) {
+                playLoudPunchyButtonSound();
+
+                const circle = document.createElement('span');
+                const diameter = Math.max(button.clientWidth, button.clientHeight);
+                const radius = diameter / 2;
+
+                const rect = button.getBoundingClientRect();
+                circle.style.width = circle.style.height = `${diameter}px`;
+                circle.style.left = `${e.clientX - rect.left - radius}px`;
+                circle.style.top = `${e.clientY - rect.top - radius}px`;
+                circle.classList.add('shockwave-wave');
+
+                const existingWave = button.querySelector('.shockwave-wave');
+                if (existingWave) {
+                    existingWave.remove();
+                }
+
+                button.appendChild(circle);
+            });
+        });
+    </script>
+</body>
 </html>
