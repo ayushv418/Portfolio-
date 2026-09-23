@@ -46,7 +46,7 @@
             padding: 40px 0 120px 0;
         }
 
-        /* ===== APPLE STYLE AUDIO PILL (WITH AUTO-START PULSE) ===== */
+        /* ===== LIVE AUDIO PILL ===== */
         .audio-toggle-bar {
             position: fixed;
             top: 18px;
@@ -83,7 +83,6 @@
             background-color: var(--accent-blue);
             border-radius: 2px;
             height: 4px;
-            transition: height 0.2s ease;
         }
 
         .playing .eq-bar:nth-child(1) { animation: eqJump 0.8s ease-in-out infinite alternate; }
@@ -159,7 +158,7 @@
             letter-spacing: -0.2px;
         }
 
-        /* ===== STICKY FROSTED NAV ===== */
+        /* ===== NAVIGATION ===== */
         nav {
             background: rgba(18, 18, 20, 0.75);
             backdrop-filter: blur(24px);
@@ -200,7 +199,7 @@
             margin-bottom: 32px;
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
-            transition: border-color 0.3s ease, transform 0.3s ease;
+            transition: border-color 0.3s ease;
         }
 
         section:hover {
@@ -292,46 +291,46 @@
             font-weight: 700;
         }
 
-        /* ===== HYPER-REALISTIC AUTHENTIC CERTIFICATE CARD ===== */
+        /* ===== MEDIUM SIZE REALISTIC CERTIFICATE ===== */
         .cert-outer-wrapper {
-            max-width: 600px;
+            max-width: 440px; /* Perfect medium size */
             margin: 0 auto;
             position: relative;
             padding: 4px;
-            background: linear-gradient(135deg, #d4af37, #f3e5ab, #aa7c11, #fff2b2, #996515);
-            border-radius: 22px;
-            box-shadow: 0 25px 60px rgba(212, 175, 55, 0.2), 0 10px 40px rgba(0, 0, 0, 0.8);
-            transition: transform 0.4s ease;
+            background: linear-gradient(135deg, #c5a059 0%, #fdf0cd 50%, #99732d 100%);
+            border-radius: 16px;
+            box-shadow: 0 15px 35px rgba(197, 160, 89, 0.25), 0 10px 25px rgba(0, 0, 0, 0.6);
+            transition: transform 0.3s ease;
         }
 
         .cert-outer-wrapper:hover {
-            transform: scale(1.02) rotate(-0.5deg);
+            transform: translateY(-4px);
         }
 
         .cert-card-real {
             background: #ffffff;
             color: #1a1a1a;
-            border-radius: 18px;
-            padding: 34px 30px;
+            border-radius: 13px;
+            padding: 24px 22px;
             position: relative;
             overflow: hidden;
-            border: 2px solid #ecd88d;
+            border: 1.5px solid #dfc480;
         }
 
-        /* Security Micro-Pattern Watermark */
+        /* Subtle Security Guilloché Background */
         .cert-card-real::before {
-            content: "VERIFIED mimo CREDENTIAL • MIMO ACADEMY • OFFICIAL RECORD • MIMO CERTIFIED • ";
+            content: "MIMO VERIFIED CREDENTIAL • OFFICIAL RECORD • ";
             position: absolute;
             top: 50%;
             left: 50%;
-            transform: translate(-50%, -50%) rotate(-30deg);
-            font-size: 1.7rem;
+            transform: translate(-50%, -50%) rotate(-25deg);
+            font-size: 1.25rem;
             font-weight: 900;
             color: rgba(124, 58, 237, 0.04);
             white-space: nowrap;
-            letter-spacing: 4px;
+            letter-spacing: 2px;
             pointer-events: none;
-            width: 200%;
+            width: 250%;
             text-align: center;
         }
 
@@ -339,13 +338,13 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 2px solid #f1f1f4;
-            padding-bottom: 12px;
-            margin-bottom: 16px;
+            border-bottom: 1.5px solid #f1f1f4;
+            padding-bottom: 8px;
+            margin-bottom: 12px;
         }
 
         .mimo-brand {
-            font-size: 1.4rem;
+            font-size: 1.25rem;
             font-weight: 900;
             letter-spacing: -0.5px;
             color: #7c3aed;
@@ -353,87 +352,85 @@
 
         .cert-serial {
             font-family: monospace;
-            font-size: 0.72rem;
+            font-size: 0.68rem;
             color: #64748b;
             background: #f8fafc;
-            padding: 4px 8px;
-            border-radius: 6px;
+            padding: 3px 6px;
+            border-radius: 4px;
             border: 1px solid #e2e8f0;
         }
 
         .cert-heading-small {
-            font-size: 0.76rem;
-            letter-spacing: 2px;
+            font-size: 0.7rem;
+            letter-spacing: 1.5px;
             text-transform: uppercase;
             color: #94a3b8;
             font-weight: 800;
             text-align: center;
-            margin-bottom: 6px;
+            margin-bottom: 4px;
         }
 
         .recipient-name {
-            font-size: 1.95rem;
+            font-size: 1.55rem;
             font-weight: 900;
             text-align: center;
             color: #0f172a;
-            letter-spacing: -0.5px;
-            margin-bottom: 4px;
+            letter-spacing: -0.4px;
+            margin-bottom: 2px;
         }
 
         .cert-track {
             text-align: center;
-            font-size: 1.15rem;
+            font-size: 0.98rem;
             font-weight: 700;
             color: #7c3aed;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
         }
 
         .cert-statement {
-            font-size: 0.86rem;
+            font-size: 0.78rem;
             color: #475569;
             text-align: center;
-            line-height: 1.5;
-            max-width: 440px;
-            margin: 0 auto 20px auto;
+            line-height: 1.45;
+            max-width: 360px;
+            margin: 0 auto 16px auto;
         }
 
-        /* Gold Foil Official Seal */
         .cert-seal-row {
             display: flex;
             justify-content: space-between;
             align-items: flex-end;
             border-top: 1px dashed #cbd5e1;
-            padding-top: 16px;
-            margin-top: 10px;
+            padding-top: 12px;
         }
 
         .gold-seal {
-            width: 58px;
-            height: 58px;
+            width: 46px;
+            height: 46px;
             background: radial-gradient(circle, #ffe27a 0%, #d4af37 60%, #996515 100%);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 4px 12px rgba(212, 175, 55, 0.5);
+            box-shadow: 0 3px 8px rgba(212, 175, 55, 0.4);
             border: 2px dashed #ffffff;
             color: #5c3a00;
-            font-size: 24px;
+            font-size: 18px;
             font-weight: bold;
         }
 
         .sig-block {
             text-align: left;
-            font-size: 0.78rem;
+            font-size: 0.72rem;
             color: #334155;
         }
 
         .sig-font {
-            font-family: "Brush Script MT", "Caveat", cursive, sans-serif;
-            font-size: 1.25rem;
+            font-family: "Brush Script MT", cursive, sans-serif;
+            font-size: 1.15rem;
             color: #1e1b4b;
             display: block;
-            margin-bottom: 2px;
+            margin-bottom: 1px;
         }
 
         /* ===== LIVE DEMOS CARDS ===== */
@@ -472,7 +469,7 @@
             margin-bottom: 20px;
         }
 
-        /* ===== UNFORGETTABLE PULSING SHOCKWAVE BUTTONS ===== */
+        /* ===== SHOCKWAVE PULSING BUTTONS ===== */
         .interactive-btn {
             position: relative;
             display: inline-flex;
@@ -495,7 +492,6 @@
             transform: scale(0.94);
         }
 
-        /* Expanding Shockwave Click */
         .shockwave-wave {
             position: absolute;
             border-radius: 50%;
@@ -512,7 +508,6 @@
             }
         }
 
-        /* Button Variations with Live Subtle Breath Glow */
         .btn-apple-blue {
             background: linear-gradient(135deg, #0071e3, #2997ff);
             color: #ffffff;
@@ -612,7 +607,7 @@
             box-shadow: 0 0 16px rgba(41, 151, 255, 0.3);
         }
 
-        /* ===== FLOATING WHATSAPP PILL ===== */
+        /* ===== FLOATING WHATSAPP BUTTON ===== */
         .floating-wa-pill {
             position: fixed;
             bottom: 24px;
@@ -649,7 +644,7 @@
 </head>
 <body>
 
-    <!-- AUDIO TOGGLE PILL (AUTO-PLAYS ON FIRST GESTURE OR CLICK) -->
+    <!-- AUDIO TOGGLE PILL -->
     <div class="audio-toggle-bar" id="audioToggle" onclick="toggleAudio()" title="Sound Experience">
         <div class="eq-bars">
             <span class="eq-bar"></span>
@@ -659,7 +654,7 @@
         <span class="audio-text" id="audioLabel">Sound On</span>
     </div>
 
-    <!-- Soft Ambient Track (High Quality Streaming) -->
+    <!-- Background Ambient Music -->
     <audio id="ambientAudio" loop preload="auto">
         <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=ambient-piano-amp-strings-10711.mp3" type="audio/mpeg">
     </audio>
@@ -754,7 +749,7 @@
                 </div>
             </section>
 
-            <!-- VERIFIED SKILLS (HYPER REALISTIC CERTIFICATE) -->
+            <!-- MEDIUM REALISTIC CERTIFICATE -->
             <section id="credentials">
                 <h2 class="sec-heading" style="text-align: center;">Verified Credentials</h2>
                 <p class="sec-sub" style="text-align: center;">Official authenticated proof of web engineering standards.</p>
@@ -763,28 +758,28 @@
                     <div class="cert-card-real">
                         <div class="cert-top-row">
                             <span class="mimo-brand">mimo</span>
-                            <span class="cert-serial">ID: MMO-7892-VERIFIED</span>
+                            <span class="cert-serial">ID: MMO-7892-PASS</span>
                         </div>
 
                         <p class="cert-heading-small">Certificate of Specialization</p>
                         <h3 class="recipient-name">Ayush Verma</h3>
                         <p class="cert-track">HTML5 Semantic Web Development</p>
                         <p class="cert-statement">
-                            Has demonstrated verified proficiency in semantic layout architecture, performance optimization, responsive design principles, and international web accessibility standards.
+                            Demonstrated verified technical competency in semantic structure, high-speed performance optimization, and mobile responsive standards.
                         </p>
 
                         <div class="cert-seal-row">
                             <div class="sig-block">
                                 <span class="sig-font">Johannes Berger</span>
                                 <strong>Johannes Berger</strong><br>
-                                <span style="color:#64748b; font-size:0.7rem;">Chief Executive Officer, Mimo</span>
+                                <span style="color:#64748b; font-size:0.65rem;">CEO, Mimo Academy</span>
                             </div>
 
-                            <div class="gold-seal" title="Authentic Gold Seal">
+                            <div class="gold-seal" title="Gold Seal">
                                 ★
                             </div>
 
-                            <div style="text-align: right; font-size: 0.75rem; color: #334155;">
+                            <div style="text-align: right; font-size: 0.7rem; color: #334155;">
                                 <strong>Issue Date</strong><br>
                                 <span>September 2026</span><br>
                                 <span style="color:#16a34a; font-weight:800;">✔ Authenticated</span>
@@ -822,7 +817,6 @@
                     </div>
                 </div>
 
-                <!-- DIRECT FORMSUBMIT GMAIL -->
                 <form action="https://formsubmit.co/stv9610@gmail.com" method="POST">
                     <input type="hidden" name="_captcha" value="false">
                     <input type="hidden" name="_subject" value="Apple-Style Web Inquiry Received!">
@@ -846,46 +840,53 @@
         </footer>
     </div>
 
-    <!-- SMART AUDIO & SHOCKWAVE SCRIPT -->
+    <!-- JAVASCRIPT: AUTOMATIC MUSIC ENGINE & EFFECTS -->
     <script>
         const audio = document.getElementById('ambientAudio');
         const audioToggle = document.getElementById('audioToggle');
         const audioLabel = document.getElementById('audioLabel');
-        let audioStarted = false;
+        let isAudioPlaying = false;
 
-        // Auto-play unlocker on user's first scroll/touch
-        function autoUnlockAudio() {
-            if (!audioStarted) {
+        function startAudioEngine() {
+            if (!isAudioPlaying) {
                 audio.volume = 0.35;
                 audio.play().then(() => {
-                    audioStarted = true;
+                    isAudioPlaying = true;
                     audioToggle.classList.add('playing');
                     audioLabel.textContent = "Ambient Playing";
-                    // Remove listeners once audio has triggered
-                    window.removeEventListener('scroll', autoUnlockAudio);
-                    window.removeEventListener('click', autoUnlockAudio);
-                    window.removeEventListener('touchstart', autoUnlockAudio);
+                    
+                    // Unbind global passive triggers once playing
+                    ['click', 'touchstart', 'scroll', 'mousemove', 'keydown'].forEach(evt => {
+                        window.removeEventListener(evt, startAudioEngine);
+                    });
                 }).catch(() => {
-                    // Browser prevented audio, user will tap pill manually
+                    // Browser strictly blocked zero-touch playback, will activate on first contact
                 });
             }
         }
 
-        window.addEventListener('scroll', autoUnlockAudio, { passive: true });
-        window.addEventListener('click', autoUnlockAudio, { passive: true });
-        window.addEventListener('touchstart', autoUnlockAudio, { passive: true });
+        // Auto play immediately on DOM load
+        window.addEventListener('DOMContentLoaded', startAudioEngine);
+        window.addEventListener('load', startAudioEngine);
 
-        // Manual Audio Toggle
+        // Fallback: trigger smoothly on first slight touch or movement
+        ['click', 'touchstart', 'scroll', 'mousemove', 'keydown'].forEach(evt => {
+            window.addEventListener(evt, startAudioEngine, { passive: true });
+        });
+
+        // Manual Audio Toggle Button
         function toggleAudio() {
             if (audio.paused) {
                 audio.volume = 0.35;
                 audio.play();
+                isAudioPlaying = true;
                 audioToggle.classList.add('playing');
                 audioLabel.textContent = "Ambient Playing";
             } else {
                 audio.pause();
+                isAudioPlaying = false;
                 audioToggle.classList.remove('playing');
-                audioLabel.textContent = "Play Ambient";
+                audioLabel.textContent = "Sound Paused";
             }
         }
 
