@@ -39,108 +39,73 @@
             position: relative;
         }
 
-        /* ===== 1. XIAOMI / HYPEROS BOOT SCREEN (SWITCH ON) ===== */
-        #xiaomiBootScreen {
+        /* ===== 1. PURE XIAOMI-STYLE GEOMETRIC BOOT (NO LOGO, NO NAME) ===== */
+        #pureBootScreen {
             position: fixed;
             inset: 0;
             background: #000000;
             z-index: 99999;
             display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            align-items: center;
-            padding: 60px 20px;
-            transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s ease, visibility 0.7s;
-        }
-
-        .xiaomi-center-group {
-            margin-top: auto;
-            margin-bottom: auto;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            animation: miLogoPop 2.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
-
-        /* Official Xiaomi Orange Squircle Badge */
-        .mi-badge-box {
-            width: 76px;
-            height: 76px;
-            background: linear-gradient(135deg, #ff7a18 0%, #ff5200 100%);
-            border-radius: 24px; /* Xiaomi squircle curvature */
-            display: flex;
-            align-items: center;
             justify-content: center;
-            box-shadow: 0 12px 35px rgba(255, 103, 0, 0.45);
+            align-items: center;
+            transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.7s;
         }
 
-        .mi-logo-svg {
-            width: 44px;
-            height: 44px;
-            fill: #ffffff;
+        .mi-anim-core {
+            position: relative;
+            width: 80px;
+            height: 80px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
-        .xiaomi-brand-name {
-            font-size: 1.5rem;
-            font-weight: 700;
-            letter-spacing: -0.5px;
-            color: #ffffff;
-            margin-top: 18px;
+        .mi-ring-outer {
+            position: absolute;
+            width: 70px;
+            height: 70px;
+            border-radius: 26px; /* Squircle curvature */
+            border: 2.5px solid var(--xiaomi-orange);
+            animation: squircleExpand 1.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            box-shadow: 0 0 35px rgba(255, 103, 0, 0.55);
         }
 
-        /* Xiaomi "Powered by HyperOS" Footer */
-        .xiaomi-boot-footer {
-            text-align: center;
-            opacity: 0;
-            animation: miFooterFade 1.6s ease forwards 0.4s;
+        .mi-dot-center {
+            width: 14px;
+            height: 14px;
+            background: #ffffff;
+            border-radius: 50%;
+            animation: dotGlowPulse 1.8s ease-in-out forwards;
+            box-shadow: 0 0 20px #ffffff;
         }
 
-        .powered-by-text {
-            font-size: 0.7rem;
-            color: #64748b;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 4px;
+        @keyframes squircleExpand {
+            0% { transform: scale(0.3) rotate(-30deg); opacity: 0; }
+            45% { transform: scale(1) rotate(0deg); opacity: 1; border-color: #ff8533; }
+            80% { transform: scale(1.1) rotate(15deg); opacity: 1; }
+            100% { transform: scale(2.2) rotate(45deg); opacity: 0; }
         }
 
-        .hyperos-title {
-            font-size: 1rem;
-            font-weight: 800;
-            letter-spacing: 1px;
-            background: linear-gradient(90deg, #ff6700, #ff9f43, #ffffff);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
+        @keyframes dotGlowPulse {
+            0% { transform: scale(0); opacity: 0; }
+            40% { transform: scale(1.3); opacity: 1; }
+            75% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(0); opacity: 0; }
         }
 
-        @keyframes miLogoPop {
-            0% { transform: scale(0.7); opacity: 0; }
-            35% { transform: scale(1); opacity: 1; }
-            85% { transform: scale(1); opacity: 1; }
-            100% { transform: scale(1.08); opacity: 0; }
-        }
-
-        @keyframes miFooterFade {
-            0% { opacity: 0; transform: translateY(8px); }
-            40% { opacity: 0.9; transform: translateY(0); }
-            85% { opacity: 0.9; }
-            100% { opacity: 0; }
-        }
-
-        #xiaomiBootScreen.booted {
+        #pureBootScreen.booted {
             opacity: 0;
             visibility: hidden;
             pointer-events: none;
-            transform: scale(1.04);
         }
 
-        /* ===== 2. XIAOMI SHUTDOWN SCREEN (SWITCH OFF) ===== */
-        #xiaomiShutdownScreen {
+        /* ===== 2. PURE SHUTDOWN SCREEN (NO LOGO, NO NAME) ===== */
+        #pureShutdownScreen {
             position: fixed;
             inset: 0;
-            background: rgba(0, 0, 0, 0.96);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
+            background: rgba(0, 0, 0, 0.98);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
             z-index: 999999;
             display: none;
             flex-direction: column;
@@ -150,45 +115,28 @@
             transition: opacity 0.5s ease;
         }
 
-        #xiaomiShutdownScreen.active {
+        #pureShutdownScreen.active {
             display: flex;
             opacity: 1;
         }
 
-        .mi-power-circle {
-            width: 70px;
-            height: 70px;
+        .shutdown-glow-circle {
+            width: 65px;
+            height: 65px;
             border-radius: 50%;
-            background: rgba(255, 103, 0, 0.15);
             border: 2px solid var(--xiaomi-orange);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 28px;
+            font-size: 26px;
             color: var(--xiaomi-orange);
-            margin-bottom: 20px;
-            box-shadow: 0 0 30px rgba(255, 103, 0, 0.4);
-            animation: miPulseGlow 1.4s infinite alternate;
+            box-shadow: 0 0 35px rgba(255, 103, 0, 0.6);
+            animation: shutdownSpinPulse 1.2s infinite alternate;
         }
 
-        @keyframes miPulseGlow {
-            from { transform: scale(0.96); }
-            to { transform: scale(1.05); }
-        }
-
-        .mi-shutdown-text {
-            color: #ffffff;
-            font-size: 1.1rem;
-            font-weight: 700;
-            letter-spacing: -0.2px;
-            margin-bottom: 6px;
-        }
-
-        .mi-sub-shutdown {
-            color: #86868b;
-            font-size: 0.78rem;
-            letter-spacing: 1px;
-            text-transform: uppercase;
+        @keyframes shutdownSpinPulse {
+            from { transform: scale(0.92); opacity: 0.8; }
+            to { transform: scale(1.08); opacity: 1; box-shadow: 0 0 50px rgba(255, 103, 0, 0.9); }
         }
 
         /* ===== BACKGROUND AMBIENT GLOW ===== */
@@ -790,7 +738,7 @@
             100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
         }
 
-        /* ===== XIAOMI HYPEROS SHUTDOWN TRIGGER CARD ===== */
+        /* ===== PURE SHUTDOWN TRIGGER CARD ===== */
         .shutdown-trigger-card {
             text-align: center;
             margin-top: 50px;
@@ -800,7 +748,7 @@
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        .mi-shutdown-btn {
+        .pure-power-btn {
             background: rgba(255, 103, 0, 0.15);
             border: 1px solid rgba(255, 103, 0, 0.5);
             color: #ff7a18;
@@ -816,7 +764,7 @@
             transition: all 0.25s ease;
         }
 
-        .mi-shutdown-btn:hover {
+        .pure-power-btn:hover {
             background: rgba(255, 103, 0, 0.3);
             transform: scale(1.03);
         }
@@ -832,29 +780,17 @@
 </head>
 <body>
 
-    <!-- 1. XIAOMI / HYPEROS BOOT SCREEN -->
-    <div id="xiaomiBootScreen">
-        <div></div>
-        <div class="xiaomi-center-group">
-            <div class="mi-badge-box">
-                <!-- Official Mi Logo SVG -->
-                <svg class="mi-logo-svg" viewBox="0 0 1024 1024">
-                    <path d="M720 304v416h-96V496c0-53-43-96-96-96s-96 43-96 96v224h-96V304h96v112c26-30 65-48 108-48s82 18 108 48V304h76zm-416 0v416h-96V304h96z"/>
-                </svg>
-            </div>
-            <div class="xiaomi-brand-name">Xiaomi</div>
-        </div>
-        <div class="xiaomi-boot-footer">
-            <div class="powered-by-text">Powered by</div>
-            <div class="hyperos-title">Xiaomi HyperOS</div>
+    <!-- 1. PURE BOOT ANIMATION (NO LOGO, NO TEXT) -->
+    <div id="pureBootScreen">
+        <div class="mi-anim-core">
+            <div class="mi-ring-outer"></div>
+            <div class="mi-dot-center"></div>
         </div>
     </div>
 
-    <!-- 2. XIAOMI SHUTDOWN SCREEN -->
-    <div id="xiaomiShutdownScreen">
-        <div class="mi-power-circle">⏻</div>
-        <div class="mi-shutdown-text">Power off</div>
-        <div class="mi-sub-shutdown">Shutting down device...</div>
+    <!-- 2. PURE SHUTDOWN ANIMATION (NO LOGO, NO TEXT) -->
+    <div id="pureShutdownScreen">
+        <div class="shutdown-glow-circle">⏻</div>
     </div>
 
     <!-- BACKGROUND GLOW -->
@@ -870,9 +806,10 @@
         <span class="audio-text" id="audioLabel">Sound On</span>
     </div>
 
-    <!-- Background Ambient Track -->
+    <!-- HIGH-RELIABILITY ULTRA-FAST STREAM AUDIO -->
     <audio id="ambientAudio" loop preload="auto">
-        <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=ambient-piano-amp-strings-10711.mp3" type="audio/mpeg">
+        <source src="https://actions.google.com/sounds/v1/water/rain_heavy.ogg" type="audio/ogg">
+        <source src="https://cdn.pixabay.com/audio/2022/05/27/audio_1808fbf07a.mp3" type="audio/mpeg">
     </audio>
 
     <!-- FLOATING WHATSAPP BUTTON -->
@@ -1049,13 +986,13 @@
                     <button type="submit" class="interactive-btn btn-apple-blue" style="width: 100%;">Submit Inquiry</button>
                 </form>
 
-                <!-- 3. XIAOMI POWER OFF TRIGGER -->
+                <!-- 3. PURE POWER OFF TRIGGER (NO NAME) -->
                 <div class="shutdown-trigger-card">
                     <span style="font-size: 24px; display:block; margin-bottom: 4px;">⚡</span>
-                    <strong style="color: #ffffff; font-size: 0.95rem;">Xiaomi HyperOS Power Sequence</strong>
-                    <p style="color: var(--text-secondary); font-size: 0.82rem; margin-top: 4px;">Simulate authentic Xiaomi power shutdown.</p>
-                    <button type="button" class="mi-shutdown-btn interactive-btn" onclick="triggerXiaomiShutdown()">
-                        <span>⏻</span> Power Off Device
+                    <strong style="color: #ffffff; font-size: 0.95rem;">Interactive Session Ending</strong>
+                    <p style="color: var(--text-secondary); font-size: 0.82rem; margin-top: 4px;">Trigger full ambient screen shutdown.</p>
+                    <button type="button" class="pure-power-btn interactive-btn" onclick="triggerPureShutdown()">
+                        <span>⏻</span> Power Off
                     </button>
                 </div>
             </section>
@@ -1066,63 +1003,56 @@
         </footer>
     </div>
 
-    <!-- SCRIPT FOR SMART SCROLL AUDIO + BUTTON TICK + XIAOMI BOOT/SHUTDOWN -->
+    <!-- SCRIPT FOR GUARANTEED SCROLL AUDIO & SOUND EFFECTS -->
     <script>
         const audio = document.getElementById('ambientAudio');
         const audioToggle = document.getElementById('audioToggle');
         const audioLabel = document.getElementById('audioLabel');
-        const miBootScreen = document.getElementById('xiaomiBootScreen');
-        const miShutdownScreen = document.getElementById('xiaomiShutdownScreen');
+        const pureBoot = document.getElementById('pureBootScreen');
+        const pureShutdown = document.getElementById('pureShutdownScreen');
 
         let isAudioPlaying = false;
-        let touchStartY = 0;
-        let isScrolledGesture = false;
+        let startTouchY = 0;
 
-        // 1. XIAOMI BOOT SCREEN (Auto exits in 2.2 seconds)
+        // 1. BOOT SCREEN (Auto vanishes in 2 seconds)
         window.addEventListener('load', () => {
             setTimeout(() => {
-                miBootScreen.classList.add('booted');
-            }, 2200);
+                pureBoot.classList.add('booted');
+            }, 1900);
         });
 
-        // 2. SMART SCROLL-ONLY AUDIO TRIGGER
-        // Priming audio with 0 volume on touchstart so mobile browser permissions pass
+        // 2. BULLETPROOF SCROLL-ONLY AUDIO ENGINE
+        // Unlock HTML5 Audio on first touch gesture
         window.addEventListener('touchstart', (e) => {
-            touchStartY = e.touches[0].clientY;
-            isScrolledGesture = false;
+            startTouchY = e.touches[0].clientY;
             if (!isAudioPlaying) {
-                audio.volume = 0;
-                audio.play().catch(() => {});
+                audio.load(); // Force pre-load audio pipeline in mobile memory
             }
         }, { passive: true });
 
-        // Activates strictly when user slides/scrolls > 10px
+        // Trigger real audio only when vertical swipe distance > 12px
         window.addEventListener('touchmove', (e) => {
-            if (!touchStartY) return;
-            const diff = Math.abs(e.touches[0].clientY - touchStartY);
-            if (diff > 10) {
-                isScrolledGesture = true;
-                if (!isAudioPlaying) {
-                    audio.volume = 0.35;
-                    isAudioPlaying = true;
-                    audioToggle.classList.add('playing');
-                    audioLabel.textContent = "Ambient Playing";
+            if (!startTouchY) return;
+            const diff = Math.abs(e.touches[0].clientY - startTouchY);
+            if (diff > 12 && !isAudioPlaying) {
+                audio.volume = 0.4;
+                const playPromise = audio.play();
+                if (playPromise !== undefined) {
+                    playPromise.then(() => {
+                        isAudioPlaying = true;
+                        audioToggle.classList.add('playing');
+                        audioLabel.textContent = "Ambient Playing";
+                    }).catch(err => {
+                        console.log("Audio unlock failed: ", err);
+                    });
                 }
-            }
-        }, { passive: true });
-
-        // If user simply tapped/clicked without scrolling, immediately stop audio
-        window.addEventListener('touchend', () => {
-            if (!isScrolledGesture && !isAudioPlaying) {
-                audio.pause();
-                audio.currentTime = 0;
             }
         }, { passive: true });
 
         // Desktop mouse wheel scroll detection
         window.addEventListener('wheel', () => {
             if (!isAudioPlaying) {
-                audio.volume = 0.35;
+                audio.volume = 0.4;
                 audio.play().then(() => {
                     isAudioPlaying = true;
                     audioToggle.classList.add('playing');
@@ -1134,7 +1064,7 @@
         // 3. MANUAL AUDIO TOGGLE PILL
         function toggleAudio() {
             if (audio.paused) {
-                audio.volume = 0.35;
+                audio.volume = 0.4;
                 audio.play();
                 isAudioPlaying = true;
                 audioToggle.classList.add('playing');
@@ -1147,7 +1077,7 @@
             }
         }
 
-        // 4. REAL-TIME SYSTEM BUTTON CLICK TICK (Click sound only, no music)
+        // 4. REAL-TIME SYNTHESIZED BUTTON CLICK TICK
         let audioCtx;
         function playButtonTickSound() {
             try {
@@ -1175,14 +1105,14 @@
             } catch (err) {}
         }
 
-        // 5. XIAOMI SHUTDOWN SEQUENCE
-        function triggerXiaomiShutdown() {
-            miShutdownScreen.classList.add('active');
+        // 5. PURE SHUTDOWN
+        function triggerPureShutdown() {
+            pureShutdown.classList.add('active');
             if (!audio.paused) {
                 audio.pause();
             }
             setTimeout(() => {
-                miShutdownScreen.classList.remove('active');
+                pureShutdown.classList.remove('active');
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             }, 3000);
         }
@@ -1196,13 +1126,11 @@
             btn.classList.add('active');
         }
 
-        // Button Click Shockwave + System Tick
+        // Button Click Shockwave + Click Sound (NO MUSIC ON BUTTON CLICK)
         document.querySelectorAll('.interactive-btn').forEach(button => {
             button.addEventListener('click', function (e) {
-                // Play System Click Sound
                 playButtonTickSound();
 
-                // Shockwave Ripple
                 const circle = document.createElement('span');
                 const diameter = Math.max(button.clientWidth, button.clientHeight);
                 const radius = diameter / 2;
