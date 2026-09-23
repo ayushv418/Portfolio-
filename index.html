@@ -9,14 +9,13 @@
 
     <style>
         :root {
-            --bg-base: #030305;
-            --surface-glass: rgba(18, 18, 22, 0.72);
-            --surface-border: rgba(255, 255, 255, 0.1);
+            --bg-base: #000000;
+            --surface-glass: rgba(18, 18, 22, 0.75);
+            --surface-border: rgba(255, 255, 255, 0.12);
             --text-primary: #f5f5f7;
             --text-secondary: #86868b;
             --accent-blue: #2997ff;
             --accent-green: #30d158;
-            --accent-purple: #bf5af2;
             --radius-large: 24px;
             --radius-pill: 980px;
         }
@@ -39,47 +38,73 @@
             position: relative;
         }
 
-        /* ===== 1. ENTRY CINEMATIC INTRO OVERLAY (2.5s) ===== */
-        #introLoader {
+        /* ===== 1. APPLE FLAGSHIP CINEMATIC CURTAIN INTRO ===== */
+        #appleIntroCurtain {
             position: fixed;
             inset: 0;
             background: #000000;
             z-index: 99999;
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
-            gap: 16px;
-            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.8s;
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.8s;
         }
 
-        .intro-ring {
-            width: 44px;
-            height: 44px;
-            border: 3px solid rgba(255, 255, 255, 0.1);
-            border-top-color: var(--accent-blue);
-            border-radius: 50%;
-            animation: spinRing 0.9s linear infinite;
+        .apple-intro-card {
+            text-align: center;
+            animation: appleIntroScale 2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
-        @keyframes spinRing {
-            to { transform: rotate(360deg); }
+        .apple-symbol-logo {
+            font-size: 2.6rem;
+            margin-bottom: 12px;
+            display: inline-block;
+            filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.4));
+            animation: logoPulse 1.8s ease infinite alternate;
         }
 
-        .intro-title {
-            font-size: 1.25rem;
-            font-weight: 700;
+        @keyframes logoPulse {
+            0% { transform: scale(0.95); opacity: 0.8; }
+            100% { transform: scale(1.08); opacity: 1; filter: drop-shadow(0 0 30px rgba(41, 151, 255, 0.8)); }
+        }
+
+        .apple-intro-text {
+            font-size: clamp(1.4rem, 4vw, 2rem);
+            font-weight: 800;
             letter-spacing: -0.5px;
-            background: linear-gradient(180deg, #ffffff, #86868b);
+            background: linear-gradient(90deg, #86868b 0%, #ffffff 50%, #86868b 100%);
+            background-size: 200% auto;
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
+            animation: appleShine 2s linear infinite;
         }
 
-        #introLoader.hide {
+        .apple-intro-sub {
+            font-size: 0.85rem;
+            color: #86868b;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-top: 6px;
+            font-weight: 600;
+        }
+
+        @keyframes appleShine {
+            to { background-position: 200% center; }
+        }
+
+        @keyframes appleIntroScale {
+            0% { transform: scale(0.85); opacity: 0; }
+            40% { opacity: 1; }
+            80% { transform: scale(1.02); opacity: 1; }
+            100% { transform: scale(1.08); opacity: 0; }
+        }
+
+        #appleIntroCurtain.vanish {
             opacity: 0;
             visibility: hidden;
             pointer-events: none;
+            transform: scale(1.05);
         }
 
         /* ===== BACKGROUND AMBIENT GLOW ===== */
@@ -354,9 +379,9 @@
             font-weight: 700;
         }
 
-        /* ===== COMPACT REALISTIC CERTIFICATE (380px) ===== */
+        /* ===== COMPACT CERTIFICATE ===== */
         .cert-outer-wrapper {
-            max-width: 380px; /* Thoda aur compact aur sharp */
+            max-width: 380px;
             margin: 0 auto;
             position: relative;
             padding: 3px;
@@ -681,7 +706,7 @@
             100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
         }
 
-        /* ===== BOTTOM CELEBRATION BADGE (DECORATIVE HOOK) ===== */
+        /* ===== BOTTOM CELEBRATION BADGE ===== */
         .bottom-badge-banner {
             text-align: center;
             margin-top: 40px;
@@ -712,10 +737,13 @@
 </head>
 <body>
 
-    <!-- 1. ENTRY INTRO SCREEN (DISAPPEARS IN 2.3s) -->
-    <div id="introLoader">
-        <div class="intro-ring"></div>
-        <div class="intro-title">Ayush Verma — Web Experience</div>
+    <!-- 1. APPLE FLAGSHIP INTRO CURTAIN -->
+    <div id="appleIntroCurtain">
+        <div class="apple-intro-card">
+            <span class="apple-symbol-logo"></span>
+            <div class="apple-intro-text">Ayush Verma</div>
+            <div class="apple-intro-sub">Web Experiences</div>
+        </div>
     </div>
 
     <!-- BACKGROUND GLOW -->
@@ -820,7 +848,7 @@
                             <p>Streamlined storefront catalog with textbook categories, transparent stationery rate lists, and store pickup ordering.</p>
                         </div>
                         <a href="stationary.html" target="_blank" class="interactive-btn btn-apple-green">
-                            View Stationery Experience ↗
+                            View Stationary Experience ↗
                         </a>
                     </div>
                 </div>
@@ -910,7 +938,6 @@
                     <button type="submit" class="interactive-btn btn-apple-blue" style="width: 100%;">Submit Inquiry</button>
                 </form>
 
-                <!-- 2. BOTTOM HOOK BANNER -->
                 <div class="bottom-badge-banner" id="bottomHook">
                     <span style="font-size: 26px; display:block; margin-bottom: 6px;">✨</span>
                     <strong style="color: #ffffff; font-size: 1rem;">Ready to upgrade your business online?</strong>
@@ -924,25 +951,25 @@
         </footer>
     </div>
 
-    <!-- SCRIPT FOR INTRO + SLIDE-TRIGGER AUDIO + BOTTOM DETECTOR -->
+    <!-- SCRIPT FOR INTRO CURTAIN + SCROLL AUDIO ENGINE -->
     <script>
         const audio = document.getElementById('ambientAudio');
         const audioToggle = document.getElementById('audioToggle');
         const audioLabel = document.getElementById('audioLabel');
-        const introLoader = document.getElementById('introLoader');
+        const introCurtain = document.getElementById('appleIntroCurtain');
         const bottomHook = document.getElementById('bottomHook');
 
         let isAudioPlaying = false;
 
-        // 1. Cinematic Intro Screen (Auto hides after 2.3 seconds)
+        // 1. Apple Intro Curtain (Hides seamlessly at 2.1 seconds)
         window.addEventListener('load', () => {
             setTimeout(() => {
-                introLoader.classList.add('hide');
-            }, 2300);
+                introCurtain.classList.add('vanish');
+            }, 2100);
         });
 
-        // 2. Slide/Scroll Triggered Music Start
-        function startMusicOnSlide() {
+        // 2. Guaranteed Scroll/Slide Audio Trigger
+        function triggerAudioOnScroll() {
             if (!isAudioPlaying) {
                 audio.volume = 0.35;
                 audio.play().then(() => {
@@ -950,22 +977,25 @@
                     audioToggle.classList.add('playing');
                     audioLabel.textContent = "Ambient Playing";
                     
-                    // Remove listeners once audio has started playing
-                    window.removeEventListener('scroll', startMusicOnSlide);
-                    window.removeEventListener('touchmove', startMusicOnSlide);
+                    // Unbind scroll listeners once audio starts
+                    window.removeEventListener('scroll', triggerAudioOnScroll);
+                    window.removeEventListener('touchmove', triggerAudioOnScroll);
+                    window.removeEventListener('wheel', triggerAudioOnScroll);
                 }).catch(() => {
-                    // Browser prevented audio
+                    // Handled if browser strictly denies
                 });
             }
 
-            // 3. Detect when user reaches bottom for celebration animation
+            // Bottom reached detector
             if ((window.innerHeight + window.scrollY) >= (document.body.offsetHeight - 250)) {
                 bottomHook.classList.add('show');
             }
         }
 
-        window.addEventListener('scroll', startMusicOnSlide, { passive: true });
-        window.addEventListener('touchmove', startMusicOnSlide, { passive: true });
+        // Multiple scroll listeners for 100% reliability
+        window.addEventListener('scroll', triggerAudioOnScroll, { passive: true });
+        window.addEventListener('touchmove', triggerAudioOnScroll, { passive: true });
+        window.addEventListener('wheel', triggerAudioOnScroll, { passive: true });
 
         // Manual Audio Toggle
         function toggleAudio() {
