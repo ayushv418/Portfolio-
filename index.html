@@ -13,8 +13,8 @@
     <style>
         :root {
             --bg-base: #000000;
-            --surface-glass: rgba(18, 18, 20, 0.7);
-            --surface-border: rgba(255, 255, 255, 0.1);
+            --surface-glass: rgba(18, 18, 20, 0.75);
+            --surface-border: rgba(255, 255, 255, 0.12);
             --text-primary: #f5f5f7;
             --text-secondary: #86868b;
             --accent-blue: #2997ff;
@@ -46,29 +46,29 @@
             padding: 40px 0 120px 0;
         }
 
-        /* ===== APPLE STYLE AUDIO FLOATING PILL ===== */
+        /* ===== APPLE STYLE AUDIO PILL (WITH AUTO-START PULSE) ===== */
         .audio-toggle-bar {
             position: fixed;
             top: 18px;
             right: 18px;
             z-index: 1000;
-            background: rgba(22, 22, 24, 0.75);
+            background: rgba(22, 22, 24, 0.85);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.2);
             padding: 8px 16px;
             border-radius: var(--radius-pill);
             display: flex;
             align-items: center;
             gap: 10px;
             cursor: pointer;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
-            transition: all 0.3s ease;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .audio-toggle-bar:hover {
-            transform: scale(1.04);
-            border-color: rgba(255, 255, 255, 0.3);
+            transform: scale(1.05);
+            border-color: rgba(255, 255, 255, 0.4);
         }
 
         .eq-bars {
@@ -83,6 +83,7 @@
             background-color: var(--accent-blue);
             border-radius: 2px;
             height: 4px;
+            transition: height 0.2s ease;
         }
 
         .playing .eq-bar:nth-child(1) { animation: eqJump 0.8s ease-in-out infinite alternate; }
@@ -101,7 +102,7 @@
             letter-spacing: 0.2px;
         }
 
-        /* ===== HERO HEADER (APPLE MINIMALIST) ===== */
+        /* ===== HERO HEADER ===== */
         header {
             padding: 80px 24px 60px 24px;
             text-align: center;
@@ -112,8 +113,8 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            background: rgba(48, 209, 88, 0.1);
-            border: 1px solid rgba(48, 209, 88, 0.3);
+            background: rgba(48, 209, 88, 0.12);
+            border: 1px solid rgba(48, 209, 88, 0.4);
             color: var(--accent-green);
             font-size: 0.76rem;
             font-weight: 600;
@@ -124,17 +125,17 @@
         }
 
         .live-dot {
-            width: 7px;
-            height: 7px;
+            width: 8px;
+            height: 8px;
             background-color: var(--accent-green);
             border-radius: 50%;
-            box-shadow: 0 0 10px var(--accent-green);
-            animation: pulseDot 1.8s infinite;
+            box-shadow: 0 0 12px var(--accent-green);
+            animation: pulseDot 1.6s infinite;
         }
 
         @keyframes pulseDot {
             0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.4; transform: scale(0.85); }
+            50% { opacity: 0.35; transform: scale(0.8); }
         }
 
         h1.hero-title {
@@ -190,7 +191,7 @@
             background: rgba(255, 255, 255, 0.08);
         }
 
-        /* ===== SECTION CARDS (GLASSMORPHISM) ===== */
+        /* ===== SECTIONS ===== */
         section {
             background: var(--surface-glass);
             border: 1px solid var(--surface-border);
@@ -203,7 +204,7 @@
         }
 
         section:hover {
-            border-color: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.22);
         }
 
         h2.sec-heading {
@@ -218,10 +219,9 @@
             color: var(--text-secondary);
             font-size: 1rem;
             margin-bottom: 28px;
-            font-weight: 400;
         }
 
-        /* ===== APPLE-LIKE TAB CONTROL ===== */
+        /* ===== TAB CONTROLS ===== */
         .tab-controls {
             display: flex;
             background: rgba(0, 0, 0, 0.5);
@@ -292,32 +292,151 @@
             font-weight: 700;
         }
 
-        /* ===== CERTIFICATE CARD ===== */
-        .cert-card {
-            background: #ffffff;
-            color: #000000;
-            border-radius: 20px;
-            padding: 30px;
-            max-width: 500px;
+        /* ===== HYPER-REALISTIC AUTHENTIC CERTIFICATE CARD ===== */
+        .cert-outer-wrapper {
+            max-width: 600px;
             margin: 0 auto;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
-            transition: transform 0.3s ease;
+            position: relative;
+            padding: 4px;
+            background: linear-gradient(135deg, #d4af37, #f3e5ab, #aa7c11, #fff2b2, #996515);
+            border-radius: 22px;
+            box-shadow: 0 25px 60px rgba(212, 175, 55, 0.2), 0 10px 40px rgba(0, 0, 0, 0.8);
+            transition: transform 0.4s ease;
         }
 
-        .cert-card:hover {
-            transform: scale(1.02);
+        .cert-outer-wrapper:hover {
+            transform: scale(1.02) rotate(-0.5deg);
         }
 
-        .cert-badge {
+        .cert-card-real {
+            background: #ffffff;
+            color: #1a1a1a;
+            border-radius: 18px;
+            padding: 34px 30px;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid #ecd88d;
+        }
+
+        /* Security Micro-Pattern Watermark */
+        .cert-card-real::before {
+            content: "VERIFIED mimo CREDENTIAL • MIMO ACADEMY • OFFICIAL RECORD • MIMO CERTIFIED • ";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-30deg);
+            font-size: 1.7rem;
+            font-weight: 900;
+            color: rgba(124, 58, 237, 0.04);
+            white-space: nowrap;
+            letter-spacing: 4px;
+            pointer-events: none;
+            width: 200%;
+            text-align: center;
+        }
+
+        .cert-top-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #f1f1f4;
+            padding-bottom: 12px;
+            margin-bottom: 16px;
+        }
+
+        .mimo-brand {
+            font-size: 1.4rem;
+            font-weight: 900;
+            letter-spacing: -0.5px;
+            color: #7c3aed;
+        }
+
+        .cert-serial {
+            font-family: monospace;
             font-size: 0.72rem;
-            font-weight: 700;
-            background: #f2f2f7;
-            padding: 4px 10px;
-            border-radius: 8px;
-            letter-spacing: 0.5px;
+            color: #64748b;
+            background: #f8fafc;
+            padding: 4px 8px;
+            border-radius: 6px;
+            border: 1px solid #e2e8f0;
         }
 
-        /* ===== DEMO PROJECTS GRID ===== */
+        .cert-heading-small {
+            font-size: 0.76rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #94a3b8;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 6px;
+        }
+
+        .recipient-name {
+            font-size: 1.95rem;
+            font-weight: 900;
+            text-align: center;
+            color: #0f172a;
+            letter-spacing: -0.5px;
+            margin-bottom: 4px;
+        }
+
+        .cert-track {
+            text-align: center;
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #7c3aed;
+            margin-bottom: 12px;
+        }
+
+        .cert-statement {
+            font-size: 0.86rem;
+            color: #475569;
+            text-align: center;
+            line-height: 1.5;
+            max-width: 440px;
+            margin: 0 auto 20px auto;
+        }
+
+        /* Gold Foil Official Seal */
+        .cert-seal-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            border-top: 1px dashed #cbd5e1;
+            padding-top: 16px;
+            margin-top: 10px;
+        }
+
+        .gold-seal {
+            width: 58px;
+            height: 58px;
+            background: radial-gradient(circle, #ffe27a 0%, #d4af37 60%, #996515 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(212, 175, 55, 0.5);
+            border: 2px dashed #ffffff;
+            color: #5c3a00;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .sig-block {
+            text-align: left;
+            font-size: 0.78rem;
+            color: #334155;
+        }
+
+        .sig-font {
+            font-family: "Brush Script MT", "Caveat", cursive, sans-serif;
+            font-size: 1.25rem;
+            color: #1e1b4b;
+            display: block;
+            margin-bottom: 2px;
+        }
+
+        /* ===== LIVE DEMOS CARDS ===== */
         .demo-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -353,65 +472,79 @@
             margin-bottom: 20px;
         }
 
-        /* ===== INTERACTIVE RIPPLE BUTTONS ===== */
+        /* ===== UNFORGETTABLE PULSING SHOCKWAVE BUTTONS ===== */
         .interactive-btn {
             position: relative;
             display: inline-flex;
             align-items: center;
             justify-content: center;
             gap: 8px;
-            padding: 14px 24px;
+            padding: 15px 26px;
             border-radius: var(--radius-pill);
             text-decoration: none;
-            font-size: 0.94rem;
-            font-weight: 600;
+            font-size: 0.95rem;
+            font-weight: 700;
             overflow: hidden;
             border: none;
             cursor: pointer;
-            transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease;
+            transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
             -webkit-tap-highlight-color: transparent;
         }
 
         .interactive-btn:active {
-            transform: scale(0.96);
+            transform: scale(0.94);
         }
 
-        /* Click Wave / Ripple */
-        .ripple-wave {
+        /* Expanding Shockwave Click */
+        .shockwave-wave {
             position: absolute;
             border-radius: 50%;
-            background: rgba(255, 255, 255, 0.45);
+            background: rgba(255, 255, 255, 0.6);
             transform: scale(0);
-            animation: rippleAnim 0.6s linear;
+            animation: shockwaveAnim 0.65s cubic-bezier(0, 0.6, 0.4, 1);
             pointer-events: none;
         }
 
-        @keyframes rippleAnim {
+        @keyframes shockwaveAnim {
             to {
-                transform: scale(4);
+                transform: scale(4.5);
                 opacity: 0;
             }
         }
 
+        /* Button Variations with Live Subtle Breath Glow */
         .btn-apple-blue {
-            background-color: var(--accent-blue);
+            background: linear-gradient(135deg, #0071e3, #2997ff);
             color: #ffffff;
-            box-shadow: 0 4px 20px rgba(41, 151, 255, 0.35);
+            box-shadow: 0 4px 20px rgba(41, 151, 255, 0.4);
+            animation: pulseBlueShadow 3s infinite alternate;
+        }
+
+        @keyframes pulseBlueShadow {
+            0% { box-shadow: 0 4px 18px rgba(41, 151, 255, 0.35); }
+            100% { box-shadow: 0 8px 32px rgba(41, 151, 255, 0.7); }
         }
 
         .btn-apple-green {
-            background-color: var(--accent-green);
+            background: linear-gradient(135deg, #28a745, #30d158);
             color: #000000;
-            box-shadow: 0 4px 20px rgba(48, 209, 88, 0.35);
+            font-weight: 800;
+            box-shadow: 0 4px 20px rgba(48, 209, 88, 0.4);
+            animation: pulseGreenShadow 3s infinite alternate;
+        }
+
+        @keyframes pulseGreenShadow {
+            0% { box-shadow: 0 4px 18px rgba(48, 209, 88, 0.35); }
+            100% { box-shadow: 0 8px 32px rgba(48, 209, 88, 0.7); }
         }
 
         .btn-apple-glass {
-            background: rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.1);
             color: #ffffff;
             border: 1px solid var(--surface-border);
         }
 
-        /* ===== CONTACT GRID ===== */
+        /* ===== CONTACT CARDS ===== */
         .contact-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -429,8 +562,9 @@
         }
 
         .contact-pill-card:hover {
-            border-color: rgba(255, 255, 255, 0.25);
-            background: rgba(255, 255, 255, 0.04);
+            border-color: rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.05);
+            transform: translateY(-4px);
         }
 
         .contact-pill-card .icon {
@@ -454,7 +588,7 @@
 
         /* ===== FORM ===== */
         form {
-            background: rgba(0, 0, 0, 0.4);
+            background: rgba(0, 0, 0, 0.45);
             border: 1px solid var(--surface-border);
             border-radius: 20px;
             padding: 28px;
@@ -470,11 +604,12 @@
             font-size: 0.95rem;
             margin-bottom: 16px;
             outline: none;
-            transition: border-color 0.2s ease;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
         }
 
         input:focus, textarea:focus {
             border-color: var(--accent-blue);
+            box-shadow: 0 0 16px rgba(41, 151, 255, 0.3);
         }
 
         /* ===== FLOATING WHATSAPP PILL ===== */
@@ -483,22 +618,24 @@
             bottom: 24px;
             right: 20px;
             z-index: 999;
-            background: var(--accent-green);
-            color: #000000;
-            padding: 14px 22px;
+            background: linear-gradient(135deg, #25d366, #128c7e);
+            color: #ffffff;
+            padding: 15px 24px;
             border-radius: var(--radius-pill);
             text-decoration: none;
-            font-weight: 700;
-            font-size: 0.92rem;
+            font-weight: 800;
+            font-size: 0.95rem;
             display: flex;
             align-items: center;
             gap: 8px;
-            box-shadow: 0 10px 30px rgba(48, 209, 88, 0.4);
-            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 10px 30px rgba(37, 211, 102, 0.5);
+            animation: pulseFloatingWA 2.4s infinite;
         }
 
-        .floating-wa-pill:hover {
-            transform: translateY(-3px) scale(1.03);
+        @keyframes pulseFloatingWA {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+            70% { transform: scale(1.04); box-shadow: 0 0 0 16px rgba(37, 211, 102, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
         }
 
         footer {
@@ -512,18 +649,18 @@
 </head>
 <body>
 
-    <!-- AUDIO TOGGLE PILL (APPLE-LIKE AMBIENT SOUND) -->
+    <!-- AUDIO TOGGLE PILL (AUTO-PLAYS ON FIRST GESTURE OR CLICK) -->
     <div class="audio-toggle-bar" id="audioToggle" onclick="toggleAudio()" title="Sound Experience">
         <div class="eq-bars">
             <span class="eq-bar"></span>
             <span class="eq-bar"></span>
             <span class="eq-bar"></span>
         </div>
-        <span class="audio-text" id="audioLabel">Play Ambient</span>
+        <span class="audio-text" id="audioLabel">Sound On</span>
     </div>
 
-    <!-- Soft Ambient Track (Creative Commons / Royalty-Free) -->
-    <audio id="ambientAudio" loop preload="none">
+    <!-- Soft Ambient Track (High Quality Streaming) -->
+    <audio id="ambientAudio" loop preload="auto">
         <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=ambient-piano-amp-strings-10711.mp3" type="audio/mpeg">
     </audio>
 
@@ -610,30 +747,49 @@
                             <h3>Patel Book Depot</h3>
                             <p>Streamlined storefront catalog with textbook categories, transparent stationery rate lists, and store pickup ordering.</p>
                         </div>
-                        <a href="stationery.html" target="_blank" class="interactive-btn btn-apple-green">
+                        <a href="stationary.html" target="_blank" class="interactive-btn btn-apple-green">
                             View Stationery Experience ↗
                         </a>
                     </div>
                 </div>
             </section>
 
-            <!-- VERIFIED SKILLS -->
+            <!-- VERIFIED SKILLS (HYPER REALISTIC CERTIFICATE) -->
             <section id="credentials">
-                <h2 class="sec-heading" style="text-align: center;">Verified Standards</h2>
-                <p class="sec-sub" style="text-align: center;">Accredited foundation in clean, semantic web architecture.</p>
+                <h2 class="sec-heading" style="text-align: center;">Verified Credentials</h2>
+                <p class="sec-sub" style="text-align: center;">Official authenticated proof of web engineering standards.</p>
 
-                <div class="cert-card">
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px;">
-                        <span style="font-weight: 800; font-size: 1.1rem; color: #581c87;">mimo</span>
-                        <span class="cert-badge">VERIFIED PASS</span>
-                    </div>
-                    <p style="font-size: 0.78rem; text-transform: uppercase; color: #6e6e73; letter-spacing: 0.5px; margin-bottom: 4px;">Certification of Achievement</p>
-                    <h3 style="font-size: 1.6rem; font-weight: 800; color: #1d1d1f; margin-bottom: 6px;">Ayush Verma</h3>
-                    <p style="color: #7c3aed; font-weight: 700; margin-bottom: 12px;">HTML5 Web Development</p>
-                    <p style="font-size: 0.85rem; color: #515154; line-height: 1.4;">Demonstrated proficiency in semantic layout creation, modern web accessibility, and performance-first structural standards.</p>
-                    <div style="border-top: 1px solid #e5e5ea; margin-top: 20px; padding-top: 12px; display: flex; justify-content: space-between; font-size: 0.75rem; color: #86868b;">
-                        <span>Johannes Berger, CEO</span>
-                        <span>September 2026</span>
+                <div class="cert-outer-wrapper">
+                    <div class="cert-card-real">
+                        <div class="cert-top-row">
+                            <span class="mimo-brand">mimo</span>
+                            <span class="cert-serial">ID: MMO-7892-VERIFIED</span>
+                        </div>
+
+                        <p class="cert-heading-small">Certificate of Specialization</p>
+                        <h3 class="recipient-name">Ayush Verma</h3>
+                        <p class="cert-track">HTML5 Semantic Web Development</p>
+                        <p class="cert-statement">
+                            Has demonstrated verified proficiency in semantic layout architecture, performance optimization, responsive design principles, and international web accessibility standards.
+                        </p>
+
+                        <div class="cert-seal-row">
+                            <div class="sig-block">
+                                <span class="sig-font">Johannes Berger</span>
+                                <strong>Johannes Berger</strong><br>
+                                <span style="color:#64748b; font-size:0.7rem;">Chief Executive Officer, Mimo</span>
+                            </div>
+
+                            <div class="gold-seal" title="Authentic Gold Seal">
+                                ★
+                            </div>
+
+                            <div style="text-align: right; font-size: 0.75rem; color: #334155;">
+                                <strong>Issue Date</strong><br>
+                                <span>September 2026</span><br>
+                                <span style="color:#16a34a; font-weight:800;">✔ Authenticated</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -690,16 +846,39 @@
         </footer>
     </div>
 
-    <!-- SCRIPT FOR AUDIO & APPLE-LIKE BUTTON RIPPLE -->
+    <!-- SMART AUDIO & SHOCKWAVE SCRIPT -->
     <script>
-        // 1. Apple Ambient Sound Controller
         const audio = document.getElementById('ambientAudio');
         const audioToggle = document.getElementById('audioToggle');
         const audioLabel = document.getElementById('audioLabel');
+        let audioStarted = false;
 
+        // Auto-play unlocker on user's first scroll/touch
+        function autoUnlockAudio() {
+            if (!audioStarted) {
+                audio.volume = 0.35;
+                audio.play().then(() => {
+                    audioStarted = true;
+                    audioToggle.classList.add('playing');
+                    audioLabel.textContent = "Ambient Playing";
+                    // Remove listeners once audio has triggered
+                    window.removeEventListener('scroll', autoUnlockAudio);
+                    window.removeEventListener('click', autoUnlockAudio);
+                    window.removeEventListener('touchstart', autoUnlockAudio);
+                }).catch(() => {
+                    // Browser prevented audio, user will tap pill manually
+                });
+            }
+        }
+
+        window.addEventListener('scroll', autoUnlockAudio, { passive: true });
+        window.addEventListener('click', autoUnlockAudio, { passive: true });
+        window.addEventListener('touchstart', autoUnlockAudio, { passive: true });
+
+        // Manual Audio Toggle
         function toggleAudio() {
             if (audio.paused) {
-                audio.volume = 0.35; // Soft subtle volume
+                audio.volume = 0.35;
                 audio.play();
                 audioToggle.classList.add('playing');
                 audioLabel.textContent = "Ambient Playing";
@@ -710,7 +889,7 @@
             }
         }
 
-        // 2. Tab Switcher
+        // Tab Switcher
         function switchAppleTab(tabId, btn) {
             document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
             document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
@@ -719,7 +898,7 @@
             btn.classList.add('active');
         }
 
-        // 3. Apple-Style Button Click Ripple Wave Effect
+        // Shockwave Ripple on Buttons
         document.querySelectorAll('.interactive-btn').forEach(button => {
             button.addEventListener('click', function (e) {
                 const circle = document.createElement('span');
@@ -730,11 +909,11 @@
                 circle.style.width = circle.style.height = `${diameter}px`;
                 circle.style.left = `${e.clientX - rect.left - radius}px`;
                 circle.style.top = `${e.clientY - rect.top - radius}px`;
-                circle.classList.add('ripple-wave');
+                circle.classList.add('shockwave-wave');
 
-                const existingRipple = button.querySelector('.ripple-wave');
-                if (existingRipple) {
-                    existingRipple.remove();
+                const existingWave = button.querySelector('.shockwave-wave');
+                if (existingWave) {
+                    existingWave.remove();
                 }
 
                 button.appendChild(circle);
@@ -743,4 +922,3 @@
     </script>
 </body>
 </html>
-       
