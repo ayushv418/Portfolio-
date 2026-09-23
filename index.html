@@ -38,73 +38,111 @@
             position: relative;
         }
 
-        /* ===== 1. APPLE FLAGSHIP CINEMATIC CURTAIN INTRO ===== */
-        #appleIntroCurtain {
+        /* ===== 1. APPLE IPHONE BOOT / SWITCH-ON ANIMATION ===== */
+        #appleBootScreen {
             position: fixed;
             inset: 0;
             background: #000000;
             z-index: 99999;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
-            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.8s;
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s ease, visibility 0.8s;
         }
 
-        .apple-intro-card {
-            text-align: center;
-            animation: appleIntroScale 2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        .apple-boot-logo {
+            font-size: 3.5rem;
+            color: #ffffff;
+            opacity: 0;
+            transform: scale(0.85);
+            animation: appleBootLogoAnim 2.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            filter: drop-shadow(0 0 25px rgba(255, 255, 255, 0.6));
         }
 
-        .apple-symbol-logo {
-            font-size: 2.6rem;
-            margin-bottom: 12px;
-            display: inline-block;
-            filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.4));
-            animation: logoPulse 1.8s ease infinite alternate;
+        .boot-bar-container {
+            width: 140px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 4px;
+            margin-top: 24px;
+            overflow: hidden;
+            opacity: 0;
+            animation: bootBarFade 2s forwards 0.3s;
         }
 
-        @keyframes logoPulse {
-            0% { transform: scale(0.95); opacity: 0.8; }
-            100% { transform: scale(1.08); opacity: 1; filter: drop-shadow(0 0 30px rgba(41, 151, 255, 0.8)); }
+        .boot-bar-progress {
+            width: 0%;
+            height: 100%;
+            background: #ffffff;
+            border-radius: 4px;
+            animation: bootProgressFill 1.8s cubic-bezier(0.4, 0, 0.2, 1) forwards 0.4s;
         }
 
-        .apple-intro-text {
-            font-size: clamp(1.4rem, 4vw, 2rem);
-            font-weight: 800;
-            letter-spacing: -0.5px;
-            background: linear-gradient(90deg, #86868b 0%, #ffffff 50%, #86868b 100%);
-            background-size: 200% auto;
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            animation: appleShine 2s linear infinite;
+        @keyframes appleBootLogoAnim {
+            0% { opacity: 0; transform: scale(0.8); }
+            40% { opacity: 1; transform: scale(1); }
+            85% { opacity: 1; transform: scale(1); }
+            100% { opacity: 0; transform: scale(1.1); }
         }
 
-        .apple-intro-sub {
-            font-size: 0.85rem;
-            color: #86868b;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            margin-top: 6px;
-            font-weight: 600;
+        @keyframes bootBarFade {
+            0% { opacity: 0; }
+            30% { opacity: 1; }
+            85% { opacity: 1; }
+            100% { opacity: 0; }
         }
 
-        @keyframes appleShine {
-            to { background-position: 200% center; }
+        @keyframes bootProgressFill {
+            0% { width: 0%; }
+            100% { width: 100%; }
         }
 
-        @keyframes appleIntroScale {
-            0% { transform: scale(0.85); opacity: 0; }
-            40% { opacity: 1; }
-            80% { transform: scale(1.02); opacity: 1; }
-            100% { transform: scale(1.08); opacity: 0; }
-        }
-
-        #appleIntroCurtain.vanish {
+        #appleBootScreen.power-on-done {
             opacity: 0;
             visibility: hidden;
             pointer-events: none;
             transform: scale(1.05);
+        }
+
+        /* ===== 2. APPLE SHUTDOWN / SWITCH-OFF OVERLAY ===== */
+        #appleShutdownScreen {
+            position: fixed;
+            inset: 0;
+            background: #000000;
+            z-index: 999999;
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.6s ease;
+        }
+
+        #appleShutdownScreen.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .shutdown-spinner {
+            width: 38px;
+            height: 38px;
+            border: 3.5px solid rgba(255, 255, 255, 0.18);
+            border-top-color: #ffffff;
+            border-radius: 50%;
+            animation: spinShut 0.8s linear infinite;
+            margin-bottom: 18px;
+        }
+
+        @keyframes spinShut {
+            to { transform: rotate(360deg); }
+        }
+
+        .shutdown-text {
+            color: #86868b;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
         }
 
         /* ===== BACKGROUND AMBIENT GLOW ===== */
@@ -379,7 +417,7 @@
             font-weight: 700;
         }
 
-        /* ===== COMPACT CERTIFICATE ===== */
+        /* ===== COMPACT CERTIFICATE (380px) ===== */
         .cert-outer-wrapper {
             max-width: 380px;
             margin: 0 auto;
@@ -570,12 +608,12 @@
             overflow: hidden;
             border: none;
             cursor: pointer;
-            transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: transform 0.15s cubic-bezier(0.16, 1, 0.3, 1);
             -webkit-tap-highlight-color: transparent;
         }
 
         .interactive-btn:active {
-            transform: scale(0.94);
+            transform: scale(0.93);
         }
 
         .shockwave-wave {
@@ -706,24 +744,36 @@
             100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
         }
 
-        /* ===== BOTTOM CELEBRATION BADGE ===== */
-        .bottom-badge-banner {
+        /* ===== BOTTOM SHUTDOWN / EXIT EXPERIENCE CARD ===== */
+        .shutdown-trigger-card {
             text-align: center;
-            margin-top: 40px;
-            padding: 20px;
-            border-radius: 20px;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px dashed rgba(255, 255, 255, 0.2);
-            opacity: 0;
-            transform: scale(0.95);
-            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            margin-top: 50px;
+            padding: 26px 20px;
+            border-radius: 22px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
         }
 
-        .bottom-badge-banner.show {
-            opacity: 1;
-            transform: scale(1);
-            border-color: var(--accent-blue);
-            box-shadow: 0 0 30px rgba(41, 151, 255, 0.25);
+        .shutdown-btn {
+            background: rgba(255, 59, 48, 0.15);
+            border: 1px solid rgba(255, 59, 48, 0.4);
+            color: #ff453a;
+            padding: 12px 24px;
+            border-radius: var(--radius-pill);
+            font-size: 0.88rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 14px;
+            transition: all 0.25s ease;
+        }
+
+        .shutdown-btn:hover {
+            background: rgba(255, 59, 48, 0.3);
+            transform: scale(1.03);
         }
 
         footer {
@@ -737,13 +787,18 @@
 </head>
 <body>
 
-    <!-- 1. APPLE FLAGSHIP INTRO CURTAIN -->
-    <div id="appleIntroCurtain">
-        <div class="apple-intro-card">
-            <span class="apple-symbol-logo"></span>
-            <div class="apple-intro-text">Ayush Verma</div>
-            <div class="apple-intro-sub">Web Experiences</div>
+    <!-- 1. APPLE BOOT / SWITCH-ON SCREEN -->
+    <div id="appleBootScreen">
+        <div class="apple-boot-logo"></div>
+        <div class="boot-bar-container">
+            <div class="boot-bar-progress"></div>
         </div>
+    </div>
+
+    <!-- 2. APPLE SHUTDOWN / SWITCH-OFF SCREEN -->
+    <div id="appleShutdownScreen">
+        <div class="shutdown-spinner"></div>
+        <div class="shutdown-text">Powering Off...</div>
     </div>
 
     <!-- BACKGROUND GLOW -->
@@ -938,10 +993,14 @@
                     <button type="submit" class="interactive-btn btn-apple-blue" style="width: 100%;">Submit Inquiry</button>
                 </form>
 
-                <div class="bottom-badge-banner" id="bottomHook">
-                    <span style="font-size: 26px; display:block; margin-bottom: 6px;">✨</span>
-                    <strong style="color: #ffffff; font-size: 1rem;">Ready to upgrade your business online?</strong>
-                    <p style="color: var(--text-secondary); font-size: 0.85rem; margin-top: 4px;">Let's build something exceptional together in Kanpur.</p>
+                <!-- 3. APPLE SHUTDOWN / EXIT EXPERIENCE -->
+                <div class="shutdown-trigger-card">
+                    <span style="font-size: 24px; display:block; margin-bottom: 4px;">⚡</span>
+                    <strong style="color: #ffffff; font-size: 0.95rem;">Reached the end of the experience?</strong>
+                    <p style="color: var(--text-secondary); font-size: 0.82rem; margin-top: 4px;">Simulate an authentic Apple shutdown sequence.</p>
+                    <button type="button" class="shutdown-btn interactive-btn" onclick="triggerAppleShutdown()">
+                        <span>⏻</span> Slide to Power Off
+                    </button>
                 </div>
             </section>
         </main>
@@ -951,53 +1010,78 @@
         </footer>
     </div>
 
-    <!-- SCRIPT FOR INTRO CURTAIN + SCROLL AUDIO ENGINE -->
+    <!-- JAVASCRIPT: SCROLL-ONLY AUDIO + CLICK SOUND FEEDBACK + BOOT/SHUTDOWN -->
     <script>
         const audio = document.getElementById('ambientAudio');
         const audioToggle = document.getElementById('audioToggle');
         const audioLabel = document.getElementById('audioLabel');
-        const introCurtain = document.getElementById('appleIntroCurtain');
-        const bottomHook = document.getElementById('bottomHook');
+        const bootScreen = document.getElementById('appleBootScreen');
+        const shutdownScreen = document.getElementById('appleShutdownScreen');
 
         let isAudioPlaying = false;
 
-        // 1. Apple Intro Curtain (Hides seamlessly at 2.1 seconds)
+        // 1. APPLE BOOT SCREEN TIMER (2.2s auto boot)
         window.addEventListener('load', () => {
             setTimeout(() => {
-                introCurtain.classList.add('vanish');
-            }, 2100);
+                bootScreen.classList.add('power-on-done');
+            }, 2200);
         });
 
-        // 2. Guaranteed Scroll/Slide Audio Trigger
-        function triggerAudioOnScroll() {
+        // 2. REAL-TIME SYNTHESIZED BUTTON CLICK SOUND (Apple UI Tock)
+        let audioCtx;
+        function playAppleButtonSound() {
+            try {
+                if (!audioCtx) {
+                    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                }
+                if (audioCtx.state === 'suspended') {
+                    audioCtx.resume();
+                }
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(800, audioCtx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(200, audioCtx.currentTime + 0.04);
+
+                gain.gain.setValueAtTime(0.12, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.04);
+
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+
+                osc.start();
+                osc.stop(audioCtx.currentTime + 0.04);
+            } catch (err) {
+                // Ignore if audio context not permitted
+            }
+        }
+
+        // 3. SCROLL / SWIPE ONLY AUDIO TRIGGER (Button click bilkul nahi karega)
+        function triggerAudioStrictlyOnScroll() {
             if (!isAudioPlaying) {
                 audio.volume = 0.35;
                 audio.play().then(() => {
                     isAudioPlaying = true;
                     audioToggle.classList.add('playing');
                     audioLabel.textContent = "Ambient Playing";
-                    
-                    // Unbind scroll listeners once audio starts
-                    window.removeEventListener('scroll', triggerAudioOnScroll);
-                    window.removeEventListener('touchmove', triggerAudioOnScroll);
-                    window.removeEventListener('wheel', triggerAudioOnScroll);
-                }).catch(() => {
-                    // Handled if browser strictly denies
-                });
-            }
 
-            // Bottom reached detector
-            if ((window.innerHeight + window.scrollY) >= (document.body.offsetHeight - 250)) {
-                bottomHook.classList.add('show');
+                    // Remove scroll listeners once audio has started
+                    window.removeEventListener('scroll', triggerAudioStrictlyOnScroll);
+                    window.removeEventListener('touchmove', triggerAudioStrictlyOnScroll);
+                    window.removeEventListener('wheel', triggerAudioStrictlyOnScroll);
+                }).catch(() => {
+                    // Mobile browser restricted zero-touch, waits for first continuous finger slide
+                });
             }
         }
 
-        // Multiple scroll listeners for 100% reliability
-        window.addEventListener('scroll', triggerAudioOnScroll, { passive: true });
-        window.addEventListener('touchmove', triggerAudioOnScroll, { passive: true });
-        window.addEventListener('wheel', triggerAudioOnScroll, { passive: true });
+        // ONLY SCROLL AND TOUCHMOVE LISTENERS (NO CLICK LISTENERS HERE)
+        window.addEventListener('scroll', triggerAudioStrictlyOnScroll, { passive: true });
+        window.addEventListener('touchmove', triggerAudioStrictlyOnScroll, { passive: true });
+        window.addEventListener('wheel', triggerAudioStrictlyOnScroll, { passive: true });
 
-        // Manual Audio Toggle
+        // 4. Manual Audio Pill Toggle
         function toggleAudio() {
             if (audio.paused) {
                 audio.volume = 0.35;
@@ -1013,6 +1097,19 @@
             }
         }
 
+        // 5. Apple Shutdown Trigger
+        function triggerAppleShutdown() {
+            shutdownScreen.classList.add('active');
+            if (!audio.paused) {
+                audio.pause();
+            }
+            setTimeout(() => {
+                // Reboot / Turn back on after 3 seconds
+                shutdownScreen.classList.remove('active');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }, 3000);
+        }
+
         // Tab Switcher
         function switchAppleTab(tabId, btn) {
             document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
@@ -1022,9 +1119,13 @@
             btn.classList.add('active');
         }
 
-        // Shockwave Ripple
+        // Button Click Shockwave + Click Sound (NO MUSIC TRIGGER)
         document.querySelectorAll('.interactive-btn').forEach(button => {
             button.addEventListener('click', function (e) {
+                // 1. Play Button Click Sound
+                playAppleButtonSound();
+
+                // 2. Shockwave visual animation
                 const circle = document.createElement('span');
                 const diameter = Math.max(button.clientWidth, button.clientHeight);
                 const radius = diameter / 2;
