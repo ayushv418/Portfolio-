@@ -12,14 +12,15 @@
 
     <style>
         :root {
-            --bg-base: #000000;
-            --surface-glass: rgba(18, 18, 20, 0.75);
-            --surface-border: rgba(255, 255, 255, 0.12);
+            --bg-base: #030305;
+            --surface-glass: rgba(18, 18, 22, 0.72);
+            --surface-border: rgba(255, 255, 255, 0.1);
             --text-primary: #f5f5f7;
             --text-secondary: #86868b;
             --accent-blue: #2997ff;
             --accent-green: #30d158;
-            --radius-large: 24px;
+            --accent-purple: #bf5af2;
+            --radius-large: 26px;
             --radius-pill: 980px;
         }
 
@@ -38,31 +39,54 @@
             line-height: 1.5;
             padding: 0 16px;
             overflow-x: hidden;
+            position: relative;
+        }
+
+        /* ===== BACKGROUND COSMIC AURA GLOW (CINEMATIC) ===== */
+        .ambient-glow-orb {
+            position: fixed;
+            top: 20%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(41, 151, 255, 0.15), rgba(191, 90, 242, 0.08), transparent 70%);
+            filter: blur(80px);
+            z-index: 0;
+            pointer-events: none;
+            animation: orbFloat 10s ease-in-out infinite alternate;
+        }
+
+        @keyframes orbFloat {
+            0% { transform: translate(-50%, -40%) scale(1); opacity: 0.6; }
+            100% { transform: translate(-45%, -55%) scale(1.2); opacity: 1; }
         }
 
         .container {
             max-width: 900px;
             margin: 0 auto;
             padding: 40px 0 120px 0;
+            position: relative;
+            z-index: 1;
         }
 
-        /* ===== LIVE AUDIO PILL ===== */
+        /* ===== APPLE STYLE AUDIO PILL ===== */
         .audio-toggle-bar {
             position: fixed;
             top: 18px;
             right: 18px;
             z-index: 1000;
-            background: rgba(22, 22, 24, 0.85);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            padding: 8px 16px;
+            background: rgba(22, 22, 26, 0.85);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            padding: 8px 18px;
             border-radius: var(--radius-pill);
             display: flex;
             align-items: center;
             gap: 10px;
             cursor: pointer;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.7);
             transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
@@ -83,6 +107,7 @@
             background-color: var(--accent-blue);
             border-radius: 2px;
             height: 4px;
+            transition: height 0.2s ease;
         }
 
         .playing .eq-bar:nth-child(1) { animation: eqJump 0.8s ease-in-out infinite alternate; }
@@ -103,7 +128,7 @@
 
         /* ===== HERO HEADER ===== */
         header {
-            padding: 80px 24px 60px 24px;
+            padding: 85px 24px 60px 24px;
             text-align: center;
             position: relative;
         }
@@ -113,14 +138,14 @@
             align-items: center;
             gap: 8px;
             background: rgba(48, 209, 88, 0.12);
-            border: 1px solid rgba(48, 209, 88, 0.4);
+            border: 1px solid rgba(48, 209, 88, 0.35);
             color: var(--accent-green);
             font-size: 0.76rem;
             font-weight: 600;
             padding: 6px 14px;
             border-radius: var(--radius-pill);
             margin-bottom: 20px;
-            letter-spacing: 0.3px;
+            box-shadow: 0 0 20px rgba(48, 209, 88, 0.15);
         }
 
         .live-dot {
@@ -138,12 +163,12 @@
         }
 
         h1.hero-title {
-            font-size: clamp(2.8rem, 7vw, 4.2rem);
+            font-size: clamp(2.8rem, 7vw, 4.4rem);
             font-weight: 800;
-            letter-spacing: -1.5px;
-            line-height: 1.08;
-            margin-bottom: 16px;
-            background: linear-gradient(180deg, #ffffff 40%, #86868b 100%);
+            letter-spacing: -1.8px;
+            line-height: 1.06;
+            margin-bottom: 18px;
+            background: linear-gradient(180deg, #ffffff 40%, #8c8c94 100%);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
@@ -160,10 +185,10 @@
 
         /* ===== NAVIGATION ===== */
         nav {
-            background: rgba(18, 18, 20, 0.75);
+            background: rgba(18, 18, 22, 0.75);
             backdrop-filter: blur(24px);
             -webkit-backdrop-filter: blur(24px);
-            padding: 12px 18px;
+            padding: 12px 20px;
             border-radius: var(--radius-pill);
             margin-bottom: 48px;
             display: flex;
@@ -173,6 +198,7 @@
             position: sticky;
             top: 14px;
             z-index: 900;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
         }
 
         nav a {
@@ -190,24 +216,25 @@
             background: rgba(255, 255, 255, 0.08);
         }
 
-        /* ===== SECTIONS ===== */
+        /* ===== SECTIONS (GLASSMORPHIC CARDS) ===== */
         section {
             background: var(--surface-glass);
             border: 1px solid var(--surface-border);
             border-radius: var(--radius-large);
             padding: 40px 32px;
             margin-bottom: 32px;
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            transition: border-color 0.3s ease;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
         }
 
         section:hover {
             border-color: rgba(255, 255, 255, 0.22);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
         }
 
         h2.sec-heading {
-            font-size: 1.8rem;
+            font-size: 1.85rem;
             font-weight: 700;
             letter-spacing: -0.8px;
             margin-bottom: 12px;
@@ -223,7 +250,7 @@
         /* ===== TAB CONTROLS ===== */
         .tab-controls {
             display: flex;
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(0, 0, 0, 0.55);
             padding: 4px;
             border-radius: var(--radius-pill);
             border: 1px solid var(--surface-border);
@@ -247,7 +274,7 @@
         .tab-btn.active {
             background: #ffffff;
             color: #000000;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
         }
 
         .tab-content {
@@ -267,7 +294,7 @@
         .feature-box {
             background: rgba(255, 255, 255, 0.02);
             border: 1px solid var(--surface-border);
-            border-radius: 18px;
+            border-radius: 20px;
             padding: 26px;
         }
 
@@ -291,35 +318,35 @@
             font-weight: 700;
         }
 
-        /* ===== MEDIUM SIZE REALISTIC CERTIFICATE ===== */
+        /* ===== MEDIUM SIZE HYPER-REALISTIC CERTIFICATE ===== */
         .cert-outer-wrapper {
-            max-width: 440px; /* Perfect medium size */
+            max-width: 450px;
             margin: 0 auto;
             position: relative;
             padding: 4px;
             background: linear-gradient(135deg, #c5a059 0%, #fdf0cd 50%, #99732d 100%);
-            border-radius: 16px;
-            box-shadow: 0 15px 35px rgba(197, 160, 89, 0.25), 0 10px 25px rgba(0, 0, 0, 0.6);
-            transition: transform 0.3s ease;
+            border-radius: 18px;
+            box-shadow: 0 20px 45px rgba(197, 160, 89, 0.22), 0 10px 30px rgba(0, 0, 0, 0.8);
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .cert-outer-wrapper:hover {
-            transform: translateY(-4px);
+            transform: translateY(-6px) scale(1.01);
         }
 
         .cert-card-real {
             background: #ffffff;
             color: #1a1a1a;
-            border-radius: 13px;
-            padding: 24px 22px;
+            border-radius: 14px;
+            padding: 26px 24px;
             position: relative;
             overflow: hidden;
             border: 1.5px solid #dfc480;
         }
 
-        /* Subtle Security Guilloché Background */
+        /* Guilloché security pattern */
         .cert-card-real::before {
-            content: "MIMO VERIFIED CREDENTIAL • OFFICIAL RECORD • ";
+            content: "MIMO VERIFIED CREDENTIAL • MIMO ACADEMY • OFFICIAL RECORD • ";
             position: absolute;
             top: 50%;
             left: 50%;
@@ -328,7 +355,7 @@
             font-weight: 900;
             color: rgba(124, 58, 237, 0.04);
             white-space: nowrap;
-            letter-spacing: 2px;
+            letter-spacing: 2.5px;
             pointer-events: none;
             width: 250%;
             text-align: center;
@@ -339,12 +366,12 @@
             justify-content: space-between;
             align-items: center;
             border-bottom: 1.5px solid #f1f1f4;
-            padding-bottom: 8px;
+            padding-bottom: 10px;
             margin-bottom: 12px;
         }
 
         .mimo-brand {
-            font-size: 1.25rem;
+            font-size: 1.3rem;
             font-weight: 900;
             letter-spacing: -0.5px;
             color: #7c3aed;
@@ -362,7 +389,7 @@
 
         .cert-heading-small {
             font-size: 0.7rem;
-            letter-spacing: 1.5px;
+            letter-spacing: 1.6px;
             text-transform: uppercase;
             color: #94a3b8;
             font-weight: 800;
@@ -371,7 +398,7 @@
         }
 
         .recipient-name {
-            font-size: 1.55rem;
+            font-size: 1.6rem;
             font-weight: 900;
             text-align: center;
             color: #0f172a;
@@ -381,18 +408,18 @@
 
         .cert-track {
             text-align: center;
-            font-size: 0.98rem;
+            font-size: 1rem;
             font-weight: 700;
             color: #7c3aed;
             margin-bottom: 10px;
         }
 
         .cert-statement {
-            font-size: 0.78rem;
+            font-size: 0.79rem;
             color: #475569;
             text-align: center;
             line-height: 1.45;
-            max-width: 360px;
+            max-width: 370px;
             margin: 0 auto 16px auto;
         }
 
@@ -405,17 +432,17 @@
         }
 
         .gold-seal {
-            width: 46px;
-            height: 46px;
+            width: 48px;
+            height: 48px;
             background: radial-gradient(circle, #ffe27a 0%, #d4af37 60%, #996515 100%);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 3px 8px rgba(212, 175, 55, 0.4);
+            box-shadow: 0 4px 10px rgba(212, 175, 55, 0.45);
             border: 2px dashed #ffffff;
             color: #5c3a00;
-            font-size: 18px;
+            font-size: 19px;
             font-weight: bold;
         }
 
@@ -427,7 +454,7 @@
 
         .sig-font {
             font-family: "Brush Script MT", cursive, sans-serif;
-            font-size: 1.15rem;
+            font-size: 1.2rem;
             color: #1e1b4b;
             display: block;
             margin-bottom: 1px;
@@ -449,12 +476,12 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            transition: transform 0.3s ease, border-color 0.3s ease;
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease;
         }
 
         .demo-item:hover {
-            transform: translateY(-4px);
-            border-color: rgba(255, 255, 255, 0.25);
+            transform: translateY(-5px);
+            border-color: rgba(255, 255, 255, 0.3);
         }
 
         .demo-item h3 {
@@ -469,7 +496,7 @@
             margin-bottom: 20px;
         }
 
-        /* ===== SHOCKWAVE PULSING BUTTONS ===== */
+        /* ===== UNFORGETTABLE SHOCKWAVE PULSE BUTTONS ===== */
         .interactive-btn {
             position: relative;
             display: inline-flex;
@@ -492,10 +519,11 @@
             transform: scale(0.94);
         }
 
+        /* Expanding Shockwave Wave */
         .shockwave-wave {
             position: absolute;
             border-radius: 50%;
-            background: rgba(255, 255, 255, 0.6);
+            background: rgba(255, 255, 255, 0.65);
             transform: scale(0);
             animation: shockwaveAnim 0.65s cubic-bezier(0, 0.6, 0.4, 1);
             pointer-events: none;
@@ -511,26 +539,26 @@
         .btn-apple-blue {
             background: linear-gradient(135deg, #0071e3, #2997ff);
             color: #ffffff;
-            box-shadow: 0 4px 20px rgba(41, 151, 255, 0.4);
+            box-shadow: 0 4px 22px rgba(41, 151, 255, 0.4);
             animation: pulseBlueShadow 3s infinite alternate;
         }
 
         @keyframes pulseBlueShadow {
             0% { box-shadow: 0 4px 18px rgba(41, 151, 255, 0.35); }
-            100% { box-shadow: 0 8px 32px rgba(41, 151, 255, 0.7); }
+            100% { box-shadow: 0 8px 34px rgba(41, 151, 255, 0.7); }
         }
 
         .btn-apple-green {
             background: linear-gradient(135deg, #28a745, #30d158);
             color: #000000;
             font-weight: 800;
-            box-shadow: 0 4px 20px rgba(48, 209, 88, 0.4);
+            box-shadow: 0 4px 22px rgba(48, 209, 88, 0.4);
             animation: pulseGreenShadow 3s infinite alternate;
         }
 
         @keyframes pulseGreenShadow {
             0% { box-shadow: 0 4px 18px rgba(48, 209, 88, 0.35); }
-            100% { box-shadow: 0 8px 32px rgba(48, 209, 88, 0.7); }
+            100% { box-shadow: 0 8px 34px rgba(48, 209, 88, 0.7); }
         }
 
         .btn-apple-glass {
@@ -539,7 +567,7 @@
             border: 1px solid var(--surface-border);
         }
 
-        /* ===== CONTACT CARDS ===== */
+        /* ===== CONTACT PILL CARDS ===== */
         .contact-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -607,7 +635,7 @@
             box-shadow: 0 0 16px rgba(41, 151, 255, 0.3);
         }
 
-        /* ===== FLOATING WHATSAPP BUTTON ===== */
+        /* ===== FLOATING WHATSAPP PILL ===== */
         .floating-wa-pill {
             position: fixed;
             bottom: 24px;
@@ -644,6 +672,9 @@
 </head>
 <body>
 
+    <!-- BACKGROUND LIGHTING -->
+    <div class="ambient-glow-orb"></div>
+
     <!-- AUDIO TOGGLE PILL -->
     <div class="audio-toggle-bar" id="audioToggle" onclick="toggleAudio()" title="Sound Experience">
         <div class="eq-bars">
@@ -654,7 +685,7 @@
         <span class="audio-text" id="audioLabel">Sound On</span>
     </div>
 
-    <!-- Background Ambient Music -->
+    <!-- Background Ambient Track -->
     <audio id="ambientAudio" loop preload="auto">
         <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=ambient-piano-amp-strings-10711.mp3" type="audio/mpeg">
     </audio>
@@ -742,7 +773,7 @@
                             <h3>Patel Book Depot</h3>
                             <p>Streamlined storefront catalog with textbook categories, transparent stationery rate lists, and store pickup ordering.</p>
                         </div>
-                        <a href="stationary.html" target="_blank" class="interactive-btn btn-apple-green">
+                        <a href="stationery.html" target="_blank" class="interactive-btn btn-apple-green">
                             View Stationery Experience ↗
                         </a>
                     </div>
@@ -840,41 +871,44 @@
         </footer>
     </div>
 
-    <!-- JAVASCRIPT: AUTOMATIC MUSIC ENGINE & EFFECTS -->
+    <!-- JAVASCRIPT: 2-SECOND DELAY MUSIC ENGINE + SHOCKWAVE EFFECTS -->
     <script>
         const audio = document.getElementById('ambientAudio');
         const audioToggle = document.getElementById('audioToggle');
         const audioLabel = document.getElementById('audioLabel');
         let isAudioPlaying = false;
+        let timerTriggered = false;
 
-        function startAudioEngine() {
-            if (!isAudioPlaying) {
-                audio.volume = 0.35;
-                audio.play().then(() => {
-                    isAudioPlaying = true;
-                    audioToggle.classList.add('playing');
-                    audioLabel.textContent = "Ambient Playing";
-                    
-                    // Unbind global passive triggers once playing
-                    ['click', 'touchstart', 'scroll', 'mousemove', 'keydown'].forEach(evt => {
-                        window.removeEventListener(evt, startAudioEngine);
+        // USER FIRST TOUCH TRIGGER -> 2 SECOND DELAY START
+        function scheduleMusicOnTouch() {
+            if (!timerTriggered && !isAudioPlaying) {
+                timerTriggered = true;
+
+                // 2 second timer setup
+                setTimeout(() => {
+                    audio.volume = 0.35;
+                    audio.play().then(() => {
+                        isAudioPlaying = true;
+                        audioToggle.classList.add('playing');
+                        audioLabel.textContent = "Ambient Playing";
+                    }).catch(() => {
+                        // Agar browser ne roka toh toggle pill tap karne par chalega
                     });
-                }).catch(() => {
-                    // Browser strictly blocked zero-touch playback, will activate on first contact
+                }, 2000); // 2000ms = Theek 2 second baad
+
+                // Listeners ko unbind kar do taaki baar-baar timer na chale
+                ['click', 'touchstart', 'scroll'].forEach(evt => {
+                    window.removeEventListener(evt, scheduleMusicOnTouch);
                 });
             }
         }
 
-        // Auto play immediately on DOM load
-        window.addEventListener('DOMContentLoaded', startAudioEngine);
-        window.addEventListener('load', startAudioEngine);
-
-        // Fallback: trigger smoothly on first slight touch or movement
-        ['click', 'touchstart', 'scroll', 'mousemove', 'keydown'].forEach(evt => {
-            window.addEventListener(evt, startAudioEngine, { passive: true });
+        // Kisi bhi jagah ungli touch ya halka scroll hote hi 2-sec timer shuru
+        ['click', 'touchstart', 'scroll'].forEach(evt => {
+            window.addEventListener(evt, scheduleMusicOnTouch, { passive: true });
         });
 
-        // Manual Audio Toggle Button
+        // Manual Pill Toggle (Agar user pause ya play karna chahe)
         function toggleAudio() {
             if (audio.paused) {
                 audio.volume = 0.35;
