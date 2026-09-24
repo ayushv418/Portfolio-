@@ -796,7 +796,7 @@
     <div class="ambient-glow-orb"></div>
 
     <!-- AUDIO TOGGLE PILL -->
-    <div class="audio-toggle-bar" id="audioToggle" onclick="toggleAudioManual()" title="Sound Experience">
+    <div class="audio-toggle-bar" id="audioToggle" onclick="toggleAudio()" title="Sound Experience">
         <div class="eq-bars">
             <span class="eq-bar"></span>
             <span class="eq-bar"></span>
@@ -804,11 +804,6 @@
         </div>
         <span class="audio-text" id="audioLabel">Sound On</span>
     </div>
-
-    <!-- Background Ambient Track -->
-    <audio id="ambientAudio" loop preload="auto" playsinline>
-        <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=ambient-piano-amp-strings-10711.mp3" type="audio/mpeg">
-    </audio>
 
     <!-- FLOATING WHATSAPP BUTTON -->
     <a href="https://wa.me/919795222082?text=Hello%20Ayush,%20I%20want%20to%20get%20a%20website%20made." target="_blank" class="floating-wa-pill interactive-btn">
@@ -1001,18 +996,16 @@
         </footer>
     </div>
 
-    <!-- JAVASCRIPT: STRICT DRAG-ONLY AUDIO TRIGGER + LOUD BUTTON SOUND -->
+    <!-- SCRIPT FOR GUARANTEED UNLOCKED AUDIO -->
     <script>
-        const audio = document.getElementById('ambientAudio');
         const audioToggle = document.getElementById('audioToggle');
         const audioLabel = document.getElementById('audioLabel');
         const pureBoot = document.getElementById('pureBootScreen');
         const pureShutdown = document.getElementById('pureShutdownScreen');
 
-        let isMusicStarted = false;
-        let isDragging = false;
-        let startY = 0;
         let audioCtx = null;
+        let ambientGain = null;
+        let isAudioPlaying = false;
 
         // 1. Silent Boot Animation
         window.addEventListener('load', () => {
@@ -1022,94 +1015,95 @@
         });
 
         // 2. Hardware Audio Unlocker
-        function unlockAudioCtx() {
+        function unlockAudioEngine() {
             if (!audioCtx) {
                 const AudioClass = window.AudioContext || window.webkitAudioContext;
                 audioCtx = new AudioClass();
+                ambientGain = audioCtx.createGain();
+                ambientGain.connect(audioCtx.destination);
             }
             if (audioCtx.state === 'suspended') {
                 audioCtx.resume();
             }
         }
 
-        // 3. STRICT DRAG-TO-PLAY ENGINE (Click/Tap Par Bilkul Nahi Chalega)
-        window.addEventListener('touchstart', (e) => {
-            startY = e.touches[0].clientY;
-            isDragging = false;
-            unlockAudioCtx();
-        }, { passive: true });
+        // 3. Ambient Synth Engine (Self-Generating Space Chords - Zero Network Dependency)
+        let activeOscs = [];
+        function startAmbientChords() {
+            if (isAudioPlaying) return;
+            unlockAudioEngine();
 
-        window.addEventListener('touchmove', (e) => {
-            if (!startY) return;
-            const distance = Math.abs(e.touches[0].clientY - startY);
-            // Agar ungli 15 pixel se zyada slide/drag hui, tabhi flag true hoga
-            if (distance > 15) {
-                isDragging = true;
-            }
-        }, { passive: true });
+            const now = audioCtx.currentTime;
+            ambientGain.gain.setValueAtTime(0.001, now);
+            ambientGain.gain.exponentialRampToValueAtTime(0.25, now + 1.5);
 
-        // Jab user drag karke ungli uthayega tabhi music activate hoga
-        window.addEventListener('touchend', () => {
-            if (isDragging && !isMusicStarted) {
-                audio.volume = 0.5;
-                audio.play().then(() => {
-                    isMusicStarted = true;
-                    audioToggle.classList.add('playing');
-                    audioLabel.textContent = "Ambient Playing";
-                }).catch(e => {
-                    console.log("Audio waiting for drag gesture:", e);
-                });
-            }
-            isDragging = false;
-        }, { passive: true });
+            // Rich warm ambient chord (D-Minor 9th)
+            const chordFrequencies = [146.83, 220.00, 261.63, 293.66, 349.23];
 
-        // Desktop Mouse Drag / Scroll Detection
-        let isMouseDown = false;
-        window.addEventListener('mousedown', () => { isMouseDown = true; });
-        window.addEventListener('mousemove', () => {
-            if (isMouseDown && !isMusicStarted) {
-                audio.volume = 0.5;
-                audio.play().then(() => {
-                    isMusicStarted = true;
-                    audioToggle.classList.add('playing');
-                    audioLabel.textContent = "Ambient Playing";
-                });
-            }
-        });
-        window.addEventListener('mouseup', () => { isMouseDown = false; });
-        window.addEventListener('wheel', () => {
-            if (!isMusicStarted) {
-                audio.volume = 0.5;
-                audio.play().then(() => {
-                    isMusicStarted = true;
-                    audioToggle.classList.add('playing');
-                    audioLabel.textContent = "Ambient Playing";
-                });
-            }
-        }, { passive: true });
+            activeOscs = chordFrequencies.map(freq => {
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
 
-        // 4. Manual Pill Toggle (Agar User Khus Se On/Off Kare)
-        function toggleAudioManual() {
-            unlockAudioCtx();
-            if (audio.paused) {
-                audio.volume = 0.5;
-                audio.play().then(() => {
-                    isMusicStarted = true;
-                    audioToggle.classList.add('playing');
-                    audioLabel.textContent = "Ambient Playing";
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(freq, now);
+
+                gain.gain.setValueAtTime(0.18, now);
+                osc.connect(gain);
+                gain.connect(ambientGain);
+
+                osc.start(now);
+                return osc;
+            });
+
+            isAudioPlaying = true;
+            audioToggle.classList.add('playing');
+            audioLabel.textContent = "Ambient Playing";
+        }
+
+        function stopAmbientChords() {
+            if (!isAudioPlaying || !audioCtx) return;
+            const now = audioCtx.currentTime;
+            ambientGain.gain.setValueAtTime(ambientGain.gain.value, now);
+            ambientGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.3);
+
+            setTimeout(() => {
+                activeOscs.forEach(o => {
+                    try { o.stop(); o.disconnect(); } catch(e){}
                 });
-            } else {
-                audio.pause();
-                isMusicStarted = false;
+                activeOscs = [];
+                isAudioPlaying = false;
                 audioToggle.classList.remove('playing');
                 audioLabel.textContent = "Sound Paused";
+            }, 300);
+        }
+
+        // 4. One-Tap Global Unlock: Screen par pehla tap/click hote hi music chalu
+        function handleFirstInteraction() {
+            if (!isAudioPlaying) {
+                startAmbientChords();
+                // Ek baar chalu hone ke baad global listener unbind kar do
+                window.removeEventListener('click', handleFirstInteraction);
+                window.removeEventListener('touchstart', handleFirstInteraction);
             }
         }
 
-        // 5. TEJ & ACCHI PUNCHY BUTTON CLICK SOUND (Rich Pop Chime)
+        window.addEventListener('click', handleFirstInteraction);
+        window.addEventListener('touchstart', handleFirstInteraction, { passive: true });
+
+        // 5. Manual Audio Pill Toggle
+        function toggleAudio() {
+            unlockAudioEngine();
+            if (!isAudioPlaying) {
+                startAmbientChords();
+            } else {
+                stopAmbientChords();
+            }
+        }
+
+        // 6. TEJ & ACCHI PUNCHY BUTTON CLICK SOUND (Rich Pop Chime)
         function playLoudPunchyButtonSound() {
             try {
-                unlockAudioCtx();
+                unlockAudioEngine();
                 const now = audioCtx.currentTime;
 
                 // High crisp click
@@ -1119,7 +1113,7 @@
                 osc1.frequency.setValueAtTime(800, now);
                 osc1.frequency.exponentialRampToValueAtTime(140, now + 0.06);
 
-                gain1.gain.setValueAtTime(0.7, now);
+                gain1.gain.setValueAtTime(0.75, now); // Loud & clear
                 gain1.gain.exponentialRampToValueAtTime(0.001, now + 0.06);
 
                 osc1.connect(gain1);
@@ -1134,7 +1128,7 @@
                 osc2.frequency.setValueAtTime(320, now);
                 osc2.frequency.exponentialRampToValueAtTime(60, now + 0.08);
 
-                gain2.gain.setValueAtTime(0.85, now);
+                gain2.gain.setValueAtTime(0.9, now); // Loud & punchy
                 gain2.gain.exponentialRampToValueAtTime(0.001, now + 0.08);
 
                 osc2.connect(gain2);
@@ -1144,15 +1138,10 @@
             } catch (err) {}
         }
 
-        // 6. Pure Shutdown
+        // 7. Pure Shutdown
         function triggerPureShutdown() {
             pureShutdown.classList.add('active');
-            if (!audio.paused) {
-                audio.pause();
-                isMusicStarted = false;
-                audioToggle.classList.remove('playing');
-                audioLabel.textContent = "Sound Paused";
-            }
+            stopAmbientChords();
             setTimeout(() => {
                 pureShutdown.classList.remove('active');
                 window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -1167,10 +1156,9 @@
             btn.classList.add('active');
         }
 
-        // Button Click Shockwave + LOUD BUTTON TICK (MUSIC KO TRIGGER NAHI KAREGA)
+        // Button Click Shockwave + TEJ CLICK SOUND
         document.querySelectorAll('.interactive-btn').forEach(button => {
             button.addEventListener('click', function (e) {
-                // Sirf button tick aawaz aayegi, background music activate nahi hoga
                 playLoudPunchyButtonSound();
 
                 const circle = document.createElement('span');
