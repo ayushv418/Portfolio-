@@ -996,7 +996,7 @@
         </footer>
     </div>
 
-    <!-- SCRIPT FOR GUARANTEED UNLOCKED AUDIO -->
+    <!-- SCRIPT FOR AUDIBLE HARDWARE SYNTHESIS & GUARANTEED BUTTON CLICK -->
     <script>
         const audioToggle = document.getElementById('audioToggle');
         const audioLabel = document.getElementById('audioLabel');
@@ -1004,8 +1004,9 @@
         const pureShutdown = document.getElementById('pureShutdownScreen');
 
         let audioCtx = null;
-        let ambientGain = null;
-        let isAudioPlaying = false;
+        let masterGain = null;
+        let isMusicPlaying = false;
+        let ambientTimer = null;
 
         // 1. Silent Boot Animation
         window.addEventListener('load', () => {
@@ -1014,134 +1015,117 @@
             }, 1900);
         });
 
-        // 2. Hardware Audio Unlocker
-        function unlockAudioEngine() {
+        // 2. HARDWARE AUDIO CONTEXT SYNCHRONOUS UNLOCK
+        function unlockAudioDirect() {
             if (!audioCtx) {
                 const AudioClass = window.AudioContext || window.webkitAudioContext;
                 audioCtx = new AudioClass();
-                ambientGain = audioCtx.createGain();
-                ambientGain.connect(audioCtx.destination);
+                masterGain = audioCtx.createGain();
+                masterGain.gain.setValueAtTime(0.7, audioCtx.currentTime); // High clear volume
+                masterGain.connect(audioCtx.destination);
             }
             if (audioCtx.state === 'suspended') {
                 audioCtx.resume();
             }
         }
 
-        // 3. Ambient Synth Engine (Self-Generating Space Chords - Zero Network Dependency)
-        let activeOscs = [];
-        function startAmbientChords() {
-            if (isAudioPlaying) return;
-            unlockAudioEngine();
+        // 3. AUDIBLE AMBIENT CHIME ARPEGGIATOR (Pure Web Audio - 100% Audible on Mobile Speakers)
+        const ambientNotes = [261.63, 329.63, 392.00, 523.25, 659.25]; // C Major / Calm Celestial
+        let noteIdx = 0;
 
-            const now = audioCtx.currentTime;
-            ambientGain.gain.setValueAtTime(0.001, now);
-            ambientGain.gain.exponentialRampToValueAtTime(0.25, now + 1.5);
+        function playAmbientChime() {
+            if (!isMusicPlaying || !audioCtx) return;
+            try {
+                const now = audioCtx.currentTime;
+                const osc = audioCtx.createOscillator();
+                const noteGain = audioCtx.createGain();
 
-            // Rich warm ambient chord (D-Minor 9th)
-            const chordFrequencies = [146.83, 220.00, 261.63, 293.66, 349.23];
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(ambientNotes[noteIdx % ambientNotes.length], now);
+                noteIdx++;
 
-            activeOscs = chordFrequencies.map(freq => {
+                // Gentle soothing fade in/out
+                noteGain.gain.setValueAtTime(0.001, now);
+                noteGain.gain.linearRampToValueAtTime(0.35, now + 0.3);
+                noteGain.gain.exponentialRampToValueAtTime(0.0001, now + 1.8);
+
+                osc.connect(noteGain);
+                noteGain.connect(masterGain);
+
+                osc.start(now);
+                osc.stop(now + 1.8);
+            } catch(e) {}
+        }
+
+        function startAmbientLoop() {
+            if (isMusicPlaying) return;
+            unlockAudioDirect();
+            isMusicPlaying = true;
+            audioToggle.classList.add('playing');
+            audioLabel.textContent = "Ambient Playing";
+
+            playAmbientChime();
+            ambientTimer = setInterval(playAmbientChime, 1400); // Har 1.4 second me ek soothing note
+        }
+
+        function stopAmbientLoop() {
+            if (!isMusicPlaying) return;
+            isMusicPlaying = false;
+            clearInterval(ambientTimer);
+            audioToggle.classList.remove('playing');
+            audioLabel.textContent = "Sound Paused";
+        }
+
+        // 4. SCREEN PAR KAHIN BHI PEHLA TAP / CLICK HOTE HI MUSIC START
+        function onFirstTouchTrigger() {
+            unlockAudioDirect();
+            if (!isMusicPlaying) {
+                startAmbientLoop();
+                window.removeEventListener('click', onFirstTouchTrigger);
+                window.removeEventListener('touchend', onFirstTouchTrigger);
+            }
+        }
+
+        window.addEventListener('click', onFirstTouchTrigger);
+        window.addEventListener('touchend', onFirstTouchTrigger);
+
+        // 5. MANUAL AUDIO PILL TOGGLE
+        function toggleAudio() {
+            unlockAudioDirect();
+            if (!isMusicPlaying) {
+                startAmbientLoop();
+            } else {
+                stopAmbientLoop();
+            }
+        }
+
+        // 6. LOUD & SHARP MECHANICAL BUTTON POP (Direct Hardware Sound)
+        function playSharpButtonSound() {
+            try {
+                unlockAudioDirect();
+                const now = audioCtx.currentTime;
                 const osc = audioCtx.createOscillator();
                 const gain = audioCtx.createGain();
 
-                osc.type = 'sine';
-                osc.frequency.setValueAtTime(freq, now);
+                osc.type = 'triangle';
+                osc.frequency.setValueAtTime(600, now);
+                osc.frequency.exponentialRampToValueAtTime(120, now + 0.05);
 
-                gain.gain.setValueAtTime(0.18, now);
+                gain.gain.setValueAtTime(1.0, now); // Full Max Sound
+                gain.gain.exponentialRampToValueAtTime(0.001, now + 0.05);
+
                 osc.connect(gain);
-                gain.connect(ambientGain);
+                gain.connect(audioCtx.destination);
 
                 osc.start(now);
-                return osc;
-            });
-
-            isAudioPlaying = true;
-            audioToggle.classList.add('playing');
-            audioLabel.textContent = "Ambient Playing";
-        }
-
-        function stopAmbientChords() {
-            if (!isAudioPlaying || !audioCtx) return;
-            const now = audioCtx.currentTime;
-            ambientGain.gain.setValueAtTime(ambientGain.gain.value, now);
-            ambientGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.3);
-
-            setTimeout(() => {
-                activeOscs.forEach(o => {
-                    try { o.stop(); o.disconnect(); } catch(e){}
-                });
-                activeOscs = [];
-                isAudioPlaying = false;
-                audioToggle.classList.remove('playing');
-                audioLabel.textContent = "Sound Paused";
-            }, 300);
-        }
-
-        // 4. One-Tap Global Unlock: Screen par pehla tap/click hote hi music chalu
-        function handleFirstInteraction() {
-            if (!isAudioPlaying) {
-                startAmbientChords();
-                // Ek baar chalu hone ke baad global listener unbind kar do
-                window.removeEventListener('click', handleFirstInteraction);
-                window.removeEventListener('touchstart', handleFirstInteraction);
-            }
-        }
-
-        window.addEventListener('click', handleFirstInteraction);
-        window.addEventListener('touchstart', handleFirstInteraction, { passive: true });
-
-        // 5. Manual Audio Pill Toggle
-        function toggleAudio() {
-            unlockAudioEngine();
-            if (!isAudioPlaying) {
-                startAmbientChords();
-            } else {
-                stopAmbientChords();
-            }
-        }
-
-        // 6. TEJ & ACCHI PUNCHY BUTTON CLICK SOUND (Rich Pop Chime)
-        function playLoudPunchyButtonSound() {
-            try {
-                unlockAudioEngine();
-                const now = audioCtx.currentTime;
-
-                // High crisp click
-                const osc1 = audioCtx.createOscillator();
-                const gain1 = audioCtx.createGain();
-                osc1.type = 'sine';
-                osc1.frequency.setValueAtTime(800, now);
-                osc1.frequency.exponentialRampToValueAtTime(140, now + 0.06);
-
-                gain1.gain.setValueAtTime(0.75, now); // Loud & clear
-                gain1.gain.exponentialRampToValueAtTime(0.001, now + 0.06);
-
-                osc1.connect(gain1);
-                gain1.connect(audioCtx.destination);
-                osc1.start(now);
-                osc1.stop(now + 0.06);
-
-                // Deep solid thud
-                const osc2 = audioCtx.createOscillator();
-                const gain2 = audioCtx.createGain();
-                osc2.type = 'triangle';
-                osc2.frequency.setValueAtTime(320, now);
-                osc2.frequency.exponentialRampToValueAtTime(60, now + 0.08);
-
-                gain2.gain.setValueAtTime(0.9, now); // Loud & punchy
-                gain2.gain.exponentialRampToValueAtTime(0.001, now + 0.08);
-
-                osc2.connect(gain2);
-                gain2.connect(audioCtx.destination);
-                osc2.start(now);
-                osc2.stop(now + 0.08);
+                osc.stop(now + 0.05);
             } catch (err) {}
         }
 
         // 7. Pure Shutdown
         function triggerPureShutdown() {
             pureShutdown.classList.add('active');
-            stopAmbientChords();
+            stopAmbientLoop();
             setTimeout(() => {
                 pureShutdown.classList.remove('active');
                 window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -1156,10 +1140,10 @@
             btn.classList.add('active');
         }
 
-        // Button Click Shockwave + TEJ CLICK SOUND
+        // Shockwave Ripple on Buttons + LOUD CLICK SOUND
         document.querySelectorAll('.interactive-btn').forEach(button => {
             button.addEventListener('click', function (e) {
-                playLoudPunchyButtonSound();
+                playSharpButtonSound();
 
                 const circle = document.createElement('span');
                 const diameter = Math.max(button.clientWidth, button.clientHeight);
