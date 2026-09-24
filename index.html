@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ayush Verma — Digital Experiences & Web Engineering</title>
+    <title id="pageTitle">Ayush Verma — Digital Experiences & Web Engineering</title>
     
     <meta name="description" content="Minimal, ultra-fast web interfaces for coaching institutes, businesses, and online creators by Ayush Verma.">
 
@@ -99,46 +99,6 @@
             pointer-events: none;
         }
 
-        /* ===== 2. SHUTDOWN SCREEN ===== */
-        #pureShutdownScreen {
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.98);
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
-            z-index: 999999;
-            display: none;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            opacity: 0;
-            transition: opacity 0.5s ease;
-        }
-
-        #pureShutdownScreen.active {
-            display: flex;
-            opacity: 1;
-        }
-
-        .shutdown-glow-circle {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            border: 3px solid var(--xiaomi-orange);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 32px;
-            color: var(--xiaomi-orange);
-            box-shadow: 0 0 45px rgba(255, 103, 0, 0.7);
-            animation: shutdownSpinPulse 1.2s infinite alternate;
-        }
-
-        @keyframes shutdownSpinPulse {
-            from { transform: scale(0.92); opacity: 0.8; }
-            to { transform: scale(1.08); opacity: 1; box-shadow: 0 0 60px rgba(255, 103, 0, 1); }
-        }
-
         .ambient-glow-orb {
             position: fixed;
             top: 20%;
@@ -205,9 +165,9 @@
             height: 4px;
         }
 
-        .playing .eq-bar:nth-child(1) { animation: eqJump 0.8s ease-in-out infinite alternate; }
-        .playing .eq-bar:nth-child(2) { animation: eqJump 0.6s ease-in-out infinite alternate 0.2s; }
-        .playing .eq-bar:nth-child(3) { animation: eqJump 0.9s ease-in-out infinite alternate 0.4s; }
+        .playing .eq-bar:nth-child(1) { animation: eqJump 0.5s ease-in-out infinite alternate; }
+        .playing .eq-bar:nth-child(2) { animation: eqJump 0.35s ease-in-out infinite alternate 0.15s; }
+        .playing .eq-bar:nth-child(3) { animation: eqJump 0.6s ease-in-out infinite alternate 0.25s; }
 
         @keyframes eqJump {
             from { height: 3px; }
@@ -737,37 +697,6 @@
             100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
         }
 
-        /* ===== PURE SHUTDOWN TRIGGER CARD ===== */
-        .shutdown-trigger-card {
-            text-align: center;
-            margin-top: 50px;
-            padding: 26px 20px;
-            border-radius: 22px;
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .pure-power-btn {
-            background: rgba(255, 103, 0, 0.15);
-            border: 1px solid rgba(255, 103, 0, 0.5);
-            color: #ff7a18;
-            padding: 13px 26px;
-            border-radius: var(--radius-pill);
-            font-size: 0.9rem;
-            font-weight: 700;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            margin-top: 14px;
-            transition: all 0.25s ease;
-        }
-
-        .pure-power-btn:hover {
-            background: rgba(255, 103, 0, 0.3);
-            transform: scale(1.03);
-        }
-
         footer {
             text-align: center;
             padding: 40px 0;
@@ -787,11 +716,6 @@
         </div>
     </div>
 
-    <!-- 2. PURE SHUTDOWN ANIMATION -->
-    <div id="pureShutdownScreen">
-        <div class="shutdown-glow-circle">⏻</div>
-    </div>
-
     <!-- BACKGROUND GLOW -->
     <div class="ambient-glow-orb"></div>
 
@@ -802,7 +726,7 @@
             <span class="eq-bar"></span>
             <span class="eq-bar"></span>
         </div>
-        <span class="audio-text" id="audioLabel">Sound On</span>
+        <span class="audio-text" id="audioLabel">Play Beat</span>
     </div>
 
     <!-- FLOATING WHATSAPP BUTTON -->
@@ -978,16 +902,6 @@
 
                     <button type="submit" class="interactive-btn btn-apple-blue" style="width: 100%;">Submit Inquiry</button>
                 </form>
-
-                <!-- 3. PURE POWER OFF TRIGGER -->
-                <div class="shutdown-trigger-card">
-                    <span style="font-size: 24px; display:block; margin-bottom: 4px;">⚡</span>
-                    <strong style="color: #ffffff; font-size: 0.95rem;">Interactive Session Ending</strong>
-                    <p style="color: var(--text-secondary); font-size: 0.82rem; margin-top: 4px;">Trigger full ambient screen shutdown.</p>
-                    <button type="button" class="pure-power-btn interactive-btn" onclick="triggerPureShutdown()">
-                        <span>⏻</span> Power Off
-                    </button>
-                </div>
             </section>
         </main>
 
@@ -996,17 +910,18 @@
         </footer>
     </div>
 
-    <!-- SCRIPT FOR AUDIBLE HARDWARE SYNTHESIS & GUARANTEED BUTTON CLICK -->
+    <!-- SCRIPT FOR CHILL-HOP BEAT SYNTHESIZER + TAB CLOSE THANKS -->
     <script>
         const audioToggle = document.getElementById('audioToggle');
         const audioLabel = document.getElementById('audioLabel');
         const pureBoot = document.getElementById('pureBootScreen');
-        const pureShutdown = document.getElementById('pureShutdownScreen');
+        const pageTitle = document.getElementById('pageTitle');
 
         let audioCtx = null;
         let masterGain = null;
-        let isMusicPlaying = false;
-        let ambientTimer = null;
+        let isBeatPlaying = false;
+        let beatInterval = null;
+        let step = 0;
 
         // 1. Silent Boot Animation
         window.addEventListener('load', () => {
@@ -1015,13 +930,13 @@
             }, 1900);
         });
 
-        // 2. HARDWARE AUDIO CONTEXT SYNCHRONOUS UNLOCK
-        function unlockAudioDirect() {
+        // 2. Hardware Audio Unlocker
+        function unlockAudioEngine() {
             if (!audioCtx) {
                 const AudioClass = window.AudioContext || window.webkitAudioContext;
                 audioCtx = new AudioClass();
                 masterGain = audioCtx.createGain();
-                masterGain.gain.setValueAtTime(0.7, audioCtx.currentTime); // High clear volume
+                masterGain.gain.setValueAtTime(0.75, audioCtx.currentTime); // Crisp clear volume
                 masterGain.connect(audioCtx.destination);
             }
             if (audioCtx.state === 'suspended') {
@@ -1029,58 +944,95 @@
             }
         }
 
-        // 3. AUDIBLE AMBIENT CHIME ARPEGGIATOR (Pure Web Audio - 100% Audible on Mobile Speakers)
-        const ambientNotes = [261.63, 329.63, 392.00, 523.25, 659.25]; // C Major / Calm Celestial
-        let noteIdx = 0;
-
-        function playAmbientChime() {
-            if (!isMusicPlaying || !audioCtx) return;
-            try {
-                const now = audioCtx.currentTime;
-                const osc = audioCtx.createOscillator();
-                const noteGain = audioCtx.createGain();
-
-                osc.type = 'sine';
-                osc.frequency.setValueAtTime(ambientNotes[noteIdx % ambientNotes.length], now);
-                noteIdx++;
-
-                // Gentle soothing fade in/out
-                noteGain.gain.setValueAtTime(0.001, now);
-                noteGain.gain.linearRampToValueAtTime(0.35, now + 0.3);
-                noteGain.gain.exponentialRampToValueAtTime(0.0001, now + 1.8);
-
-                osc.connect(noteGain);
-                noteGain.connect(masterGain);
-
-                osc.start(now);
-                osc.stop(now + 1.8);
-            } catch(e) {}
+        // 3. HARDWARE CHILL-HOP GROOVE BEAT SYNTHESIZER
+        // Kick Drum (Deep punch)
+        function triggerKick(time) {
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.frequency.setValueAtTime(150, time);
+            osc.frequency.exponentialRampToValueAtTime(35, time + 0.12);
+            gain.gain.setValueAtTime(0.7, time);
+            gain.gain.exponentialRampToValueAtTime(0.001, time + 0.12);
+            osc.connect(gain);
+            gain.connect(masterGain);
+            osc.start(time);
+            osc.stop(time + 0.12);
         }
 
-        function startAmbientLoop() {
-            if (isMusicPlaying) return;
-            unlockAudioDirect();
-            isMusicPlaying = true;
+        // Hi-Hat / Shaker (Crisp snap)
+        function triggerHiHat(time) {
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.type = 'highpass';
+            osc.frequency.setValueAtTime(8000, time);
+            gain.gain.setValueAtTime(0.08, time);
+            gain.gain.exponentialRampToValueAtTime(0.001, time + 0.05);
+            osc.connect(gain);
+            gain.connect(masterGain);
+            osc.start(time);
+            osc.stop(time + 0.05);
+        }
+
+        // Melodic Bass Chords (Modern Lofi Vibe)
+        const bassNotes = [130.81, 146.83, 164.81, 174.61]; // C - D - E - F groove
+        function triggerChord(time, noteIndex) {
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.type = 'triangle';
+            osc.frequency.setValueAtTime(bassNotes[noteIndex % bassNotes.length], time);
+            gain.gain.setValueAtTime(0.25, time);
+            gain.gain.exponentialRampToValueAtTime(0.001, time + 0.35);
+            osc.connect(gain);
+            gain.connect(masterGain);
+            osc.start(time);
+            osc.stop(time + 0.35);
+        }
+
+        // Beat Clock Loop
+        function runBeatLoop() {
+            if (!isBeatPlaying || !audioCtx) return;
+            const now = audioCtx.currentTime;
+
+            // Step 0 & 2: Kick
+            if (step % 2 === 0) {
+                triggerKick(now);
+            }
+            // Every Step: Hi-Hat
+            triggerHiHat(now);
+
+            // Step 0 & 3: Bass chords
+            if (step === 0 || step === 3) {
+                triggerChord(now, Math.floor(step / 2));
+            }
+
+            step = (step + 1) % 4;
+        }
+
+        function startGrooveBeat() {
+            if (isBeatPlaying) return;
+            unlockAudioEngine();
+            isBeatPlaying = true;
+            step = 0;
             audioToggle.classList.add('playing');
-            audioLabel.textContent = "Ambient Playing";
+            audioLabel.textContent = "Beat Playing";
 
-            playAmbientChime();
-            ambientTimer = setInterval(playAmbientChime, 1400); // Har 1.4 second me ek soothing note
+            runBeatLoop();
+            beatInterval = setInterval(runBeatLoop, 320); // ~95 BPM Chillhop tempo
         }
 
-        function stopAmbientLoop() {
-            if (!isMusicPlaying) return;
-            isMusicPlaying = false;
-            clearInterval(ambientTimer);
+        function stopGrooveBeat() {
+            if (!isBeatPlaying) return;
+            isBeatPlaying = false;
+            clearInterval(beatInterval);
             audioToggle.classList.remove('playing');
-            audioLabel.textContent = "Sound Paused";
+            audioLabel.textContent = "Play Beat";
         }
 
-        // 4. SCREEN PAR KAHIN BHI PEHLA TAP / CLICK HOTE HI MUSIC START
+        // 4. FIRST USER TOUCH UNLOCKS & PLAYS BEAT
         function onFirstTouchTrigger() {
-            unlockAudioDirect();
-            if (!isMusicPlaying) {
-                startAmbientLoop();
+            unlockAudioEngine();
+            if (!isBeatPlaying) {
+                startGrooveBeat();
                 window.removeEventListener('click', onFirstTouchTrigger);
                 window.removeEventListener('touchend', onFirstTouchTrigger);
             }
@@ -1089,29 +1041,29 @@
         window.addEventListener('click', onFirstTouchTrigger);
         window.addEventListener('touchend', onFirstTouchTrigger);
 
-        // 5. MANUAL AUDIO PILL TOGGLE
+        // 5. MANUAL AUDIO TOGGLE
         function toggleAudio() {
-            unlockAudioDirect();
-            if (!isMusicPlaying) {
-                startAmbientLoop();
+            unlockAudioEngine();
+            if (!isBeatPlaying) {
+                startGrooveBeat();
             } else {
-                stopAmbientLoop();
+                stopGrooveBeat();
             }
         }
 
-        // 6. LOUD & SHARP MECHANICAL BUTTON POP (Direct Hardware Sound)
+        // 6. CRISP & LOUD BUTTON CLICK
         function playSharpButtonSound() {
             try {
-                unlockAudioDirect();
+                unlockAudioEngine();
                 const now = audioCtx.currentTime;
                 const osc = audioCtx.createOscillator();
                 const gain = audioCtx.createGain();
 
                 osc.type = 'triangle';
-                osc.frequency.setValueAtTime(600, now);
-                osc.frequency.exponentialRampToValueAtTime(120, now + 0.05);
+                osc.frequency.setValueAtTime(620, now);
+                osc.frequency.exponentialRampToValueAtTime(110, now + 0.05);
 
-                gain.gain.setValueAtTime(1.0, now); // Full Max Sound
+                gain.gain.setValueAtTime(1.0, now);
                 gain.gain.exponentialRampToValueAtTime(0.001, now + 0.05);
 
                 osc.connect(gain);
@@ -1122,16 +1074,6 @@
             } catch (err) {}
         }
 
-        // 7. Pure Shutdown
-        function triggerPureShutdown() {
-            pureShutdown.classList.add('active');
-            stopAmbientLoop();
-            setTimeout(() => {
-                pureShutdown.classList.remove('active');
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            }, 3000);
-        }
-
         // Tab Switcher
         function switchAppleTab(tabId, btn) {
             document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
@@ -1140,7 +1082,7 @@
             btn.classList.add('active');
         }
 
-        // Shockwave Ripple on Buttons + LOUD CLICK SOUND
+        // Button Click Shockwave + Click Sound
         document.querySelectorAll('.interactive-btn').forEach(button => {
             button.addEventListener('click', function (e) {
                 playSharpButtonSound();
@@ -1162,6 +1104,23 @@
 
                 button.appendChild(circle);
             });
+        });
+
+        // 7. TAB CLOSE / EXIT: "THANKS FOR VISITING" PROMPT & TITLE ANIMATION
+        window.addEventListener('beforeunload', (e) => {
+            const farewellMsg = "Thanks for visiting! Looking forward to working with you.";
+            e.preventDefault();
+            e.returnValue = farewellMsg;
+            return farewellMsg;
+        });
+
+        // Jab user tab switch kare ya minimize kare
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden) {
+                document.title = "Thanks for Visiting! 👋 — Ayush Verma";
+            } else {
+                document.title = "Ayush Verma — Digital Experiences & Web Engineering";
+            }
         });
     </script>
 </body>
