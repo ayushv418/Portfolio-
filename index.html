@@ -7,6 +7,9 @@
     
     <meta name="description" content="Minimal, ultra-fast web interfaces for coaching institutes, businesses, and online creators by Ayush Verma.">
 
+    <!-- LottieFiles Web Player CDN -->
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+
     <style>
         :root {
             --bg-base: #000000;
@@ -16,7 +19,6 @@
             --text-secondary: #86868b;
             --accent-blue: #2997ff;
             --accent-green: #30d158;
-            --xiaomi-orange: #ff6700;
             --radius-large: 24px;
             --radius-pill: 980px;
         }
@@ -39,66 +41,62 @@
             position: relative;
         }
 
-        /* ===== 1. SILENT BIG BOOT ANIMATION ===== */
-        #pureBootScreen {
+        /* ===== 1. LOTTIEFILES "LET'S START" INTRO SCREEN ===== */
+        #lottieIntroScreen {
             position: fixed;
             inset: 0;
             background: #000000;
             z-index: 99999;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
-            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.8s;
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s ease, visibility 0.8s;
         }
 
-        .mi-anim-core {
-            position: relative;
-            width: 140px;
-            height: 140px;
+        .lottie-box {
+            width: 220px;
+            height: 220px;
             display: flex;
             justify-content: center;
             align-items: center;
+            filter: drop-shadow(0 0 35px rgba(41, 151, 255, 0.5));
         }
 
-        .mi-ring-outer {
-            position: absolute;
-            width: 130px;
-            height: 130px;
-            border-radius: 42px;
-            border: 4px solid var(--xiaomi-orange);
-            animation: squircleExpandBig 2.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-            box-shadow: 0 0 60px rgba(255, 103, 0, 0.8), inset 0 0 30px rgba(255, 103, 0, 0.4);
+        .lets-start-text {
+            font-size: 2rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            margin-top: 10px;
+            background: linear-gradient(135deg, #ffffff 30%, #2997ff 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: textGlowPulse 1.8s ease-in-out infinite alternate;
         }
 
-        .mi-dot-center {
-            width: 24px;
-            height: 24px;
-            background: #ffffff;
-            border-radius: 50%;
-            animation: dotGlowPulseBig 2s ease-in-out forwards;
-            box-shadow: 0 0 35px #ffffff, 0 0 70px var(--xiaomi-orange);
+        .lets-start-sub {
+            font-size: 0.85rem;
+            color: #86868b;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-top: 6px;
+            font-weight: 600;
         }
 
-        @keyframes squircleExpandBig {
-            0% { transform: scale(0.2) rotate(-45deg); opacity: 0; }
-            40% { transform: scale(1) rotate(0deg); opacity: 1; border-color: #ffa366; }
-            75% { transform: scale(1.15) rotate(15deg); opacity: 1; }
-            100% { transform: scale(2.8) rotate(45deg); opacity: 0; }
+        @keyframes textGlowPulse {
+            0% { transform: scale(0.96); filter: drop-shadow(0 0 10px rgba(41, 151, 255, 0.2)); }
+            100% { transform: scale(1.02); filter: drop-shadow(0 0 25px rgba(41, 151, 255, 0.8)); }
         }
 
-        @keyframes dotGlowPulseBig {
-            0% { transform: scale(0); opacity: 0; }
-            35% { transform: scale(1.4); opacity: 1; }
-            70% { transform: scale(1); opacity: 1; }
-            100% { transform: scale(0); opacity: 0; }
-        }
-
-        #pureBootScreen.booted {
+        #lottieIntroScreen.hide {
             opacity: 0;
             visibility: hidden;
             pointer-events: none;
+            transform: scale(1.06);
         }
 
+        /* Ambient Glow */
         .ambient-glow-orb {
             position: fixed;
             top: 20%;
@@ -106,7 +104,7 @@
             transform: translate(-50%, -50%);
             width: 500px;
             height: 500px;
-            background: radial-gradient(circle, rgba(41, 151, 255, 0.15), rgba(255, 103, 0, 0.08), transparent 70%);
+            background: radial-gradient(circle, rgba(41, 151, 255, 0.15), rgba(191, 90, 242, 0.08), transparent 70%);
             filter: blur(80px);
             z-index: 0;
             pointer-events: none;
@@ -604,7 +602,7 @@
             border: 1px solid var(--surface-border);
         }
 
-        /* ===== CONTACT CARDS ===== */
+        /* ===== CONTACT CARDS (UPDATED WITH NEW EMAIL) ===== */
         .contact-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -708,12 +706,20 @@
 </head>
 <body>
 
-    <!-- 1. SILENT BIG BOOT ANIMATION -->
-    <div id="pureBootScreen">
-        <div class="mi-anim-core">
-            <div class="mi-ring-outer"></div>
-            <div class="mi-dot-center"></div>
+    <!-- 1. LOTTIEFILES "LET'S START" INTRO SCREEN -->
+    <div id="lottieIntroScreen">
+        <div class="lottie-box">
+            <!-- Premium High-Tech Rocket Launch Animation from LottieFiles -->
+            <lottie-player 
+                src="https://assets2.lottiefiles.com/packages/lf20_m6cu9j9a.json" 
+                background="transparent" 
+                speed="1.2" 
+                style="width: 100%; height: 100%;" 
+                autoplay>
+            </lottie-player>
         </div>
+        <div class="lets-start-text">Let's Start</div>
+        <div class="lets-start-sub">Crafting Digital Excellence</div>
     </div>
 
     <!-- BACKGROUND GLOW -->
@@ -859,7 +865,7 @@
                 </div>
             </section>
 
-            <!-- CONTACT -->
+            <!-- CONTACT (UPDATED WITH webdevelopment9595@gmail.com) -->
             <section id="contact">
                 <h2 class="sec-heading">Initiate a Project</h2>
                 <p class="sec-sub">Direct channels for rapid consultation and deployment:</p>
@@ -882,14 +888,14 @@
                     <div class="contact-pill-card">
                         <div class="icon">✉️</div>
                         <div class="meta">Email Dispatch</div>
-                        <span class="val">stv9610@gmail.com</span>
-                        <a href="mailto:stv9610@gmail.com" class="interactive-btn btn-apple-glass" style="width: 100%;">Send Email</a>
+                        <span class="val">webdevelopment9595@gmail.com</span>
+                        <a href="mailto:webdevelopment9595@gmail.com" class="interactive-btn btn-apple-glass" style="width: 100%;">Send Email</a>
                     </div>
                 </div>
 
-                <form action="https://formsubmit.co/stv9610@gmail.com" method="POST">
+                <form action="https://formsubmit.co/webdevelopment9595@gmail.com" method="POST">
                     <input type="hidden" name="_captcha" value="false">
-                    <input type="hidden" name="_subject" value="Web Inquiry Received!">
+                    <input type="hidden" name="_subject" value="New Web Inquiry Received!">
                     
                     <label style="display:block; font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 6px;">Your Name / Institution</label>
                     <input type="text" name="Client_Name" placeholder="e.g. Guidance Academy" required>
@@ -910,12 +916,11 @@
         </footer>
     </div>
 
-    <!-- SCRIPT FOR CHILL-HOP BEAT SYNTHESIZER + TAB CLOSE THANKS -->
+    <!-- JAVASCRIPT LOGIC -->
     <script>
         const audioToggle = document.getElementById('audioToggle');
         const audioLabel = document.getElementById('audioLabel');
-        const pureBoot = document.getElementById('pureBootScreen');
-        const pageTitle = document.getElementById('pageTitle');
+        const introScreen = document.getElementById('lottieIntroScreen');
 
         let audioCtx = null;
         let masterGain = null;
@@ -923,20 +928,20 @@
         let beatInterval = null;
         let step = 0;
 
-        // 1. Silent Boot Animation
+        // 1. Lottie Intro Screen (Auto fade out after 2.4s)
         window.addEventListener('load', () => {
             setTimeout(() => {
-                if (pureBoot) pureBoot.classList.add('booted');
-            }, 1900);
+                if (introScreen) introScreen.classList.add('hide');
+            }, 2400);
         });
 
-        // 2. Hardware Audio Unlocker
+        // 2. Hardware Audio Context Initialization
         function unlockAudioEngine() {
             if (!audioCtx) {
                 const AudioClass = window.AudioContext || window.webkitAudioContext;
                 audioCtx = new AudioClass();
                 masterGain = audioCtx.createGain();
-                masterGain.gain.setValueAtTime(0.75, audioCtx.currentTime); // Crisp clear volume
+                masterGain.gain.setValueAtTime(0.75, audioCtx.currentTime);
                 masterGain.connect(audioCtx.destination);
             }
             if (audioCtx.state === 'suspended') {
@@ -944,8 +949,7 @@
             }
         }
 
-        // 3. HARDWARE CHILL-HOP GROOVE BEAT SYNTHESIZER
-        // Kick Drum (Deep punch)
+        // 3. Chill-Hop Groove Rhythm
         function triggerKick(time) {
             const osc = audioCtx.createOscillator();
             const gain = audioCtx.createGain();
@@ -959,7 +963,6 @@
             osc.stop(time + 0.12);
         }
 
-        // Hi-Hat / Shaker (Crisp snap)
         function triggerHiHat(time) {
             const osc = audioCtx.createOscillator();
             const gain = audioCtx.createGain();
@@ -973,8 +976,7 @@
             osc.stop(time + 0.05);
         }
 
-        // Melodic Bass Chords (Modern Lofi Vibe)
-        const bassNotes = [130.81, 146.83, 164.81, 174.61]; // C - D - E - F groove
+        const bassNotes = [130.81, 146.83, 164.81, 174.61];
         function triggerChord(time, noteIndex) {
             const osc = audioCtx.createOscillator();
             const gain = audioCtx.createGain();
@@ -988,22 +990,13 @@
             osc.stop(time + 0.35);
         }
 
-        // Beat Clock Loop
         function runBeatLoop() {
             if (!isBeatPlaying || !audioCtx) return;
             const now = audioCtx.currentTime;
 
-            // Step 0 & 2: Kick
-            if (step % 2 === 0) {
-                triggerKick(now);
-            }
-            // Every Step: Hi-Hat
+            if (step % 2 === 0) triggerKick(now);
             triggerHiHat(now);
-
-            // Step 0 & 3: Bass chords
-            if (step === 0 || step === 3) {
-                triggerChord(now, Math.floor(step / 2));
-            }
+            if (step === 0 || step === 3) triggerChord(now, Math.floor(step / 2));
 
             step = (step + 1) % 4;
         }
@@ -1017,7 +1010,7 @@
             audioLabel.textContent = "Beat Playing";
 
             runBeatLoop();
-            beatInterval = setInterval(runBeatLoop, 320); // ~95 BPM Chillhop tempo
+            beatInterval = setInterval(runBeatLoop, 320);
         }
 
         function stopGrooveBeat() {
@@ -1028,7 +1021,7 @@
             audioLabel.textContent = "Play Beat";
         }
 
-        // 4. FIRST USER TOUCH UNLOCKS & PLAYS BEAT
+        // Tap se Beat chalu
         function onFirstTouchTrigger() {
             unlockAudioEngine();
             if (!isBeatPlaying) {
@@ -1037,11 +1030,9 @@
                 window.removeEventListener('touchend', onFirstTouchTrigger);
             }
         }
-
         window.addEventListener('click', onFirstTouchTrigger);
         window.addEventListener('touchend', onFirstTouchTrigger);
 
-        // 5. MANUAL AUDIO TOGGLE
         function toggleAudio() {
             unlockAudioEngine();
             if (!isBeatPlaying) {
@@ -1051,7 +1042,7 @@
             }
         }
 
-        // 6. CRISP & LOUD BUTTON CLICK
+        // 4. Loud Punchy Button Sound
         function playSharpButtonSound() {
             try {
                 unlockAudioEngine();
@@ -1074,7 +1065,7 @@
             } catch (err) {}
         }
 
-        // Tab Switcher
+        // Tab switcher
         function switchAppleTab(tabId, btn) {
             document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
             document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
@@ -1082,7 +1073,7 @@
             btn.classList.add('active');
         }
 
-        // Button Click Shockwave + Click Sound
+        // Button Ripple & Click Sound
         document.querySelectorAll('.interactive-btn').forEach(button => {
             button.addEventListener('click', function (e) {
                 playSharpButtonSound();
@@ -1098,23 +1089,12 @@
                 circle.classList.add('shockwave-wave');
 
                 const existingWave = button.querySelector('.shockwave-wave');
-                if (existingWave) {
-                    existingWave.remove();
-                }
-
+                if (existingWave) existingWave.remove();
                 button.appendChild(circle);
             });
         });
 
-        // 7. TAB CLOSE / EXIT: "THANKS FOR VISITING" PROMPT & TITLE ANIMATION
-        window.addEventListener('beforeunload', (e) => {
-            const farewellMsg = "Thanks for visiting! Looking forward to working with you.";
-            e.preventDefault();
-            e.returnValue = farewellMsg;
-            return farewellMsg;
-        });
-
-        // Jab user tab switch kare ya minimize kare
+        // 5. Tab switch / close "Thanks for Visiting"
         document.addEventListener('visibilitychange', () => {
             if (document.hidden) {
                 document.title = "Thanks for Visiting! 👋 — Ayush Verma";
