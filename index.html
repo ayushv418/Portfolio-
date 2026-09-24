@@ -5,7 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title id="pageTitle">Ayush Verma — Digital Experiences & Web Engineering</title>
     
-    <meta name="description" content="Minimal, ultra-fast web interfaces for coaching institutes, businesses, and online creators by Ayush Verma.">
+    <meta name="description" content="Lightning-fast web experiences for coaching institutes, local businesses, and modern online brands by Ayush Verma.">
+    
+    <!-- OpenGraph / WhatsApp Share Preview Tags -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Ayush Verma — Digital Experiences & Web Engineering">
+    <meta property="og:description" content="Get high-converting, lightning-fast web storefronts for coaching institutes, retail, and creators. Ready in 48-72 hours.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1200&auto=format&fit=crop">
+    <meta name="twitter:card" content="summary_large_image">
 
     <!-- LottieFiles Web Player CDN -->
     <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
@@ -19,6 +26,7 @@
             --text-secondary: #86868b;
             --accent-blue: #2997ff;
             --accent-green: #30d158;
+            --xiaomi-orange: #ff6700;
             --radius-large: 24px;
             --radius-pill: 980px;
         }
@@ -41,7 +49,7 @@
             position: relative;
         }
 
-        /* ===== 1. LOTTIEFILES "LET'S START" INTRO SCREEN ===== */
+        /* ===== 1. LOTTIEFILES INTRO SCREEN ===== */
         #lottieIntroScreen {
             position: fixed;
             inset: 0;
@@ -181,7 +189,7 @@
 
         /* ===== HEADER ===== */
         header {
-            padding: 85px 24px 60px 24px;
+            padding: 85px 24px 50px 24px;
             text-align: center;
             position: relative;
         }
@@ -240,12 +248,13 @@
             background: rgba(18, 18, 22, 0.75);
             backdrop-filter: blur(24px);
             -webkit-backdrop-filter: blur(24px);
-            padding: 12px 20px;
+            padding: 10px 16px;
             border-radius: var(--radius-pill);
             margin-bottom: 48px;
             display: flex;
+            flex-wrap: wrap;
             justify-content: center;
-            gap: 14px;
+            gap: 10px;
             border: 1px solid var(--surface-border);
             position: sticky;
             top: 14px;
@@ -255,7 +264,7 @@
         nav a {
             color: var(--text-secondary);
             text-decoration: none;
-            font-size: 0.86rem;
+            font-size: 0.84rem;
             font-weight: 500;
             padding: 6px 12px;
             border-radius: var(--radius-pill);
@@ -366,6 +375,204 @@
             content: "—";
             color: var(--accent-blue);
             font-weight: 700;
+        }
+
+        /* ===== PRICING SECTION ===== */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 20px;
+        }
+
+        .pricing-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--surface-border);
+            border-radius: 22px;
+            padding: 30px 24px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .pricing-card.featured {
+            background: linear-gradient(180deg, rgba(41, 151, 255, 0.12), rgba(18, 18, 22, 0.85));
+            border: 1.5px solid var(--accent-blue);
+            box-shadow: 0 10px 35px rgba(41, 151, 255, 0.25);
+        }
+
+        .popular-badge {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--accent-blue);
+            color: #ffffff;
+            font-size: 0.72rem;
+            font-weight: 800;
+            padding: 4px 14px;
+            border-radius: var(--radius-pill);
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .tier-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .tier-price {
+            font-size: 2.1rem;
+            font-weight: 900;
+            letter-spacing: -1px;
+            color: #ffffff;
+            margin-bottom: 6px;
+        }
+
+        .tier-desc {
+            font-size: 0.86rem;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+            line-height: 1.4;
+        }
+
+        .tier-features {
+            list-style: none;
+            display: grid;
+            gap: 10px;
+            margin-bottom: 24px;
+            font-size: 0.88rem;
+        }
+
+        .tier-features li {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #e5e5ea;
+        }
+
+        .tier-features li span {
+            color: var(--accent-green);
+            font-weight: 800;
+        }
+
+        /* ===== TESTIMONIALS SECTION ===== */
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 18px;
+        }
+
+        .testimonial-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--surface-border);
+            border-radius: 20px;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .stars-row {
+            color: #ffb703;
+            font-size: 1.1rem;
+            margin-bottom: 12px;
+            letter-spacing: 2px;
+        }
+
+        .test-quote {
+            font-size: 0.92rem;
+            color: #e5e5ea;
+            line-height: 1.45;
+            margin-bottom: 18px;
+            font-style: italic;
+        }
+
+        .client-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .client-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+        }
+
+        .client-name {
+            font-size: 0.92rem;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        .client-meta {
+            font-size: 0.76rem;
+            color: var(--text-secondary);
+        }
+
+        /* ===== FAQ SECTION (ACCORDION) ===== */
+        .faq-item {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--surface-border);
+            border-radius: 16px;
+            margin-bottom: 14px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .faq-header {
+            padding: 20px 22px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            user-select: none;
+        }
+
+        .faq-icon {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            transition: transform 0.3s ease;
+        }
+
+        .faq-body {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.35s cubic-bezier(0.16, 1, 0.3, 1), padding 0.3s ease;
+            color: var(--text-secondary);
+            font-size: 0.92rem;
+            line-height: 1.5;
+            padding: 0 22px;
+        }
+
+        .faq-item.active {
+            border-color: rgba(255, 255, 255, 0.28);
+            background: rgba(255, 255, 255, 0.04);
+        }
+
+        .faq-item.active .faq-body {
+            max-height: 200px;
+            padding-bottom: 20px;
+        }
+
+        .faq-item.active .faq-icon {
+            transform: rotate(45deg);
+            color: var(--accent-blue);
         }
 
         /* ===== COMPACT CERTIFICATE ===== */
@@ -602,7 +809,7 @@
             border: 1px solid var(--surface-border);
         }
 
-        /* ===== CONTACT CARDS (UPDATED WITH NEW EMAIL) ===== */
+        /* ===== CONTACT CARDS ===== */
         .contact-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -709,7 +916,6 @@
     <!-- 1. LOTTIEFILES "LET'S START" INTRO SCREEN -->
     <div id="lottieIntroScreen">
         <div class="lottie-box">
-            <!-- Premium High-Tech Rocket Launch Animation from LottieFiles -->
             <lottie-player 
                 src="https://assets2.lottiefiles.com/packages/lf20_m6cu9j9a.json" 
                 background="transparent" 
@@ -755,7 +961,10 @@
         <nav>
             <a href="#services">Services</a>
             <a href="#demos">Live Demos</a>
-            <a href="#credentials">Verified Skill</a>
+            <a href="#pricing">Pricing</a>
+            <a href="#testimonials">Clients</a>
+            <a href="#faq">FAQ</a>
+            <a href="#credentials">Skill</a>
             <a href="#contact">Contact</a>
         </nav>
 
@@ -825,6 +1034,164 @@
                 </div>
             </section>
 
+            <!-- 1. TRANSPARENT PRICING & PACKAGES -->
+            <section id="pricing">
+                <h2 class="sec-heading">Transparent Investment</h2>
+                <p class="sec-sub">Zero hidden charges. Complete clarity upfront for your digital storefront:</p>
+
+                <div class="pricing-grid">
+                    <!-- Starter -->
+                    <div class="pricing-card">
+                        <div>
+                            <h3 class="tier-title">Starter Storefront</h3>
+                            <div class="tier-price">₹2,999 — ₹4,499</div>
+                            <p class="tier-desc">Perfect for single coachings, clinics, and local retail stores needing an instant mobile presence.</p>
+                            <ul class="tier-features">
+                                <li><span>✓</span> 1 High-Speed Responsive Page</li>
+                                <li><span>✓</span> Direct WhatsApp & Call CTAs</li>
+                                <li><span>✓</span> Google Maps Location Integration</li>
+                                <li><span>✓</span> Printable Counter QR Standee</li>
+                                <li><span>✓</span> Delivered in 48 Hours</li>
+                            </ul>
+                        </div>
+                        <a href="https://wa.me/919795222082?text=Hello%20Ayush,%20I%20am%20interested%20in%20the%20Starter%20Storefront%20package." target="_blank" class="interactive-btn btn-apple-glass" style="width: 100%;">Choose Starter</a>
+                    </div>
+
+                    <!-- Business Growth (Featured with 7k - 7.5k) -->
+                    <div class="pricing-card featured">
+                        <span class="popular-badge">Most Popular</span>
+                        <div>
+                            <h3 class="tier-title" style="color: var(--accent-blue);">Business Growth</h3>
+                            <div class="tier-price">₹7,000 — ₹7,500</div>
+                            <p class="tier-desc">Engineered for institutions and established retailers wanting higher conversions & online visibility.</p>
+                            <ul class="tier-features">
+                                <li><span>✓</span> Up to 5 Custom Pages (About, Courses, Fees)</li>
+                                <li><span>✓</span> Product / Batch Inquiry Catalog</li>
+                                <li><span>✓</span> Automated Lead Capture Form</li>
+                                <li><span>✓</span> Local SEO & Google Search Indexing</li>
+                                <li><span>✓</span> 30 Days Free Maintenance & Edits</li>
+                            </ul>
+                        </div>
+                        <a href="https://wa.me/919795222082?text=Hello%20Ayush,%20I%20want%20the%20Business%20Growth%20package%20(7000-7500)." target="_blank" class="interactive-btn btn-apple-blue" style="width: 100%;">Get Business Growth</a>
+                    </div>
+
+                    <!-- Custom Pro -->
+                    <div class="pricing-card">
+                        <div>
+                            <h3 class="tier-title">Custom Engineering</h3>
+                            <div class="tier-price">₹12,999+</div>
+                            <p class="tier-desc">For brands requiring complex features, interactive dashboards, or full e-commerce systems.</p>
+                            <ul class="tier-features">
+                                <li><span>✓</span> Unlimited Scalable Pages</li>
+                                <li><span>✓</span> Custom Web Animations & Audio</li>
+                                <li><span>✓</span> Payment Gateway Integration</li>
+                                <li><span>✓</span> Dedicated Speed & Security Shield</li>
+                                <li><span>✓</span> Priority VIP Support</li>
+                            </ul>
+                        </div>
+                        <a href="https://wa.me/919795222082?text=Hello%20Ayush,%20I%20want%20to%20discuss%20a%20Custom%20Engineering%20project." target="_blank" class="interactive-btn btn-apple-glass" style="width: 100%;">Discuss Custom</a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 2. CLIENT SOCIAL PROOF / REVIEWS -->
+            <section id="testimonials">
+                <h2 class="sec-heading">Client Experiences</h2>
+                <p class="sec-sub">What commercial owners say about our engineering standards:</p>
+
+                <div class="testimonial-grid">
+                    <div class="testimonial-card">
+                        <div>
+                            <div class="stars-row">★★★★★</div>
+                            <p class="test-quote">"Hamari offline coaching ke admission inquiries WhatsApp par 3 guna badh gayi jab se Ayush ne batch timetable ka portal banaya."</p>
+                        </div>
+                        <div class="client-info">
+                            <div class="client-avatar">🎓</div>
+                            <div>
+                                <div class="client-name">Target Academy</div>
+                                <div class="client-meta">Academic Coaching, Kanpur</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="testimonial-card">
+                        <div>
+                            <div class="stars-row">★★★★★</div>
+                            <p class="test-quote">"Store par customers QR scan karke rate-list aur books seedhe phone par dekh lete hain. Hamara time aur bheed dono manage ho gayi."</p>
+                        </div>
+                        <div class="client-info">
+                            <div class="client-avatar">📚</div>
+                            <div>
+                                <div class="client-name">Patel Book Depot</div>
+                                <div class="client-meta">Stationery & Retail Books</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="testimonial-card">
+                        <div>
+                            <div class="stars-row">★★★★★</div>
+                            <p class="test-quote">"Sub-second loading speed aur premium dark aesthetics ne client proposals me conversion 100% smooth kar diya."</p>
+                        </div>
+                        <div class="client-info">
+                            <div class="client-avatar">🎨</div>
+                            <div>
+                                <div class="client-name">Vanguard Studio</div>
+                                <div class="client-meta">Digital Media & Creator</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 3. INTERACTIVE FAQ SECTION -->
+            <section id="faq">
+                <h2 class="sec-heading">Frequently Asked Questions</h2>
+                <p class="sec-sub">Clear answers to common questions before we start building:</p>
+
+                <div class="faq-list">
+                    <div class="faq-item" onclick="toggleFaq(this)">
+                        <div class="faq-header">
+                            <span>Website banne me kitna time lagta hai?</span>
+                            <span class="faq-icon">+</span>
+                        </div>
+                        <div class="faq-body">
+                            Starter storefronts ko 48 se 72 ghante ke andar live kar diya jata hai. Business Growth aur multi-page catalogs me requirements finalize hone ke baad 4 se 5 din lagte hain.
+                        </div>
+                    </div>
+
+                    <div class="faq-item" onclick="toggleFaq(this)">
+                        <div class="faq-header">
+                            <span>Domain aur Hosting ka setup kaise hoga?</span>
+                            <span class="faq-icon">+</span>
+                        </div>
+                        <div class="faq-body">
+                            Aapko domain (.com ya .in) purchase karne me complete guidance di jayegi, ya hum complete setup manage kar denge. Hosting cloud-native aur zero-downtime server par optimize rehti hai.
+                        </div>
+                    </div>
+
+                    <div class="faq-item" onclick="toggleFaq(this)">
+                        <div class="faq-header">
+                            <span>Kya website slow phones aur 4G/5G par fast chalegi?</span>
+                            <span class="faq-icon">+</span>
+                        </div>
+                        <div class="faq-body">
+                            Haan, bilkul! Hamara code zero-bloat standards par likha jata hai jo bina kisi heavy framework ke sub-second speed par khulta hai, chahe network kitna bhi slow ho.
+                        </div>
+                    </div>
+
+                    <div class="faq-item" onclick="toggleFaq(this)">
+                        <div class="faq-header">
+                            <span>Future me timetable ya prices change karni ho toh?</span>
+                            <span class="faq-icon">+</span>
+                        </div>
+                        <div class="faq-body">
+                            Har package ke sath free maintenance period milta hai. Aap bas WhatsApp par text ya rate-list bhejenge, aur hum use 1 ghante me update kar denge.
+                        </div>
+                    </div>
+                </div>
+            </section>
+
             <!-- COMPACT REALISTIC CERTIFICATE -->
             <section id="credentials">
                 <h2 class="sec-heading" style="text-align: center;">Verified Credentials</h2>
@@ -865,7 +1232,7 @@
                 </div>
             </section>
 
-            <!-- CONTACT (UPDATED WITH webdevelopment9595@gmail.com) -->
+            <!-- CONTACT -->
             <section id="contact">
                 <h2 class="sec-heading">Initiate a Project</h2>
                 <p class="sec-sub">Direct channels for rapid consultation and deployment:</p>
@@ -916,7 +1283,7 @@
         </footer>
     </div>
 
-    <!-- JAVASCRIPT LOGIC -->
+    <!-- SCRIPT FOR CHILL-HOP BEAT SYNTHESIZER + FAQ ACCORDION -->
     <script>
         const audioToggle = document.getElementById('audioToggle');
         const audioLabel = document.getElementById('audioLabel');
@@ -928,14 +1295,14 @@
         let beatInterval = null;
         let step = 0;
 
-        // 1. Lottie Intro Screen (Auto fade out after 2.4s)
+        // 1. Lottie Intro Screen (Auto hide after 2.4s)
         window.addEventListener('load', () => {
             setTimeout(() => {
                 if (introScreen) introScreen.classList.add('hide');
             }, 2400);
         });
 
-        // 2. Hardware Audio Context Initialization
+        // 2. Hardware Audio Unlocker
         function unlockAudioEngine() {
             if (!audioCtx) {
                 const AudioClass = window.AudioContext || window.webkitAudioContext;
@@ -1073,6 +1440,16 @@
             btn.classList.add('active');
         }
 
+        // 5. FAQ Accordion Logic
+        function toggleFaq(item) {
+            playSharpButtonSound();
+            const wasActive = item.classList.contains('active');
+            document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
+            if (!wasActive) {
+                item.classList.add('active');
+            }
+        }
+
         // Button Ripple & Click Sound
         document.querySelectorAll('.interactive-btn').forEach(button => {
             button.addEventListener('click', function (e) {
@@ -1094,7 +1471,7 @@
             });
         });
 
-        // 5. Tab switch / close "Thanks for Visiting"
+        // 6. Tab switch / close "Thanks for Visiting"
         document.addEventListener('visibilitychange', () => {
             if (document.hidden) {
                 document.title = "Thanks for Visiting! 👋 — Ayush Verma";
