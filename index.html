@@ -17,7 +17,6 @@
 
     <!-- LottieFiles Web Player CDN -->
     <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
     <style>
         :root {
@@ -245,42 +244,6 @@
             letter-spacing: -0.2px;
         }
 
-        .hero-actions {
-            margin-top: 30px;
-            display: flex;
-            justify-content: center;
-            gap: 14px;
-            flex-wrap: wrap;
-        }
-
-        .cta-btn {
-            background: #ffffff;
-            color: #000000;
-            font-weight: 700;
-            font-size: 0.92rem;
-            padding: 12px 24px;
-            border-radius: var(--radius-pill);
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            transition: all 0.25s ease;
-        }
-
-        .cta-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(255, 255, 255, 0.2);
-        }
-
-        .cta-btn-menu {
-            background: linear-gradient(135deg, #ff6700, #ff8c00);
-            color: #ffffff;
-        }
-
-        .cta-btn-menu:hover {
-            box-shadow: 0 8px 25px rgba(255, 103, 0, 0.4);
-        }
-
         /* ===== NAVIGATION ===== */
         nav {
             background: rgba(18, 18, 22, 0.75);
@@ -309,7 +272,7 @@
             transition: all 0.25s ease;
         }
 
-        nav a:hover, nav a.active {
+        nav a:hover {
             color: var(--text-primary);
             background: rgba(255, 255, 255, 0.08);
         }
@@ -342,100 +305,6 @@
             color: var(--text-secondary);
             font-size: 1rem;
             margin-bottom: 28px;
-        }
-
-        /* ===== PROJECTS & MENU DEMO GRID ===== */
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-        }
-
-        .project-card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid var(--surface-border);
-            border-radius: 20px;
-            padding: 24px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .project-card:hover {
-            transform: translateY(-4px);
-            border-color: rgba(255, 255, 255, 0.3);
-        }
-
-        .project-card.featured-menu {
-            border: 1.5px solid var(--xiaomi-orange);
-            background: linear-gradient(180deg, rgba(255, 103, 0, 0.09) 0%, rgba(18, 18, 22, 0.85) 100%);
-            box-shadow: 0 10px 30px rgba(255, 103, 0, 0.18);
-        }
-
-        .badge-project {
-            align-self: flex-start;
-            font-size: 0.72rem;
-            font-weight: 700;
-            padding: 4px 10px;
-            border-radius: var(--radius-pill);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 14px;
-            background: rgba(255, 255, 255, 0.08);
-            color: var(--text-primary);
-        }
-
-        .featured-menu .badge-project {
-            background: var(--xiaomi-orange);
-            color: #ffffff;
-        }
-
-        .project-title {
-            font-size: 1.3rem;
-            font-weight: 700;
-            margin-bottom: 8px;
-            color: #ffffff;
-        }
-
-        .project-desc {
-            font-size: 0.88rem;
-            color: var(--text-secondary);
-            margin-bottom: 22px;
-            line-height: 1.45;
-        }
-
-        .project-link-btn {
-            background: rgba(255, 255, 255, 0.08);
-            color: #ffffff;
-            border: 1px solid var(--surface-border);
-            text-decoration: none;
-            padding: 10px 18px;
-            border-radius: var(--radius-pill);
-            font-size: 0.85rem;
-            font-weight: 600;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            transition: all 0.25s ease;
-        }
-
-        .project-link-btn:hover {
-            background: #ffffff;
-            color: #000000;
-        }
-
-        .featured-menu .project-link-btn {
-            background: var(--xiaomi-orange);
-            border-color: var(--xiaomi-orange);
-        }
-
-        .featured-menu .project-link-btn:hover {
-            background: #ff7d26;
-            color: #ffffff;
         }
 
         /* ===== TAB CONTROLS ===== */
@@ -859,13 +728,12 @@
         <!-- Navigation Bar -->
         <nav>
             <a href="#about">About</a>
-            <a href="#projects">Work & Demos</a>
-            <a href="menu.html" target="_blank" style="color: var(--xiaomi-orange); font-weight:700;">Menu Demo ⚡</a>
-            <a href="#pricing">Packages</a>
+            <a href="#services">Services</a>
+            <a href="#pricing">Pricing</a>
             <a href="#reviews">Reviews</a>
             <a href="#certificate">Credentials</a>
             <a href="#faq">FAQ</a>
-            <a href="https://wa.me/+919795222082" target="_blank">Contact</a>
+            <a href="https://wa.me/919795640326" target="_blank">Contact</a>
         </nav>
 
         <!-- Header / Hero Section -->
@@ -875,100 +743,39 @@
             </div>
             <h1 class="hero-title">High-Converting Digital Experiences.</h1>
             <p class="hero-sub">
-                Engineering high-speed, 1-page digital menus, interactive storefronts, and admission portals that load in under 2 seconds.
+                Engineering high-speed, 1-page digital storefronts, admission funnels, and retail catalogs that load in under 2 seconds.
             </p>
-
-            <div class="hero-actions">
-                <a href="menu.html" target="_blank" class="cta-btn cta-btn-menu">
-                    <i class="fa-solid fa-book-open"></i> Live 3D Restaurant Menu
-                </a>
-                <a href="https://wa.me/+919795222082" target="_blank" class="cta-btn">
-                    <i class="fa-brands fa-whatsapp"></i> Chat on WhatsApp
-                </a>
-            </div>
         </header>
 
-        <!-- Work & Projects Section (With menu.html Highlighted) -->
-        <section id="projects">
-            <h2 class="sec-heading">Live Storefront & Demo Demos</h2>
-            <p class="sec-sub">Mobile-optimized digital setups crafted for instant client conversions.</p>
-
-            <div class="projects-grid">
-                
-                <!-- 1. RESTAURANT 3D FLIP-BOOK MENU (menu.html) -->
-                <div class="project-card featured-menu">
-                    <div>
-                        <span class="badge-project">🔥 Live Interactive Demo</span>
-                        <h3 class="project-title">3D Flip-Book Restaurant Menu</h3>
-                        <p class="project-desc">
-                            Ultra-responsive 3D page-flipping digital menu with direct "Order on WhatsApp" functionality. Perfect for cafes and bistros looking to skip app commissions.
-                        </p>
-                    </div>
-                    <a href="menu.html" target="_blank" class="project-link-btn">
-                        Open 3D Menu Demo <i class="fa-solid fa-arrow-up-right-from-square"></i>
-                    </a>
-                </div>
-
-                <!-- 2. Coaching Portal -->
-                <div class="project-card">
-                    <div>
-                        <span class="badge-project">Education</span>
-                        <h3 class="project-title">Coaching & Academy Portal</h3>
-                        <p class="project-desc">
-                            High-converting landing page with batch schedules, fee charts, student result displays, and one-tap WhatsApp inquiry capture.
-                        </p>
-                    </div>
-                    <a href="coaching.html" target="_blank" class="project-link-btn">
-                        Open Coaching Demo <i class="fa-solid fa-arrow-up-right-from-square"></i>
-                    </a>
-                </div>
-
-                <!-- 3. Retail Stationery -->
-                <div class="project-card">
-                    <div>
-                        <span class="badge-project">Retail</span>
-                        <h3 class="project-title">Stationery & Book Catalog</h3>
-                        <p class="project-desc">
-                            Single-page product catalog for book shops and stationery retailers with instant item stock inquiries.
-                        </p>
-                    </div>
-                    <a href="stationary.html" target="_blank" class="project-link-btn">
-                        Open Stationery Demo <i class="fa-solid fa-arrow-up-right-from-square"></i>
-                    </a>
-                </div>
-
-            </div>
-        </section>
-
         <!-- Services / Feature Tabs -->
-        <section>
+        <section id="services">
             <h2 class="sec-heading">What We Deliver</h2>
             <p class="sec-sub">Designed for speed, ease of use, and immediate sales conversions.</p>
 
             <div class="tab-controls">
-                <button class="tab-btn active" onclick="switchTab('restaurants', this)">Restaurants</button>
-                <button class="tab-btn" onclick="switchTab('coaching', this)">Coaching Centers</button>
+                <button class="tab-btn active" onclick="switchTab('coaching', this)">Coaching Centers</button>
+                <button class="tab-btn" onclick="switchTab('retail', this)">Retail & Stores</button>
                 <button class="tab-btn" onclick="switchTab('tech', this)">Performance</button>
             </div>
 
-            <div id="restaurants" class="tab-content active">
-                <div class="feature-box">
-                    <h3>Interactive Digital Menus</h3>
-                    <ul>
-                        <li>Smooth 3D page turn gestures that look like a real physical menu on mobile.</li>
-                        <li>Automated WhatsApp order generation with total bill computation.</li>
-                        <li>Zero monthly hosting headache, fast loading on 4G/5G connections.</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div id="coaching" class="tab-content">
+            <div id="coaching" class="tab-content active">
                 <div class="feature-box">
                     <h3>Institute Admission Funnels</h3>
                     <ul>
                         <li>Direct inquiry routing to counseling teams via WhatsApp.</li>
                         <li>Course highlights, faculty credentials, and timetable tables.</li>
                         <li>Google Maps local SEO integration to drive foot traffic.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div id="retail" class="tab-content">
+                <div class="feature-box">
+                    <h3>Single-Page Storefronts</h3>
+                    <ul>
+                        <li>Showcase key inventory without expensive e-commerce setups.</li>
+                        <li>One-tap ordering and availability checks via WhatsApp.</li>
+                        <li>Smooth mobile browsing optimized for local shoppers.</li>
                     </ul>
                 </div>
             </div>
@@ -1003,23 +810,23 @@
                             <li><span>✓</span> Delivered in 48 Hours</li>
                         </ul>
                     </div>
-                    <a href="https://wa.me/+91 9795222082?text=Hi,%20I%20am%20interested%20in%20the%20Starter%20Storefront%20plan" target="_blank" class="project-link-btn">Select Plan</a>
+                    <a href="https://wa.me/919795640326?text=Hi,%20I%20am%20interested%20in%20the%20Starter%20Storefront%20plan" target="_blank" style="text-align: center; text-decoration: none; padding: 10px; background: rgba(255,255,255,0.08); border-radius: var(--radius-pill); color: #fff; font-weight: 600; font-size: 0.85rem;">Select Plan</a>
                 </div>
 
                 <div class="pricing-card featured">
                     <span class="popular-badge">Most Popular</span>
                     <div>
-                        <div class="tier-title">Interactive 3D Menu</div>
+                        <div class="tier-title">Growth Funnel</div>
                         <div class="tier-price">₹3,499</div>
-                        <p class="tier-desc">Complete interactive 3D digital menu with cart and WhatsApp order routing.</p>
+                        <p class="tier-desc">Complete landing page solution for institutes, clinics, and businesses.</p>
                         <ul class="tier-features">
-                            <li><span>✓</span> 3D Flip Book Mobile Animation</li>
-                            <li><span>✓</span> Automated WhatsApp Cart Checkout</li>
-                            <li><span>✓</span> QR Code Ready for Tables</li>
-                            <li><span>✓</span> Free Hosting Setup</li>
+                            <li><span>✓</span> Interactive Feature Sections</li>
+                            <li><span>✓</span> Automated WhatsApp Lead Routing</li>
+                            <li><span>✓</span> SEO & Speed Optimization</li>
+                            <li><span>✓</span> Priority 48-Hour Turnaround</li>
                         </ul>
                     </div>
-                    <a href="https://wa.me/+91 9795222082?text=Hi,%20I%20am%20interested%20in%20the%20Interactive%203D%20Menu%20plan" target="_blank" class="project-link-btn" style="background:var(--accent-blue); border-color:var(--accent-blue);">Select Plan</a>
+                    <a href="https://wa.me/919795640326?text=Hi,%20I%20am%20interested%20in%20the%20Growth%20Funnel%20plan" target="_blank" style="text-align: center; text-decoration: none; padding: 10px; background: var(--accent-blue); border-radius: var(--radius-pill); color: #fff; font-weight: 600; font-size: 0.85rem;">Select Plan</a>
                 </div>
             </div>
         </section>
@@ -1033,13 +840,13 @@
                 <div class="testimonial-card">
                     <div>
                         <div class="stars-row">★★★★★</div>
-                        <p class="test-quote">"The 3D menu was ready in 2 days. Our customers simply scan the QR code and message orders straight to our counter."</p>
+                        <p class="test-quote">"The site was ready in 2 days. Admissions inquiries started coming straight to our WhatsApp without any friction."</p>
                     </div>
                     <div class="client-info">
-                        <div class="client-avatar">☕</div>
+                        <div class="client-avatar">📚</div>
                         <div>
-                            <div class="client-name">Local Bistro Partner</div>
-                            <div class="client-meta">Cafe & Food Joint</div>
+                            <div class="client-name">Academic Center</div>
+                            <div class="client-meta">Competitive Coaching</div>
                         </div>
                     </div>
                 </div>
@@ -1050,10 +857,10 @@
                         <p class="test-quote">"Fast response time and clean code. The page loads instantly on student phones without any lag."</p>
                     </div>
                     <div class="client-info">
-                        <div class="client-avatar">📚</div>
+                        <div class="client-avatar">⚡</div>
                         <div>
-                            <div class="client-name">Academic Center</div>
-                            <div class="client-meta">Competitive Coaching</div>
+                            <div class="client-name">Local Business Owner</div>
+                            <div class="client-meta">Retail Storefront</div>
                         </div>
                     </div>
                 </div>
@@ -1088,21 +895,21 @@
 
             <div class="faq-item active">
                 <div class="faq-header" onclick="toggleFaq(this)">
-                    <span>How do customers open the 3D menu?</span>
+                    <span>How do WhatsApp inquiries arrive?</span>
                     <span class="faq-icon">+</span>
                 </div>
                 <div class="faq-body">
-                    We generate a custom QR code for your cafe tables or counter. Customers point their phone camera, and the menu immediately opens in their browser without downloading any apps.
+                    When visitors click the WhatsApp button, a pre-filled, clear message is automatically created so you know exactly which course or service they are asking about.
                 </div>
             </div>
 
             <div class="faq-item">
                 <div class="faq-header" onclick="toggleFaq(this)">
-                    <span>How do WhatsApp orders arrive?</span>
+                    <span>Do I need to pay monthly server fees?</span>
                     <span class="faq-icon">+</span>
                 </div>
                 <div class="faq-body">
-                    When the customer picks their items and taps "Order on WhatsApp", an auto-formatted message with item names, quantities, and the total bill lands directly on your registered WhatsApp number.
+                    No. Single-page storefronts can be hosted completely free on high-speed static CDNs, meaning zero recurring monthly hosting bills.
                 </div>
             </div>
 
@@ -1112,14 +919,14 @@
                     <span class="faq-icon">+</span>
                 </div>
                 <div class="faq-body">
-                    Most single-page websites and digital menus are coded, tested, and deployed within 48 to 72 hours once menu details or photos are provided.
+                    Most single-page websites are coded, tested, and deployed within 48 to 72 hours once content details are provided.
                 </div>
             </div>
         </section>
 
         <!-- Footer -->
         <footer>
-            <p>© 2026 Ayush Verma. Engineered with clean code, CSS3 transforms, and responsive design.</p>
+            <p>© 2026 Ayush Verma. Engineered with clean code, CSS3, and responsive design.</p>
         </footer>
 
     </div>
