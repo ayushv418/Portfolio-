@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cafe Delight - Digital Menu</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background: radial-gradient(circle, #2b1f1d, #140d0c);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #333;
+      overflow-x: hidden;
+      padding: 20px;
+    }
+
+    .header-text {
+      text-align: center;
+      color: #f7d08a;
+      margin-bottom: 25px;
+    }
+
+    .header-text h1 {
+      font-size: 1.8rem;
+      letter-spacing: 1px;
+    }
+
+    .header-text p {
+      font-size: 0.9rem;
+      color: #d1b89d;
+      margin-top: 5px;
+    }
+
+    /* 3D Scene Viewport */
+    .book-container {
+      perspective: 1500px;
+      width: 320px;
+      height: 480px;
+      position: relative;
+    }
+
+    .book {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      transform-style: preserve-3d;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+      border-radius: 10px;
+    }
+
+    .paper {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      transform-origin: left center;
+      transform-style: preserve-3d;
+      transition: transform 0.8s cubic-bezier(0.645, 0.045, 0.355, 1);
+      cursor: pointer;
+      border-radius: 8px;
+    }
+
+    .front, .back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      background: #fffdf9;
+      backface-visibility: hidden;
+      border-radius: 8px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border: 1px solid #ebd9c8;
+      box-shadow: inset 4px 0 10px rgba(0, 0, 0, 0.05);
+    }
+
+    .back {
+      transform: rotateY(180deg);
+      background: #faf4ec;
+    }
+
+    /* Cover Page Styling */
+    .cover {
+      background: linear-gradient(145deg, #7b1e19, #4a100c);
+      color: #fce8cc;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid #b8860b;
+      box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.5);
+    }
+
+    .cover h2 {
+      font-size: 2rem;
+      margin-bottom: 8px;
+      font-family: Georgia, serif;
+    }
+
+    .cover .subtitle {
+      font-size: 0.9rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #ffd700;
+    }
+
+    .cover .tagline {
+      margin-top: 30px;
+      font-size: 0.85rem;
+      opacity: 0.8;
+      border: 1px dashed #ffd700;
+      padding: 8px 12px;
+      border-radius: 20px;
+    }
+
+    /* Menu Sections */
+    .menu-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #7b1e19;
+      border-bottom: 2px solid #7b1e19;
+      padding-bottom: 6px;
+      margin-bottom: 16px;
+      text-transform: uppercase;
+    }
+
+    .menu-items {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .menu-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      font-size: 0.95rem;
+    }
+
+    .item-name {
+      font-weight: 600;
+      color: #222;
+    }
+
+    .item-dots {
+      flex: 1;
+      border-bottom: 1px dotted #aaa;
+      margin: 0 8px;
+    }
+
+    .item-price {
+      font-weight: 700;
+      color: #a32219;
+    }
+
+    .page-footer {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.75rem;
+      color: #888;
+      border-top: 1px solid #eee;
+      padding-top: 8px;
+    }
+
+    /* WhatsApp Order Button inside Menu */
+    .whatsapp-btn {
+      display: inline-block;
+      text-align: center;
+      background: #25d366;
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+      padding: 10px 14px;
+      border-radius: 25px;
+      font-size: 0.85rem;
+      margin-top: 15px;
+      box-shadow: 0 4px 10px rgba(37, 211, 102, 0.3);
+    }
+
+    /* Navigation Controls */
+    .controls {
+      display: flex;
+      gap: 15px;
+      margin-top: 25px;
+    }
+
+    .nav-btn {
+      background: #f7d08a;
+      border: none;
+      padding: 10px 20px;
+      font-size: 0.9rem;
+      font-weight: bold;
+      border-radius: 6px;
+      cursor: pointer;
+      color: #3b2011;
+      transition: 0.2s;
+    }
+
+    .nav-btn:hover {
+      background: #ffd994;
+      transform: translateY(-2px);
+    }
+
+    .nav-btn:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+      transform: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header-text">
+    <h1>The Urban Bistro</h1>
+    <p>Swipe or click buttons to turn pages</p>
+  </div>
+
+  <div class="book-container" id="bookContainer">
+    <div class="book">
+
+      <!-- Page 1 (Cover Front & Back) -->
+      <div class="paper" id="p1" style="z-index: 3;">
+        <div class="front cover">
+          <h2>BISTRO</h2>
+          <div class="subtitle">Food & Beverage Menu</div>
+          <div class="tagline">👉 Tap or swipe to open</div>
+        </div>
+        <div class="back">
+          <div>
+            <div class="menu-title">Hot Coffees</div>
+            <div class="menu-items">
+              <div class="menu-row">
+                <span class="item-name">Espresso Solo</span>
+                <span class="item-dots"></span>
+                <span class="item-price">₹89</span>
+              </div>
+              <div class="menu-row">
+                <span class="item-name">Cappuccino Classic</span>
+                <span class="item-dots"></span>
+                <span class="item-price">₹129</span>
+              </div>
+              <div class="menu-row">
+                <span class="item-name">Cafe Mocha Rich</span>
+                <span class="item-dots"></span>
+                <span class="item-price">₹149</span>
+              </div>
+              <div class="menu-row">
+                <span class="item-name">Vanilla Latte</span>
+                <span class="item-dots"></span>
+                <span class="item-price">₹139</span>
+              </div>
+            </div>
+          </div>
+          <div class="page-footer">
+            <span>Specialty Brews</span>
+            <span>Pg 1</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Page 2 (Inside Pages) -->
+      <div class="paper" id="p2" style="z-index: 2;">
+        <div class="front">
+          <div>
+            <div class="menu-title">Burgers & Wraps</div>
+            <div class="menu-items">
+              <div class="menu-row">
+                <span class="item-name">Crispy Paneer Burger</span>
+                <span class="item-dots"></span>
+                <span class="item-price">₹119</span>
+              </div>
+              <div class="menu-row">
+                <span class="item-name">Smoky BBQ Burger</span>
+                <span class="item-dots"></span>
+                <span class="item-price">₹149</span>
+              </div>
+              <div class="menu-row">
+                <span class="item-name">Cheesy Loaded Roll</span>
+                <span class="item-dots"></span>
+                <span class="item-price">₹129</span>
+              </div>
+              <div class="menu-row">
+                <span class="item-name">Peri Peri Fries</span>
+                <span class="item-dots"></span>
+                <span class="item-price">₹99</span>
+              </div>
+            </div>
+          </div>
+          <div class="page-footer">
+            <span>Fast Bites</span>
+            <span>Pg 2</span>
+          </div>
+        </div>
+        <div class="back">
+          <div>
+            <div class="menu-title">Pizzas (8 Inch)</div>
+            <div class="menu-items">
+              <div class="menu-row">
+                <span class="item-name">Classic Margherita</span>
+                <span class="item-dots"></span>
+                <span class="item-price">₹189</span>
+              </div>
+              <div class="menu-row">
+                <span class="item-name">Farmhouse Delight</span>
+                <span class="item-dots"></span>
+                <span class="item-price">₹239</span>
+              </div>
+              <div class="menu-row">
+                <span class="item-name">Spicy Paneer Tikka</span>
+                <span class="item-dots"></span>
+                <span class="item-price">₹269</span>
+              </div>
+            </div>
+          </div>
+          <div class="page-footer">
+            <span>Oven Fresh</span>
+            <span>Pg 3</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Page 3 (Final Order Page & Back Cover) -->
+      <div class="paper" id="p3" style="z-index: 1;">
+        <div class="front">
+          <div>
+            <div class="menu-title">Cold Beverages</div>
+            <div class="menu-items">
+              <div class="menu-row">
+                <span class="item-name">Thick Chocolate Shake</span>
+                <span class="item-dots"></span>
+                <span class="item-price">₹139</span>
+              </div>
+              <div class="menu-row">
+                <span class="item-name">Virgin Mojito</span>
+                <span class="item-dots"></span>
+                <span class="item-price">₹109</span>
+              </div>
+              <div class="menu-row">
+                <span class="item-name">Iced Caramel Latte</span>
+                <span class="item-dots"></span>
+                <span class="item-price">₹149</span>
+              </div>
+            </div>
+          </div>
+          <div>
+            <a href="https://wa.me/919876543210?text=Hi,%20I%20want%20to%20place%20an%20order%20from%20the%20digital%20menu" target="_blank" class="whatsapp-btn">
+              ⚡ Order Directly on WhatsApp
+            </a>
+          </div>
+          <div class="page-footer">
+            <span>Drinks</span>
+            <span>Pg 4</span>
+          </div>
+        </div>
+        <div class="back cover">
+          <h2>VISIT AGAIN</h2>
+          <div class="subtitle">Kakadeo, Kanpur</div>
+          <p style="margin-top:20px; font-size: 0.8rem; opacity:0.8;">Open Daily: 11 AM - 11 PM</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Navigation Buttons -->
+  <div class="controls">
+    <button class="nav-btn" id="prevBtn" disabled>◀ Previous</button>
+    <button class="nav-btn" id="nextBtn">Next ▶</button>
+  </div>
+
+  <script>
+    const papers = [
+      document.getElementById('p1'),
+      document.getElementById('p2'),
+      document.getElementById('p3')
+    ];
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const bookContainer = document.getElementById('bookContainer');
+
+    let currentLocation = 0;
+    const maxLocation = papers.length;
+
+    function updatePageZIndex() {
+      papers.forEach((paper, index) => {
+        if (index < currentLocation) {
+          paper.style.zIndex = index + 1;
+        } else {
+          paper.style.zIndex = maxLocation - index + 1;
+        }
+      });
+    }
+
+    function goNextPage() {
+      if (currentLocation < maxLocation) {
+        papers[currentLocation].style.transform = 'rotateY(-180deg)';
+        currentLocation++;
+        updatePageZIndex();
+        updateButtons();
+      }
+    }
+
+    function goPrevPage() {
+      if (currentLocation > 0) {
+        currentLocation--;
+        papers[currentLocation].style.transform = 'rotateY(0deg)';
+        updatePageZIndex();
+        updateButtons();
+      }
+    }
+
+    function updateButtons() {
+      prevBtn.disabled = (currentLocation === 0);
+      nextBtn.disabled = (currentLocation === maxLocation);
+    }
+
+    nextBtn.addEventListener('click', goNextPage);
+    prevBtn.addEventListener('click', goPrevPage);
+
+    // Touch and Drag / Swipe Gesture for Mobile
+    let startX = 0;
+    let endX = 0;
+
+    bookContainer.addEventListener('touchstart', (e) => {
+      startX = e.changedTouches[0].screenX;
+    }, false);
+
+    bookContainer.addEventListener('touchend', (e) => {
+      endX = e.changedTouches[0].screenX;
+      handleSwipe();
+    }, false);
+
+    // Mouse Drag for Desktop
+    let isMouseDown = false;
+    bookContainer.addEventListener('mousedown', (e) => {
+      isMouseDown = true;
+      startX = e.clientX;
+    });
+
+    window.addEventListener('mouseup', (e) => {
+      if (!isMouseDown) return;
+      isMouseDown = false;
+      endX = e.clientX;
+      handleSwipe();
+    });
+
+    function handleSwipe() {
+      const swipeDistance = endX - startX;
+      if (swipeDistance < -45) {
+        // Dragged Left -> Next Page
+        goNextPage();
+      } else if (swipeDistance > 45) {
+        // Dragged Right -> Previous Page
+        goPrevPage();
+      }
+    }
+  </script>
+</body>
+</html>
