@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Ayush Verma — Premium Web Developer">
+<title>Ayush Verma — Web Developer</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",Arial,sans-serif;background:#f5f5f7;color:#1d1d1f;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+button{font:inherit}
+:root{--blue:#0071e3;--gray:#86868b;--line:#d2d2d7}
+#loader{position:fixed;inset:0;background:#000;color:#fff;z-index:99999;display:flex;align-items:center;justify-content:center;transition:.8s}
+#loader.hide{opacity:0;visibility:hidden}
+.loaderInner{text-align:center}
+.loaderMark{font-size:34px;font-weight:700;letter-spacing:-3px;animation:pop 1s}
+.loaderSub{font-size:8px;letter-spacing:4px;color:#777;margin-top:12px}
+.loaderBar{height:2px;width:130px;background:#222;margin:20px auto 0;overflow:hidden}
+.loaderBar i{display:block;width:0;height:100%;background:#fff;animation:bar 1.2s forwards}
+@keyframes pop{from{opacity:0;transform:scale(.7)}to{opacity:1;transform:none}}
+@keyframes bar{to{width:100%}}
+.nav{position:fixed;z-index:5000;top:0;left:0;width:100%;height:52px;background:#f5f5f7dc;backdrop-filter:blur(18px);border-bottom:1px solid #00000010}
+.navInner{max-width:1000px;width:92%;height:100%;margin:auto;display:flex;align-items:center;justify-content:space-between}
+.navLogo{font-size:15px;font-weight:700;letter-spacing:-.5px}
+.navLogo span{color:#777}
+.navLinks{display:flex;gap:25px;font-size:11px;color:#424245}
+.navLinks a:hover{color:#000}
+.navButton{font-size:10px;border:0;border-radius:30px;background:#1d1d1f;color:#fff;padding:8px 15px;cursor:pointer}
+.hero{min-height:100vh;background:#000;color:#f5f5f7;display:flex;align-items:center;justify-content:center;text-align:center;position:relative;overflow:hidden;padding:100px 20px}
+.heroOrb{position:absolute;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,#393939,#141414 35%,transparent 70%);filter:blur(35px);animation:orb 8s ease-in-out infinite alternate}
+@keyframes orb{from{transform:scale(.85) translateY(20px)}to{transform:scale(1.12) translateY(-25px)}}
+.heroGlow{position:absolute;width:250px;height:250px;border-radius:50%;background:#d2aa6130;filter:blur(80px);top:20%;left:10%;animation:glow 7s ease-in-out infinite alternate}
+@keyframes glow{to{transform:translate(700px,250px)}}
+.heroContent{position:relative;z-index:2;max-width:950px}
+.heroEyebrow{font-size:12px;color:#a1a1a6;margin-bottom:28px}
+.hero h1{font-size:clamp(58px,10vw,125px);font-weight:700;letter-spacing:-7px;line-height:.9}
+.hero h1 span{display:block;background:linear-gradient(100deg,#fff,#aaa,#fff);color:transparent;background-clip:text;-webkit-background-clip:text;background-size:200%;animation:shineText 5s linear infinite}
+@keyframes shineText{to{background-position:200%}}
+.heroDesc{max-width:600px;margin:32px auto 0;color:#86868b;font-size:16px;line-height:1.7}
+.heroActions{margin-top:32px;display:flex;justify-content:center;gap:10px;flex-wrap:wrap}
+.heroBtn{padding:12px 19px;border-radius:30px;font-size:12px;transition:.3s}
+.heroBtn.blue{background:#0071e3;color:#fff}
+.heroBtn.light{background:#fff;color:#111}
+.heroBtn:hover{transform:scale(1.04)}
+.heroNote{font-size:9px;color:#555;margin-top:50px;letter-spacing:2px;text-transform:uppercase}
+.introSection{background:#f5f5f7;padding:150px 0 140px}
+.introText{width:min(1000px,90%);margin:auto}
+.introText .small{font-size:14px;color:#86868b;margin-bottom:25px}
+.introText h2{font-size:clamp(42px,7vw,82px);line-height:1.08;letter-spacing:-4px;max-width:950px;word-spacing:2px}
+.fadeText{color:#b5b5ba}
+.showcase{background:#000;color:#fff;padding:125px 0 130px}
+.showcaseTop{width:min(1050px,92%);margin:auto}
+.showcaseTop small{color:#86868b;font-size:12px}
+.showcaseTop h2{font-size:clamp(44px,7vw,85px);line-height:1.08;letter-spacing:-4px;margin-top:22px;word-spacing:3px}
+.showcaseTop p{color:#86868b;max-width:520px;font-size:14px;line-height:1.9;margin-top:30px}
+.demoTabs{width:min(1050px,92%);margin:60px auto 15px;display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.demoTab{border:1px solid #292929;background:#111;color:#777;padding:22px;text-align:left;border-radius:17px;cursor:pointer;transition:.4s}
+.demoTab:hover{background:#171717;color:#aaa}
+.demoTab.active{background:#fff;color:#111;border-color:#fff;transform:translateY(-5px)}
+.demoTabNum{font-size:9px;opacity:.5}
+.demoTab strong{display:block;font-size:18px;margin-top:12px}
+.demoTab span{display:block;font-size:9px;margin-top:7px;opacity:.55}
+.demoStage{width:min(1050px,92%);margin:auto;border-radius:30px;overflow:hidden;background:#111;border:1px solid #252525;min-height:600px}
+.demoStageTop{height:42px;border-bottom:1px solid #292929;display:flex;align-items:center;padding:0 15px;gap:6px}
+.browserDot{width:7px;height:7px;border-radius:50%;background:#444}
+.demoContent{display:grid;grid-template-columns:1fr 1fr;min-height:555px}
+.demoVisual{position:relative;overflow:hidden;display:flex;align-items:center;padding:55px;transition:.4s}
+.demoVisual.coaching{background:radial-gradient(circle at 75% 20%,#8b6737,#17130f 62%)}
+.demoVisual.hotel{background:radial-gradient(circle at 75% 20%,#9c7042,#17120d 62%)}
+.demoVisual.restaurant{background:radial-gradient(circle at 75% 20%,#477b53,#0d1710 62%)}
+.demoVisual:after{content:"";position:absolute;inset:-100px;background:linear-gradient(120deg,transparent 40%,#ffffff18 50%,transparent 60%);transform:translateX(-100%);animation:shine 5s infinite}
+@keyframes shine{to{transform:translateX(100%)}}
+.visualText{position:relative;z-index:2}
+.visualText small{font-size:9px;letter-spacing:3px;color:#ffffff80;text-transform:uppercase}
+.visualText h3{font-size:clamp(45px,6vw,78px);letter-spacing:-4px;line-height:.9;margin-top:20px}
+.visualLine{width:130px;height:4px;border-radius:5px;background:#fff5;margin-top:25px}
+.visualMini{display:flex;gap:8px;margin-top:45px}
+.visualMini i{display:block;width:65px;height:45px;border:1px solid #ffffff18;background:#ffffff0b;border-radius:8px}
+.demoInfo{padding:55px 48px;display:flex;flex-direction:column;justify-content:center;transition:.2s}
+.demoInfo small{font-size:9px;letter-spacing:3px;color:#777;text-transform:uppercase}
+.demoInfo h3{font-size:42px;letter-spacing:-2px;margin-top:12px}
+.demoInfo p{font-size:13px;line-height:1.9;color:#999;margin-top:20px}
+.infoGrid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:28px}
+.infoBox{padding:14px;border:1px solid #292929;border-radius:12px;background:#ffffff04}
+.infoBox span{display:block;font-size:8px;color:#666;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:6px}
+.infoBox strong{font-size:11px}
+.featureList{display:flex;flex-wrap:wrap;gap:6px;margin-top:17px}
+.feature{font-size:9px;padding:7px 9px;border-radius:7px;background:#ffffff09;border:1px solid #ffffff10;color:#aaa}
+.priceRow{margin-top:30px;display:flex;align-items:end;justify-content:space-between}
+.priceRow strong{font-size:25px}
+.priceRow small{display:block;margin-top:3px;color:#666}
+.priceChange{font-size:8px;color:#666}
+.statement{padding:170px 0;background:#f5f5f7}
+.statementInner{width:min(1050px,90%);margin:auto}
+.statement h2{font-size:clamp(46px,8vw,100px);letter-spacing:-5px;line-height:1}
+.statement p{max-width:500px;color:#86868b;font-size:15px;line-height:1.9;margin-top:30px}
+.pricingSection{background:#fff;padding:130px 0}
+.sectionWidth{width:min(1050px,92%);margin:auto}
+.sectionLabel{font-size:12px;color:#86868b}
+.sectionTitle{font-size:clamp(43px,7vw,80px);letter-spacing:-4px;line-height:1.05;margin-top:18px;word-spacing:3px}
+.sectionDescription{max-width:500px;color:#86868b;font-size:14px;line-height:1.9;margin-top:24px}
+.pricing{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:60px}
+.plan{padding:30px;border-radius:25px;background:#f5f5f7;border:1px solid #e1e1e5;transition:.35s}
+.plan:hover{transform:translateY(-8px)}
+.plan.featured{background:#111;color:#fff;border-color:#111}
+.plan small{font-size:10px;color:#86868b}
+.plan h3{font-size:20px;margin-top:10px}
+.planPrice{font-size:38px;font-weight:700;letter-spacing:-2px;margin:18px 0}
+.plan ul{list-style:none;color:#86868b;font-size:11px;line-height:2.2}
+.plan.featured ul{color:#999}
+.plan li:before{content:"✓";color:#0071e3;margin-right:8px}
+.planBtn{display:inline-block;margin-top:25px;background:#0071e3;color:#fff;border-radius:25px;padding:10px 16px;font-size:10px}
+.aboutSection{background:#f5f5f7;padding:130px 0}
+.aboutGrid{display:grid;grid-template-columns:1fr 1fr;gap:15px;margin-top:55px}
+.aboutCard{background:#fff;border-radius:25px;padding:35px}
+.aboutCard p{color:#86868b;font-size:13px;line-height:1.9}
+.skills{display:flex;gap:7px;flex-wrap:wrap;margin-top:25px}
+.skill{font-size:9px;padding:8px 11px;background:#f5f5f7;border-radius:8px;color:#555}
+.process{display:flex;flex-direction:column;gap:28px}
+.processItem{padding-left:25px;position:relative}
+.processItem:before{content:"";position:absolute;left:0;top:5px;width:8px;height:8px;border-radius:50%;background:#0071e3}
+.processItem h3{font-size:15px}
+.processItem p{margin-top:8px}
+.faqSection{background:#fff;padding:130px 0}
+.faqList{max-width:850px;margin:55px auto 0;border-top:1px solid #d2d2d7}
+.faqItem{border-bottom:1px solid #d2d2d7}
+.faqQuestion{width:100%;border:0;background:transparent;padding:25px 5px;display:flex;align-items:center;justify-content:space-between;text-align:left;gap:20px;font-size:16px;font-weight:600;color:#1d1d1f;cursor:pointer}
+.faqIcon{font-size:25px;font-weight:300;color:#86868b;transition:.3s;flex-shrink:0}
+.faqAnswer{display:grid;grid-template-rows:0fr;transition:grid-template-rows .4s}
+.faqAnswer p{overflow:hidden;color:#86868b;font-size:13px;line-height:1.9;max-width:720px;padding:0 5px}
+.faqItem.open .faqAnswer{grid-template-rows:1fr}
+.faqItem.open .faqAnswer p{padding-bottom:25px}
+.faqItem.open .faqIcon{transform:rotate(45deg);color:#0071e3}
+.contactSection{background:#000;color:#fff;padding:140px 0}
+.contactBox{width:min(1050px,92%);margin:auto}
+.contactBox h2{font-size:clamp(50px,8vw,100px);letter-spacing:-5px;line-height:1}
+.contactBox>p{color:#86868b;max-width:520px;line-height:1.9;font-size:14px;margin-top:28px}
+.contactLinks{display:flex;flex-direction:column;max-width:600px;margin-top:45px}
+.contactLink{display:flex;justify-content:space-between;align-items:center;padding:20px 0;border-bottom:1px solid #292929;color:#aaa;transition:.25s}
+.contactLink:hover{color:#fff;padding-left:8px}
+.contactLink strong{font-size:14px}
+.contactLink span{font-size:20px}
+footer{background:#000;color:#555;padding:30px 4%;font-size:9px;border-top:1px solid #222;display:flex;justify-content:space-between}
+.ripple{position:absolute;width:15px;height:15px;border:2px solid currentColor;border-radius:50%;transform:translate(-50%,-50%);animation:ripple .65s ease-out;pointer-events:none;z-index:20}
+@keyframes ripple{to{opacity:0;transform:translate(-50%,-50%) scale(7)}}
+.reveal{opacity:0;transform:translateY(35px);transition:opacity .9s,transform .9s}
+.reveal.show{opacity:1;transform:none}
+@media(max-width:800px){
+.navLinks{display:none}
+.demoContent{grid-template-columns:1fr}
+.demoVisual{min-height:400px}
+.demoInfo{padding:40px 25px}
+.pricing,.aboutGrid{grid-template-columns:1fr}
+.demoTabs{grid-template-columns:1fr}
+}
+@media(max-width:600px){
+.nav{height:55px}
+.navInner{width:90%}
+.navLogo{font-size:14px}
+.navButton{padding:9px 15px}
+.hero{min-height:100svh;padding:100px 22px 70px}
+.heroEyebrow{font-size:10px;margin-bottom:25px}
+.hero h1{font-size:clamp(52px,15vw,78px);letter-spacing:-3px;line-height:1}
+.heroDesc{font-size:14px;line-height:1.85;max-width:340px;margin-top:28px}
+.heroActions{margin-top:28px}
+.heroNote{margin-top:42px}
+.introSection{padding:90px 0 115px}
+.introText{width:88%}
+.introText .small{font-size:13px;margin-bottom:32px}
+.introText h2{font-size:clamp(39px,11vw,58px);line-height:1.1;letter-spacing:-2px;word-spacing:4px}
+.showcase{padding:100px 0 115px}
+.showcaseTop{width:88%}
+.showcaseTop small{font-size:13px;display:block;margin-bottom:32px}
+.showcaseTop h2{font-size:clamp(40px,11vw,60px);line-height:1.08;letter-spacing:-2px;word-spacing:5px}
+.showcaseTop p{font-size:14px;line-height:1.9;margin-top:34px;color:#999}
+.demoTabs{width:88%;margin-top:55px;gap:10px}
+.demoTab{padding:19px}
+.demoStage{width:88%;min-height:auto;margin-top:15px;border-radius:22px}
+.demoVisual{padding:35px;min-height:330px}
+.visualText h3{font-size:clamp(43px,12vw,65px);letter-spacing:-2px;line-height:.95}
+.demoInfo{padding:40px 25px}
+.demoInfo h3{font-size:32px;letter-spacing:-1px;line-height:1.1}
+.demoInfo p{font-size:12px;line-height:1.85}
+.infoGrid{grid-template-columns:1fr 1fr}
+.statement{padding:110px 0}
+.statementInner{width:88%}
+.statement h2{font-size:clamp(40px,11vw,62px);line-height:1.08;letter-spacing:-2px;word-spacing:4px}
+.statement p{font-size:14px;line-height:1.9;margin-top:30px}
+.pricingSection{padding:110px 0}
+.sectionWidth{width:88%}
+.sectionTitle{font-size:clamp(40px,11vw,60px);line-height:1.08;letter-spacing:-2px;word-spacing:4px}
+.sectionDescription{font-size:13px;line-height:1.9;margin-top:28px}
+.pricing{margin-top:45px}
+.plan{padding:28px}
+.aboutSection{padding:110px 0}
+.aboutGrid{margin-top:45px}
+.aboutCard{padding:28px}
+.aboutCard p{font-size:13px;line-height:1.9}
+.faqSection{padding:110px 0}
+.faqList{margin-top:45px}
+.faqQuestion{font-size:14px;line-height:1.5;padding:23px 2px;gap:15px}
+.faqIcon{font-size:22px}
+.faqAnswer p{font-size:12px;line-height:1.9;padding-left:2px;padding-right:2px}
+.contactSection{padding:115px 0}
+.contactBox{width:88%}
+.contactBox h2{font-size:clamp(44px,12vw,68px);line-height:1.05;letter-spacing:-2.5px;word-spacing:3px}
+.contactBox>p{font-size:13px;line-height:1.9;margin-top:30px}
+.contactLink{padding:20px 0}
+.contactLink strong{font-size:12px}
+footer{display:block;line-height:1.8}
+footer span{display:block;margin-top:7px}
+}
+</style>
+</head>
+<body>
+
+<div id="loader">
+<div class="loaderInner">
+<div class="loaderMark">AV.</div>
+<div class="loaderSub">WEB DEVELOPMENT</div>
+<div class="loaderBar"><i></i></div>
+</div>
+</div>
+
+<header class="nav">
+<div class="navInner">
+<a href="#home" class="navLogo clickable">AYUSH <span>VERMA</span></a>
+<div class="navLinks">
+<a href="#demos">Work</a>
+<a href="#pricing">Pricing</a>
+<a href="#about">About</a>
+<a href="#faq">FAQ</a>
+<a href="#contact">Contact</a>
+</div>
+<a href="#contact" class="navButton clickable">Let's Talk</a>
+</div>
+</header>
+
+<section class="hero" id="home">
+<div class="heroOrb"></div>
+<div class="heroGlow"></div>
+<div class="heroContent reveal">
+<div class="heroEyebrow">Web Developer · India · Available for projects</div>
+<h1>Websites.<br><span>But better.</span></h1>
+<p class="heroDesc">I design and build modern websites that make businesses look premium, feel trustworthy and turn visitors into customers.</p>
+<div class="heroActions">
+<a href="#demos" class="heroBtn blue clickable">Explore my work</a>
+<a href="#contact" class="heroBtn light clickable">Start a project</a>
+</div>
+<div class="heroNote">Scroll to discover ↓</div>
+</div>
+</section>
+
+<section class="introSection">
+<div class="introText reveal">
+<div class="small">The idea</div>
+<h2>Your website isn't just a website. <span class="fadeText">It's the first impression your business gets to make.</span></h2>
+</div>
+</section>
+
+<section class="showcase" id="demos">
+<div class="showcaseTop reveal">
+<small>Selected concepts</small>
+<h2>Three businesses.<br>Three experiences.</h2>
+<p>Every business needs a different kind of website. Select one and see how the design, purpose, features and investment change.</p>
+</div>
+
+<div class="demoTabs reveal">
+<button class="demoTab active clickable" data-type="coaching">
+<div class="demoTabNum">01 / EDUCATION</div>
+<strong>Coaching</strong>
+<span>Admissions · Courses · Results</span>
+</button>
+
+<button class="demoTab clickable" data-type="hotel">
+<div class="demoTabNum">02 / HOSPITALITY</div>
+<strong>Hotel</strong>
+<span>Rooms · Gallery · Booking</span>
+</button>
+
+<button class="demoTab clickable" data-type="restaurant">
+<div class="demoTabNum">03 / DINING</div>
+<strong>Restaurant</strong>
+<span>Menu · Offers · Reservation</span>
+</button>
+</div>
+
+<div class="demoStage reveal">
+<div class="demoStageTop">
+<span class="browserDot"></span>
+<span class="browserDot"></span>
+<span class="browserDot"></span>
+</div>
+
+<div class="demoContent">
+<div class="demoVisual coaching" id="demoVisual">
+<div class="visualText">
+<small id="visualSmall">Education Website</small>
+<h3 id="visualTitle">Learn.<br>Grow.<br>Win.</h3>
+<div class="visualLine"></div>
+<div class="visualMini"><i></i><i></i><i></i></div>
+</div>
+</div>
+
+<div class="demoInfo">
+<small id="demoNumber">01 / EDUCATION</small>
+<h3 id="demoName">NextGen Academy</h3>
+<p id="demoDescription">A focused coaching website designed to turn visitors into students by clearly presenting courses, faculty, results and admission information.</p>
+
+<div class="infoGrid">
+<div class="infoBox"><span>Primary Goal</span><strong id="goal">Get Admissions</strong></div>
+<div class="infoBox"><span>Design</span><strong id="style">Bold & Motivational</strong></div>
+<div class="infoBox"><span>Best For</span><strong id="audience">Coaching Institutes</strong></div>
+<div class="infoBox"><span>Starting From</span><strong id="demoPrice">₹4,999</strong></div>
+</div>
+
+<div class="featureList" id="features">
+<span class="feature">Courses</span>
+<span class="feature">Faculty</span>
+<span class="feature">Results</span>
+<span class="feature">Admissions</span>
+</div>
+
+<div class="priceRow">
+<div><strong id="bottomPrice">₹4,999</strong><small>starting website price</small></div>
+<div class="priceChange">SELECT ANOTHER →</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<section class="statement">
+<div class="statementInner reveal">
+<h2>Simple on the surface.<br><span class="fadeText">Powerful underneath.</span></h2>
+<p>Clean interfaces, responsive layouts, smooth animation and thoughtful details — without unnecessary complexity.</p>
+</div>
+</section>
+
+<section class="pricingSection" id="pricing">
+<div class="sectionWidth">
+<div class="sectionLabel reveal">Pricing</div>
+<h2 class="sectionTitle reveal">Choose what<br>fits your business.</h2>
+<p class="sectionDescription reveal">These are starting packages. Your final price depends on the number of pages, functionality and custom requirements.</p>
+
+<div class="pricing">
+<div class="plan reveal">
+<small>FOR STARTING OUT</small>
+<h3>Starter</h3>
+<div class="planPrice">₹2,999</div>
+<ul>
+<li>One-page website</li>
+<li>Responsive design</li>
+<li>Basic animation</li>
+<li>Contact section</li>
+<li>Mobile optimized</li>
+</ul>
+<a href="#contact" class="planBtn clickable">Get started</a>
+</div>
+
+<div class="plan featured reveal">
+<small>RECOMMENDED</small>
+<h3>Professional</h3>
+<div class="planPrice">₹5,999</div>
+<ul>
+<li>Up to 5 sections/pages</li>
+<li>Premium UI design</li>
+<li>Advanced animations</li>
+<li>Interactive elements</li>
+<li>Deployment assistance</li>
+</ul>
+<a href="#contact" class="planBtn clickable">Get started</a>
+</div>
+
+<div class="plan reveal">
+<small>FOR GROWING BRANDS</small>
+<h3>Premium</h3>
+<div class="planPrice">₹9,999</div>
+<ul>
+<li>Custom multi-page site</li>
+<li>Advanced interactions</li>
+<li>Custom design system</li>
+<li>Forms & integrations</li>
+<li>Priority revisions</li>
+</ul>
+<a href="#contact" class="planBtn clickable">Get started</a>
+</div>
+</div>
+</div>
+</section>
+
+<section class="aboutSection" id="about">
+<div class="sectionWidth">
+<div class="sectionLabel reveal">About the developer</div>
+<h2 class="sectionTitle reveal">Design meets<br>development.</h2>
+
+<div class="aboutGrid">
+<div class="aboutCard reveal">
+<p>I'm Ayush Verma, a web developer focused on creating modern, responsive and memorable websites for businesses and personal brands.<br><br>I care about both sides of a website — how it looks and how it helps the business.</p>
+<div class="skills">
+<span class="skill">HTML</span>
+<span class="skill">CSS</span>
+<span class="skill">JavaScript</span>
+<span class="skill">Responsive Design</span>
+<span class="skill">Animations</span>
+<span class="skill">GitHub Pages</span>
+</div>
+</div>
+
+<div class="aboutCard reveal">
+<div class="process">
+<div class="processItem">
+<h3>01 — Understand</h3>
+<p>Understand your business, audience and goals.</p>
+</div>
+<div class="processItem">
+<h3>02 — Design</h3>
+<p>Create a visual direction that fits your brand.</p>
+</div>
+<div class="processItem">
+<h3>03 — Build</h3>
+<p>Turn the design into a fast responsive website.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<section class="faqSection" id="faq">
+<div class="sectionWidth">
+
+<div class="sectionLabel reveal">Frequently asked questions</div>
+
+<h2 class="sectionTitle reveal">
+Questions clients<br>usually ask.
+</h2>
+
+<p class="sectionDescription reveal">
+Before starting a website project, these are some of the questions that usually come up.
+</p>
+
+<div class="faqList reveal">
+
+<div class="faqItem">
+<button class="faqQuestion clickable">
+<span>Why does my business need a website?</span>
+<span class="faqIcon">+</span>
+</button>
+<div class="faqAnswer">
+<p>
+A website gives your business a professional online presence where customers can learn about your services, see your work, contact you and take action anytime. It also helps people find and understand your business when they search for it online.
+</p>
+</div>
+</div>
+
+<div class="faqItem">
+<button class="faqQuestion clickable">
+<span>What is the advantage of having a website?</span>
+<span class="faqIcon">+</span>
+</button>
+<div class="faqAnswer">
+<p>
+A professional website gives your business its own online space. It can help build trust, showcase your services, explain what you offer clearly and make it easier for potential customers to contact you.
+</p>
+</div>
+</div>
+
+<div class="faqItem">
+<button class="faqQuestion clickable">
+<span>How can a website help me get more customers?</span>
+<span class="faqIcon">+</span>
+</button>
+<div class="faqAnswer">
+<p>
+A good website can guide visitors from discovering your business to taking action — such as calling you, sending a WhatsApp message, making an enquiry or requesting your service. Clear information and strong call-to-action buttons can make that process easier.
+</p>
+</div>
+</div>
+
+<div class="faqItem">
+<button class="faqQuestion clickable">
+<span>How much does a professional website cost?</span>
+<span class="faqIcon">+</span>
+</button>
+<div class="faqAnswer">
+<p>
+The price depends on the number of pages, design, animations and features you need. My starting packages are ₹2,999, ₹5,999 and ₹9,999. Custom requirements can be discussed before starting the project.
+</p>
+</div>
+</div>
+
+</div>
+</div>
+</section>
+
+<section class="contactSection" id="contact">
+<div class="contactBox reveal">
+
+<div class="sectionLabel">Let's build something</div>
+
+<h2>
+Have an idea?<br>
+<span style="color:#86868b">Let's make it real.</span>
+</h2>
+
+<p>
+Tell me what you want to build. Whether it's a coaching website, hotel, restaurant, portfolio or business website — we can start from there.
+</p>
+
+<div class="contactLinks">
+
+<a class="contactLink clickable" href="tel:+919795222082">
+<strong>Call · 9795222082</strong>
+<span>↗</span>
+</a>
+
+<a class="contactLink clickable" href="https://wa.me/919795222082" target="_blank">
+<strong>WhatsApp · Start a conversation</strong>
+<span>↗</span>
+</a>
+
+<a class="contactLink clickable" href="mailto:webdevelopment9595@mail.com">
+<strong>Email · webdevelopment9595@mail.com</strong>
+<span>↗</span>
+</a>
+
+</div>
+</div>
+</section>
+
+<footer>
+<span>© 2026 Ayush Verma</span>
+<span>Designed & built with HTML · CSS · JavaScript</span>
+</footer>
+
+<script>
+window.addEventListener("load",function(){
+setTimeout(function(){
+document.getElementById("loader").classList.add("hide");
+},1300);
+});
+
+const revealObserver=new IntersectionObserver(function(entries){
+entries.forEach(function(entry){
+if(entry.isIntersecting){
+entry.target.classList.add("show");
+revealObserver.unobserve(entry.target);
+}
+});
+},{threshold:.08});
+
+document.querySelectorAll(".reveal").forEach(function(el){
+revealObserver.observe(el);
+});
+
+let audio=null;
+
+function playClick(){
+try{
+if(!audio){
+audio=new(window.AudioContext||window.webkitAudioContext)();
+}
+if(audio.state==="suspended")audio.resume();
+
+let o=audio.createOscillator();
+let g=audio.createGain();
+
+o.type="sine";
+o.frequency.setValueAtTime(650,audio.currentTime);
+o.frequency.exponentialRampToValueAtTime(250,audio.currentTime+.08);
+
+g.gain.setValueAtTime(.035,audio.currentTime);
+g.gain.exponentialRampToValueAtTime(.001,audio.currentTime+.09);
+
+o.connect(g);
+g.connect(audio.destination);
+o.start();
+o.stop(audio.currentTime+.09);
+}catch(e){}
+}
+
+document.querySelectorAll(".clickable").forEach(function(el){
+el.addEventListener("click",function(e){
+
+playClick();
+
+let r=this.getBoundingClientRect();
+let x=e.clientX-r.left;
+let y=e.clientY-r.top;
+
+if(!isFinite(x))x=r.width/2;
+if(!isFinite(y))y=r.height/2;
+
+let ripple=document.createElement("span");
+ripple.className="ripple";
+ripple.style.left=x+"px";
+ripple.style.top=y+"px";
+
+this.style.position=this.style.position==="static"?"relative":this.style.position;
+this.appendChild(ripple);
+
+setTimeout(function(){
+ripple.remove();
+},700);
+
+});
+});
+
+const demos={
+coaching:{
+number:"01 / EDUCATION",
+small:"Education Website",
+title:"Learn.<br>Grow.<br>Win.",
+name:"NextGen Academy",
+description:"A focused coaching website designed to turn visitors into students by clearly presenting courses, faculty, results and admission information.",
+goal:"Get Admissions",
+style:"Bold & Motivational",
+audience:"Coaching Institutes",
+price:"₹4,999",
+features:["Courses","Faculty","Results","Admissions"]
+},
+hotel:{
+number:"02 / HOSPITALITY",
+small:"Hospitality Website",
+title:"Stay.<br>Relax.<br>Repeat.",
+name:"Aura Grand Hotel",
+description:"An elegant hotel website designed to showcase rooms, amenities and experiences while making it easy for visitors to enquire or book.",
+goal:"Get Bookings",
+style:"Elegant & Luxury",
+audience:"Hotels & Resorts",
+price:"₹7,999",
+features:["Rooms","Gallery","Amenities","Booking"]
+},
+restaurant:{
+number:"03 / DINING",
+small:"Restaurant Website",
+title:"Taste.<br>Fresh.<br>Daily.",
+name:"The Olive Table",
+description:"A visual restaurant website built to showcase the menu, offers and atmosphere while converting visitors into reservations and customers.",
+goal:"Get Reservations",
+style:"Visual & Appetite",
+audience:"Restaurants & Cafes",
+price:"₹5,999",
+features:["Menu","Offers","Gallery","Reservation"]
+}
+};
+
+document.querySelectorAll(".demoTab").forEach(function(tab){
+tab.addEventListener("click",function(){
+
+let type=this.dataset.type;
+let d=demos[type];
+
+document.querySelectorAll(".demoTab").forEach(function(t){
+t.classList.remove("active");
+});
+
+this.classList.add("active");
+
+let visual=document.getElementById("demoVisual");
+
+visual.style.opacity="0";
+visual.style.transform="scale(.97)";
+document.querySelector(".demoInfo").style.opacity="0";
+
+setTimeout(function(){
+
+document.getElementById("demoNumber").textContent=d.number;
+document.getElementById("visualSmall").textContent=d.small;
+document.getElementById("visualTitle").innerHTML=d.title;
+document.getElementById("demoName").textContent=d.name;
+document.getElementById("demoDescription").textContent=d.description;
+document.getElementById("goal").textContent=d.goal;
+document.getElementById("style").textContent=d.style;
+document.getElementById("audience").textContent=d.audience;
+document.getElementById("demoPrice").textContent=d.price;
+document.getElementById("bottomPrice").textContent=d.price;
+
+visual.className="demoVisual "+type;
+
+let box=document.getElementById("features");
+box.innerHTML="";
+
+d.features.forEach(function(f){
+let s=document.createElement("span");
+s.className="feature";
+s.textContent=f;
+box.appendChild(s);
+});
+
+visual.style.opacity="1";
+visual.style.transform="scale(1)";
+document.querySelector(".demoInfo").style.opacity="1";
+
+},180);
+});
+});
+
+document.querySelectorAll(".faqQuestion").forEach(function(q){
+q.addEventListener("click",function(){
+
+let item=this.parentElement;
+let wasOpen=item.classList.contains("open");
+
+document.querySelectorAll(".faqItem").forEach(function(other){
+other.classList.remove("open");
+});
+
+if(!wasOpen){
+item.classList.add("open");
+}
+});
+});
+</script>
+
+</body>
+</html>
